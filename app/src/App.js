@@ -4,6 +4,8 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 import PassengerHome from './pages/PassengerHome';
 import  AdminHome from './pages/AdminHome';
+import  Home from './pages/Home';
+
 
 import './App.css';
 
@@ -13,8 +15,7 @@ function App() {
       <Switch>
         <Route exact path="/" component={Login} />
         <Route exact path="/register" component={Register} />
-        <Route exact path="/passHome" component={PassengerHome} />
-        <Route exact path="/adminHome" component={AdminHome} />
+        <Route exact path="/home" component={Home} />
 
       </Switch>
     </div>
