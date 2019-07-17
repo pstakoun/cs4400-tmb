@@ -22,4 +22,14 @@ router.post('/register', (req, res) => {
   res.sendStatus(200);
 });
 
+/* Log in user */
+router.post('/login', (res, req) => {
+  const {
+    userID,
+    password,
+  } = req.body;
+  // TODO log in user
+  res.sendStatus(200);
+});
+
 module.exports = router;
