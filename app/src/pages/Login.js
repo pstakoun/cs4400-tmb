@@ -1,13 +1,13 @@
 import React from 'react';
-import './App.css';
+import './Login.css';
 import GeneralButton from "./components/GeneralButton";
 
-function App() {
+function Login() {
     return (
-        <div className="App">
+        <div className="Login">
             <GeneralButton/>
         </div>
     );
 }
 
-export default App;
+export default Login;
