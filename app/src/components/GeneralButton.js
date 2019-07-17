@@ -1,5 +1,5 @@
 import React from 'react';
-import './Button.css';
+import './GeneralButton.css';
 
 class GeneralButton extends React.Component {
     constructor(props) {
@@ -21,9 +21,7 @@ class GeneralButton extends React.Component {
     render() {
         return (
             <button
-                className={"Button"}
-                block
-                bsSize="large"
+                className={"GeneralButton"}
                 type="submit"
                 onClick={this.handlePress}
                 disabled={!this.validateForm()}
