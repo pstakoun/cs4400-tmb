@@ -3,7 +3,9 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node app.js"
+    "start": "node app.js",
+    "lint": "eslint . || true",
+    "lint-fix": "eslint . --fix || true"
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",
@@ -11,5 +13,10 @@
     "express": "~4.16.1",
     "jade": "~1.11.0",
     "morgan": "~1.9.1"
+  },
+  "devDependencies": {
+    "eslint": "^5.16.0",
+    "eslint-config-airbnb-base": "^13.2.0",
+    "eslint-plugin-import": "^2.18.0"
   }
 }
