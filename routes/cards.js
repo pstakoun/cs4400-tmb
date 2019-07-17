@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 
-/* GET users */
+/* GET cards */
 router.get('/', function(req, res, next) {
   // TODO
 });

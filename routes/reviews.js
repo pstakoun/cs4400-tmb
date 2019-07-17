@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 
-/* GET users */
+/* GET reviews */
 router.get('/', function(req, res, next) {
   // TODO
 });
