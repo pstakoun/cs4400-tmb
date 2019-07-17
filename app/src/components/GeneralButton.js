@@ -4,11 +4,11 @@ import './Button.css';
 class GeneralButton extends React.Component {
     constructor(props) {
         super(props);
-        this.props.handlePress = this.props.handlePress.bind(this);
+        this.handlePress = this.handlePress.bind(this);
     }
 
     handlePress() {
-
+        // TODO
     }
 
     validateForm() {
@@ -25,7 +25,7 @@ class GeneralButton extends React.Component {
                 block
                 bsSize="large"
                 type="submit"
-                onClick={this.props.handlePress}
+                onClick={this.handlePress}
                 disabled={!this.validateForm()}
             >
                 {this.props.text}
