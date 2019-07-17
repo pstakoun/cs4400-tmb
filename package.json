@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "start": "node app.js",
-    "lint": "eslint . || true"
+    "lint": "eslint . || true",
+    "lint-fix": "eslint . --fix || true"
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",
