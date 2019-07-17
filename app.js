@@ -28,4 +28,7 @@ app.use(function(req, res) {
   res.sendFile(path.join(__dirname+'/app/build/index.html'));
 });
 
-module.exports = app;
+const port = process.env.PORT || 8080;
+app.listen(port);
+
+console.log('Listening on port ' + port);
