@@ -1,0 +1,36 @@
+.Login {
+    background-color: whitesmoke;
+    border-radius: 10px;
+    color: #282c34;
+    padding: 60px;
+    font-size: 16px;
+}
+
+.inputSegment {
+    max-width: 320px;
+    margin-bottom: 20px;
+}
+
+.inputSegment label {
+    display: inline-block;
+    margin: 5px;
+}
+
+.inputSegment input {
+    display: inline-block;
+    float: right;
+    font-size: 16px;
+    padding: 5px;
+    border-radius: 5px;
+    border-style: solid;
+    border-width: 1px;
+    border-color: lightgrey;
+}
+
+button {
+    padding: 10px;
+    background-color: whitesmoke;
+    border-radius: 5px;
+    margin-right: 10px;
+    margin-left: 10px;
+}
