@@ -7,7 +7,7 @@
 
 .TextField label {
     display: inline-block;
-    margin: 5px;
+    padding: 5px;
 }
 
 .TextField input {

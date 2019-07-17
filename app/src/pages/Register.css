@@ -2,14 +2,14 @@ body {
     background-color: #282c34;
 }
 
-.Login {
+.Register {
     background-color: whitesmoke;
     border-radius: 10px;
     color: #282c34;
     padding: 30px;
     font-size: 16px;
     margin: 0 auto;
-    width: 350px;
+    width: 400px;
 }
 
 .ButtonWrapper {

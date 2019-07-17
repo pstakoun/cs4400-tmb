@@ -21,6 +21,7 @@ class TextField extends React.Component {
         <label>{this.props.text}</label>
         <input
           type={this.props.type}
+          placeholder={this.props.placeholder}
           value={this.state.content}
           onChange={this.handleChange}
         />
