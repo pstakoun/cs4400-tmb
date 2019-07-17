@@ -32,7 +32,6 @@ router.post('/login', (res, req) => {
     userID,
     password,
   } = req.body;
-  // TODO log in user
   jwt.sign(userID, 'supersecret', (err, token) => {
     res.status(200).json({ token });
   });
