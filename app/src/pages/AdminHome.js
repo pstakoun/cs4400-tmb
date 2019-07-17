@@ -13,16 +13,19 @@ function PassengerHome() {
 
                 <div className={"ButtonWrapper"}>
                <header>
-    <h2>Welcome Passenger!</h2>
+    <h2>Welcome Admin!</h2>
   </header>
 
   <b className="b">Actions:</b>
-                <GeneralButton text = {"Leave Review"}/>
-                <GeneralButton text = {"View Review"}/>
+  <GeneralButton text = {"View Trips"}/>
+
+               
                 <GeneralButton text = {"Buy Card"}/>
                 <GeneralButton text = {"Go on Trip"}/>
-                <GeneralButton text = {"View Trips"}/>
-                <GeneralButton text = {"Edit"}/>
+                <GeneralButton text = {"Edit Profile"}/>
+                <GeneralButton text = {"Add Station"}/>
+                <GeneralButton text = {"Add Line"}/>
+                <GeneralButton text = {"Review Passenger Reviews"}/>
             </div>
          </div>
     </div>

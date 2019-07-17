@@ -14,8 +14,13 @@
     "debug": "~2.6.9",
     "express": "~4.16.1",
     "jade": "~1.11.0",
+<<<<<<< HEAD
     "morgan": "~1.9.1",
     "react-rater": "^5.1.0"
+=======
+    "jsonwebtoken": "^8.5.1",
+    "morgan": "~1.9.1"
+>>>>>>> e6cd52a017850e5244282cde31c31fbe9c3cae86
   },
   "devDependencies": {
     "eslint": "^5.16.0",
