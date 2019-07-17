@@ -29,7 +29,7 @@ class Login extends React.Component {
             <Link to={'/register'}>
               <GeneralButton text="Register" handlePress={this.handleRegister}/>
             </Link>
-            <Link to={'/leaveReview'}>
+            <Link to={'/home'}>
               <GeneralButton text="Login" handlePress={this.handleLogin}/>
             </Link>
           </div>
