@@ -20,7 +20,9 @@ body {
 .GeneralButton {
     margin : 8px;
 }
-
+.b {
+    font-weight: lighter;
+}
 .Wrapper {
     background-color: #282c34;
     min-height: 100vh;

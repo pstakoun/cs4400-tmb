@@ -9,20 +9,24 @@ function PassengerHome() {
        
         <div className = "Wrapper">  
             
-            <div className = "Cards">  
-            <div className={"ButtonWrapper"}>
-               
+            <div className = "Cards"> 
+
+                <div className={"ButtonWrapper"}>
+               <header>
+    <h2>Welcome Passenger!</h2>
+  </header>
+
+  <b className="b">Actions:</b>
                 <GeneralButton text = {"Leave Review"}/>
                 <GeneralButton text = {"View Review"}/>
                 <GeneralButton text = {"Buy Card"}/>
                 <GeneralButton text = {"Go on Trip"}/>
                 <GeneralButton text = {"View Trips"}/>
                 <GeneralButton text = {"Edit"}/>
-
+            </div>
          </div>
-
-         </div>
-</div>
+    </div>
     );
+}
 
 export default PassengerHome;
