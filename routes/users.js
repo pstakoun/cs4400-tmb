@@ -13,7 +13,7 @@ router.get('/', (req, res) => res.status(200).json({}));
 
 /* Register user */
 router.post('/register', (req, res) => {
-  const user = {
+  const {
     firstName,
     middleInitial,
     lastName,
@@ -22,47 +22,30 @@ router.post('/register', (req, res) => {
     password,
     confirmPassword,
   } = req.body;
-  // TODO register user
-  if (user.password != user.confirmPassword) {
-    alert("Passwords don't match");
-    res.send({
-      code: 500,
-      failed: "Passwords don't match",
-    });
-  } else if (length(user.password) < 8) { // TODO MOVE THIS TO SQL!
-    alert('Password must be longer then 8 characters');
-    res.send({
-      code: 500,
-      failed: 'Passwords too short',
-    });
-  } else {
-    connection.query('INSERT INTO User SET ?', user, (error, results, fields) => {
-      if (error) {
-        console.log('error ocurred', error);
-        res.send({
-          code: 500,
-          failed: 'error ocurred',
-        });
-      } else {
-        console.log('The solution is: ', results);
-        res.send({
-          code: 200,
-          success: 'user registered sucessfully',
-        });
-      }
-    });
-  /* connection.query('TODO', (error, results, fields) => {
-    if (error) {
-      throw error;
-      // return res.sendStatus(500);
-    }
-    if (results.length > 0) {
-      // TODO already exists
-    }
-    // TODO insert user
-    return res.sendStatus(200);
-  }); */
+
+  if (password !== confirmPassword) {
+    return res.status(400).json({ message: 'Passwords do not match' });
   }
+  if (password.length < 8) {
+    return res.status(400).json({ message: 'Password too short' });
+  }
+
+  const user = {
+    ID: userID,
+    first_name: firstName,
+    minit: middleInitial,
+    last_name: lastName,
+    password, // TODO hash password
+    passenger_email: email,
+  };
+
+  connection.query('INSERT INTO User SET ?', user, (err) => {
+    if (err) {
+      console.log(err);
+      return res.status(500).json({ message: 'An error ocurred' });
+    }
+    res.status(200).json({ message: 'Success' });
+  });
 });
 
 /* Log in user */
@@ -71,44 +54,38 @@ router.post('/login', (req, res) => {
     userID,
     password,
   } = req.body;
-  // TODO confirm user in db
 
-  connection.query('SELECT * FROM User WHERE ID = ?', [userID], (error, results, fields) => {
-    if (error) {
-      // console.log("error ocurred",error);
-      res.send({
-        code: 400,
-        failed: 'error ocurred',
-      });
-    } else {
-      // console.log('The solution is: ', results);
-      if (results.length > 0) {
-        if (results[0].password == password) {
-          res.send({
-            code: 200,
-            success: 'login sucessfull',
-          });
-        } else {
-          res.send({
-            code: 204,
-            success: 'Email and password does not match',
-          });
-        }
-      } else {
-        res.send({
-          code: 204,
-          success: 'Email does not exits',
-        });
-      }
+  connection.query('SELECT * FROM User WHERE ID = ?', [userID], (err, result) => {
+    if (err) {
+      console.log(err);
+      return res.status(500).json({ message: 'An error ocurred' });
     }
-  });
 
-  // TODO route to admin home or not based on if admin or not
-  const user = {
-    id: userID,
-    admin: false,
-  };
-  jwt.sign(user, 'supersecret', (err, token) => res.status(200).json({ user, token }));
+    const user = result[0];
+
+    if (user.length === 0) {
+      return res.status(401).json({ message: 'User ID or password is incorrect' });
+    }
+
+    if (user.password !== password) { // TODO handle hash
+      return res.status(401).json({ message: 'User ID or password is incorrect' });
+    }
+
+    delete user.password;
+
+    connection.query('SELECT * FROM Admin WHERE ID = ?', [userID], (err1, result1) => {
+      if (err1) {
+        console.log(err1);
+        return res.status(500).json({ message: 'An error ocurred' });
+      }
+
+      if (result1.length > 0) {
+        user.admin = true;
+      }
+
+      jwt.sign(user, 'supersecret', (err2, token) => res.status(200).json({ user, token }));
+    });
+  });
 });
 
 /* Authenticates user */
