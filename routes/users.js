@@ -90,9 +90,9 @@ router.post('/login', (req, res) => {
 });
 
 /* Log out user */
-router.get('/logout', (req, res) => {
+router.post('/logout', (req, res) => {
   req.session.user = null;
-  res.redirect('/login');
+  res.status(200).json({ success: true, message: 'Success' });
 });
 
 module.exports = router;

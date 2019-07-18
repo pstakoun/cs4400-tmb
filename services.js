@@ -26,6 +26,14 @@ const requireLogin = (req, res, next) => {
   });
 };
 
+const requireNoLogin = (req, res, next) => {
+  if (req.session.user) {
+    return res.redirect('/');
+  }
+
+  next();
+};
+
 const requireAdmin = (req, res, next) => {
   if (!req.session.user) {
     return res.redirect('/login');
@@ -58,5 +66,6 @@ const requireAdmin = (req, res, next) => {
 module.exports = {
   connection,
   requireLogin,
+  requireNoLogin,
   requireAdmin,
 };

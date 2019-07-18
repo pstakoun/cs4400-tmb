@@ -3,6 +3,7 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
 
+const { requireLogin, requireNoLogin, requireAdmin } = require('./services');
 const usersRouter = require('./routes/users');
 const cardsRouter = require('./routes/cards');
 const stationsRouter = require('./routes/stations');
@@ -29,6 +30,8 @@ app.use('/api/stations', stationsRouter);
 app.use('/api/lines', linesRouter);
 app.use('/api/trips', tripsRouter);
 app.use('/api/reviews', reviewsRouter);
+
+app.use('/', requireLogin);
 
 app.use((req, res) => {
   res.sendFile(path.join(`${__dirname}/app/build/index.html`));
