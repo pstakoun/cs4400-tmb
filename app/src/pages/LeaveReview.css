@@ -35,3 +35,7 @@ body {
 textarea {
   width: 340px;
 }
+
+.Dropdown-root {
+  margin: 20px;
+}
