@@ -5,6 +5,24 @@ import GeneralButton from '../components/GeneralButton.js';
 import TextField from '../components/TextField.js';
 
 class Register extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      firstName: '',
+      middleInitial: '',
+      lastName: '',
+      email: '',
+      userID: '',
+      password: '',
+      confirmPassword: '',
+    };
+    this.handleRegister = this.handleRegister.bind(this);
+  }
+
+  handleRegister() {
+
+  }
+
   render() {
     return (
       <div className="Wrapper">
@@ -20,7 +38,7 @@ class Register extends React.Component {
             <Link to="/">
               <GeneralButton text="I already have an account" />
             </Link>
-            <GeneralButton text="Register" />
+            <GeneralButton text="Register" handlePress={this.handleRegister} />
           </div>
         </div>
       </div>
