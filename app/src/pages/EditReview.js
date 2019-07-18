@@ -19,7 +19,7 @@ class EditReview extends React.Component {
       shoppingRating: 0,
       speedRating: 0,
       comment: '',
-      status: 'pending'
+      status: 'pending',
     };
   }
 
@@ -41,9 +41,18 @@ class EditReview extends React.Component {
     return (
       <div className="Wrapper">
         <div className="EditReview">
-          <label className={"InfoLabel"}>Edit Review: {this.state.station}</label>
-          <label className={"InfoLabel"}>Status: {this.state.status}</label>
-          <label className={"InfoLabel"}>ID: {this.state.rid}</label>
+          <label className="InfoLabel">
+Edit Review:
+            {this.state.station}
+          </label>
+          <label className="InfoLabel">
+Status:
+            {this.state.status}
+          </label>
+          <label className="InfoLabel">
+ID:
+            {this.state.rid}
+          </label>
           <ReviewStars text="Shopping" rating={this.state.shoppingRating} name="shopping" handleRate={this.handleRateShopping} />
           <ReviewStars text="Connection Speed" rating={this.state.speedRating} name="speed" handleRate={this.handleRateSpeed} />
           <textarea
@@ -53,7 +62,7 @@ class EditReview extends React.Component {
             value={this.state.comment}
           />
           <div className="ButtonWrapper">
-            <Link to={"/home"}>
+            <Link to="/home">
               <GeneralButton text="Delete Review" />
             </Link>
             <GeneralButton text="Submit Review" />

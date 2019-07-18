@@ -19,7 +19,7 @@ class LeaveReview extends React.Component {
       shoppingRating: 0,
       speedRating: 0,
       comment: '',
-      status: 'pending'
+      status: 'pending',
     };
   }
 
@@ -56,7 +56,7 @@ class LeaveReview extends React.Component {
             value={this.state.comment}
           />
           <div className="ButtonWrapper">
-            <Link to={"/passengerHome"}>
+            <Link to="/passengerHome">
               <GeneralButton text="Main Menu" />
             </Link>
             <GeneralButton text="Submit Review" />

@@ -21,7 +21,7 @@ function BuyCard() {
           <GeneralButton text="T-jove" />
         </div>
         <div className="ButtonWrapper">
-          <Link to={"/passengerHome"}>
+          <Link to="/passengerHome">
             <GeneralButton text="Main Menu" />
           </Link>
         </div>

@@ -6,7 +6,6 @@ import Table from '../components/Table.js';
 import GeneralButton from '../components/GeneralButton';
 
 
-
 class ViewReviews extends React.Component {
   constructor(props) {
     super(props);
@@ -16,10 +15,10 @@ class ViewReviews extends React.Component {
     return (
       <div className="Wrapper">
         <div className="ViewReviews">
-          <Table/>
-          <div className={"ButtonWrapper"}>
-            <Link to={"/passengerHome"}>
-              <GeneralButton text={"Main Menu"}/>
+          <Table />
+          <div className="ButtonWrapper">
+            <Link to="/passengerHome">
+              <GeneralButton text="Main Menu" />
             </Link>
           </div>
         </div>

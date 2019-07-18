@@ -6,9 +6,9 @@ import LeaveReview from './pages/LeaveReview';
 import PassengerHome from './pages/PassengerHome';
 import AdminHome from './pages/AdminHome';
 import Home from './pages/Home';
-import EditReview from './pages/EditReview'
+import EditReview from './pages/EditReview';
 import BuyCard from './pages/BuyCard';
-import ViewReviews from './pages/ViewReviews'
+import ViewReviews from './pages/ViewReviews';
 
 
 import './App.css';

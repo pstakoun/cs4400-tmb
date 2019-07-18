@@ -20,7 +20,7 @@ router.post('/buy', (req, res) => {
     type,
     purchaseDateAndTime,
     usesLeft,
-    expirationDate
+    expirationDate,
   } = req.body;
 
   res.send({
