@@ -49,7 +49,6 @@ router.post('/register', (req, res) => {
 
 /* Log in user */
 router.post('/login', (req, res) => {
-  console.log(req.body);
   const {
     userID,
     password,
