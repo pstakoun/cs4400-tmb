@@ -31,8 +31,6 @@ app.use('/api/lines', linesRouter);
 app.use('/api/trips', tripsRouter);
 app.use('/api/reviews', reviewsRouter);
 
-app.use('/', requireLogin);
-
 app.use((req, res) => {
   res.sendFile(path.join(`${__dirname}/app/build/index.html`));
 });
