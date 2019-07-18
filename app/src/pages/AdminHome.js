@@ -1,6 +1,6 @@
 import React from 'react';
 import GeneralButton from '../components/GeneralButton.js';
-import './PassHome.css';
+import './Home.css';
 import { Link } from 'react-router-dom';
 
 function AdminHome() {
