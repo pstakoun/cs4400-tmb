@@ -1,6 +1,7 @@
 const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
+const jwt = require('jsonwebtoken');
 
 const usersRouter = require('./routes/users');
 const cardsRouter = require('./routes/cards');
@@ -16,6 +17,21 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'app/build')));
+
+app.use((req, res, next) => {
+  let token = req.headers.authorization;
+  if (!token) {
+    return next();
+  }
+  token = token.replace('Bearer ', '');
+  jwt.verify(token, 'supersecret', (err, user) => {
+    if (!err) {
+      req.token = token;
+      req.user = user;
+    }
+    next();
+  });
+});
 
 app.use('/api/users', usersRouter);
 app.use('/api/cards', cardsRouter);
