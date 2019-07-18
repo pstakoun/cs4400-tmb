@@ -6,6 +6,7 @@ import GeneralButton from '../components/GeneralButton.js';
 import TextField from '../components/TextField.js';
 import ReviewStars from '../components/ReviewStars.js';
 import 'react-dropdown/style.css';
+import { stat } from 'fs';
 
 class LeaveReview extends React.Component {
   constructor(props) {
@@ -13,15 +14,53 @@ class LeaveReview extends React.Component {
     this.handleRateShopping = this.handleRateShopping.bind(this);
     this.handleRateSpeed = this.handleRateSpeed.bind(this);
     this.handleCommentChange = this.handleCommentChange.bind(this);
+    this._onSelect = this._onSelect.bind(this)
     this.state = {
       options: [],
-      defaultOption: '',
+      selected: '',
       shoppingRating: 0,
       speedRating: 0,
       comment: '',
       status: 'pending',
     };
   }
+
+  
+  handleLogin() {
+    fetch('/api/users/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        userID: this.state.userID,
+        password: this.state.password,
+      }),
+    }).then(res => res.json()).then((data) => {
+      if (data.success) {
+        this.setState({
+          loggedIn: true,
+        });
+      } else {
+        alert(data.message);
+      }
+    });
+  }
+
+
+  componentWillMount() {
+    let initialStations = [];
+    fetch('/api/stations').then(
+      results => results.json()
+      ).then(data => {
+        initialStations = data.map(station => station.name);
+    this.setState({
+      options: initialStations,
+    });
+  });
+}
+
+  
 
   handleRateShopping(rating) {
     console.log(`Shopping Rating is: ${this.state.shoppingRating}`);
@@ -37,14 +76,48 @@ class LeaveReview extends React.Component {
     this.setState({ comment: event.target.value });
   }
 
+
+  handleDropdownUpdate(value) {
+    this.setState({currentOptions: value})
+  }
+
+
+  handleNewReview() {
+    fetch('/api/reviews/add', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+    station : this.state.station,
+    shopping : this.state.shoppingRating,
+    connection : this.state.speedRating,
+    comment : this.state.comment,
+      }),
+    }).then(res => res.json()).then((data) => {
+      if (data.success) {
+        //TODO idk wht goes here
+      } else {
+        alert(data.message);
+      }
+    });
+  }
+
+  _onSelect (option) {
+    console.log('You selected ', option.label)
+    this.setState({selected: option})
+  }
+
   render() {
+    const defaultOption = this.state.selected
+
     return (
       <div className="Wrapper">
         <div className="LeaveReview">
           <Dropdown
-            options={this.state.options}
+            options={(this.state.options)}
+            value={defaultOption}
             onChange={this._onSelect}
-            value={this.state.defaultOption}
             placeholder="Select a Station"
           />
           <ReviewStars text="Shopping" rating={this.state.shoppingRating} name="shopping" handleRate={this.handleRateShopping} />
@@ -59,7 +132,7 @@ class LeaveReview extends React.Component {
             <Link to="/">
               <GeneralButton text="Main Menu" />
             </Link>
-            <GeneralButton text="Submit Review" />
+            <GeneralButton text="Submit Review" handlePress={this.handleNewReview}/>
           </div>
         </div>
       </div>
