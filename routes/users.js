@@ -16,9 +16,7 @@ const connection = mysql.createConnection({
 connection.connect();
 
 /* GET users */
-router.get('/', (req, res) => {
-  return res.status(200).json({});
-});
+router.get('/', (req, res) => res.status(200).json({}));
 
 /* Register user */
 router.post('/register', (req, res) => {
@@ -35,7 +33,7 @@ router.post('/register', (req, res) => {
   connection.query('TODO', (error, results, fields) => {
     if (error) {
       throw error;
-      //return res.sendStatus(500);
+      // return res.sendStatus(500);
     }
     if (results.length > 0) {
       // TODO already exists
@@ -56,9 +54,7 @@ router.post('/login', (res, req) => {
     id: userID,
     admin: false,
   };
-  jwt.sign(user, 'supersecret', (err, token) => {
-    return res.status(200).json({ user, token });
-  });
+  jwt.sign(user, 'supersecret', (err, token) => res.status(200).json({ user, token }));
 });
 
 /* Authenticates user */
@@ -73,6 +69,6 @@ router.post('/authenticate', (res, req) => {
     }
     // TODO Get user from db by user.id
   });
-})
+});
 
 module.exports = router;
