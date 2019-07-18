@@ -74,7 +74,7 @@ class Register extends React.Component {
           <TextField text="Password" type="password" handleChange={this.passwordChange} />
           <TextField text="Password (again)" type="password" handleChange={this.passwordCheckChange} onChange={this.checkPass()} />
           <div className="ButtonWrapper">
-            <Link to="/">
+            <Link to="/login">
               <GeneralButton text="I already have an account" />
             </Link>
             <GeneralButton text="Register" handlePress={this.handleRegister} />

@@ -42,11 +42,9 @@ class Login extends React.Component {
           <TextField text="Password" type="password" handleChange={this.passwordChange} />
           <div className="ButtonWrapper">
             <Link to="/register">
-              <GeneralButton text="Register" handlePress={this.handleRegister} />
+              <GeneralButton text="Register" />
             </Link>
-            <Link to="/home">
-              <GeneralButton text="Login" handlePress={this.handleLogin} />
-            </Link>
+            <GeneralButton text="Login" handlePress={this.handleLogin} />
           </div>
         </div>
       </div>
