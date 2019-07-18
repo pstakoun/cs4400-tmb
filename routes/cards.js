@@ -21,7 +21,7 @@ router.post('/purchase', (req, res) => {
 
   const card = {
     user_ID: req.session.user.ID,
-    type: type,
+    type,
     purchase_date_time: purchaseDateAndTime,
     uses_left: usesLeft,
     expiration_date: expirationDate,

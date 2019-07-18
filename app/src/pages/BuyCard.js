@@ -5,24 +5,24 @@ import './Home.css';
 import './BuyCard.css';
 
 
-class BuyCard extends React.Component{
+class BuyCard extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       dateTime: '',
       futureDateTime: '',
-    }
+    };
   }
 
   calculateDateTimes(days) {
-    var today = new Date();
-    var future = new Date();
+    const today = new Date();
+    const future = new Date();
     future.setDate(future.getDate() + days);
-    var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
-    var futureDate = future.getFullYear()+'-'+(future.getMonth()+1)+'-'+future.getDate();
-    var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
-    this.state.dateTime = date+' '+time;
-    this.state.futureDateTime = futureDate+' '+time;
+    const date = `${today.getFullYear()}-${today.getMonth() + 1}-${today.getDate()}`;
+    const futureDate = `${future.getFullYear()}-${future.getMonth() + 1}-${future.getDate()}`;
+    const time = `${today.getHours()}:${today.getMinutes()}:${today.getSeconds()}`;
+    this.state.dateTime = `${date} ${time}`;
+    this.state.futureDateTime = `${futureDate} ${time}`;
     console.log(this.state.dateTime);
     console.log(this.state.futureDateTime);
   }
@@ -45,7 +45,7 @@ class BuyCard extends React.Component{
       }),
     }).then(res => res.json()).then((data) => {
       if (data.success) {
-        alert(name + " purchased");
+        alert(`${name} purchased`);
       } else {
         alert(data.message);
       }
@@ -62,10 +62,10 @@ class BuyCard extends React.Component{
             </header>
 
             <b className="b">Pick Card Type:</b>
-            <GeneralButton text="T-mes" handlePress={this.handlePurchase.bind(this, "T-mes", null, 30)}/>
-            <GeneralButton text="T-10" handlePress={this.handlePurchase.bind(this, "T-10", 10, null)}/>
-            <GeneralButton text="T-50/30" handlePress={this.handlePurchase.bind(this, "T-50/30", 50, 30)}/>
-            <GeneralButton text="T-jove" handlePress={this.handlePurchase.bind(this, "T-jove", null, 90)}/>
+            <GeneralButton text="T-mes" handlePress={this.handlePurchase.bind(this, 'T-mes', null, 30)} />
+            <GeneralButton text="T-10" handlePress={this.handlePurchase.bind(this, 'T-10', 10, null)} />
+            <GeneralButton text="T-50/30" handlePress={this.handlePurchase.bind(this, 'T-50/30', 50, 30)} />
+            <GeneralButton text="T-jove" handlePress={this.handlePurchase.bind(this, 'T-jove', null, 90)} />
           </div>
           <div className="ButtonWrapper">
             <Link to="/">

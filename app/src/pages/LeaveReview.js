@@ -14,7 +14,7 @@ class LeaveReview extends React.Component {
     this.handleRateShopping = this.handleRateShopping.bind(this);
     this.handleRateSpeed = this.handleRateSpeed.bind(this);
     this.handleCommentChange = this.handleCommentChange.bind(this);
-    this._onSelect = this._onSelect.bind(this)
+    this._onSelect = this._onSelect.bind(this);
     this.state = {
       options: [],
       selected: '',
@@ -25,7 +25,7 @@ class LeaveReview extends React.Component {
     };
   }
 
-  
+
   handleLogin() {
     fetch('/api/users/login', {
       method: 'POST',
@@ -51,16 +51,15 @@ class LeaveReview extends React.Component {
   componentWillMount() {
     let initialStations = [];
     fetch('/api/stations').then(
-      results => results.json()
-      ).then(data => {
-        initialStations = data.map(station => station.name);
-    this.setState({
-      options: initialStations,
+      results => results.json(),
+    ).then((data) => {
+      initialStations = data.map(station => station.name);
+      this.setState({
+        options: initialStations,
+      });
     });
-  });
-}
+  }
 
-  
 
   handleRateShopping(rating) {
     console.log(`Shopping Rating is: ${this.state.shoppingRating}`);
@@ -78,7 +77,7 @@ class LeaveReview extends React.Component {
 
 
   handleDropdownUpdate(value) {
-    this.setState({currentOptions: value})
+    this.setState({ currentOptions: value });
   }
 
 
@@ -89,27 +88,27 @@ class LeaveReview extends React.Component {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-    station : this.state.selected,
-    shopping : this.state.shoppingRating,
-    connection : this.state.speedRating,
-    comment : this.state.comment,
+        station: this.state.selected,
+        shopping: this.state.shoppingRating,
+        connection: this.state.speedRating,
+        comment: this.state.comment,
       }),
     }).then(res => res.json()).then((data) => {
       if (data.success) {
-        //TODO idk wht goes here
+        // TODO idk wht goes here
       } else {
         alert(data.message);
       }
     });
   }
 
-  _onSelect (option) {
-    //console.log('You selected ', option.label)
-    this.setState({selected: option})
+  _onSelect(option) {
+    // console.log('You selected ', option.label)
+    this.setState({ selected: option });
   }
 
   render() {
-    const defaultOption = this.state.selected
+    const defaultOption = this.state.selected;
 
     return (
       <div className="Wrapper">
@@ -132,7 +131,7 @@ class LeaveReview extends React.Component {
             <Link to="/">
               <GeneralButton text="Main Menu" />
             </Link>
-            <GeneralButton text="Submit Review" handlePress={this.handleNewReview}/>
+            <GeneralButton text="Submit Review" handlePress={this.handleNewReview} />
           </div>
         </div>
       </div>
