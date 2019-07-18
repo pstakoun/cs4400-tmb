@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "acorn": "^6.2.0",
+    "material-table": "^1.40.1",
     "react": "^16.8.6",
     "react-base-table": "^1.6.5",
     "react-dom": "^16.8.6",

@@ -22,7 +22,9 @@ Actions:
           <Link to="/LeaveReview">
             <GeneralButton text="Leave Review" />
           </Link>
-          <GeneralButton text="View Reviews" />
+          <Link to="/ViewReviews">
+            <GeneralButton text="View Reviews" />
+          </Link>
           <Link to="/BuyCard">
             <GeneralButton text="Buy Card" />
           </Link>

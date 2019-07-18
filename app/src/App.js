@@ -8,6 +8,7 @@ import AdminHome from './pages/AdminHome';
 import Home from './pages/Home';
 import EditReview from './pages/EditReview'
 import BuyCard from './pages/BuyCard';
+import ViewReviews from './pages/ViewReviews'
 
 
 import './App.css';
@@ -23,6 +24,7 @@ function App() {
         <Route exact path="/passengerHome" component={PassengerHome} />
         <Route exact path="/buyCard" component={BuyCard} />
         <Route exact path="/editReview" component={EditReview} />
+        <Route exact path="/viewReviews" component={ViewReviews} />
       </Switch>
     </div>
   );
