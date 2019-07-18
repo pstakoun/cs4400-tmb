@@ -8,13 +8,13 @@ class Register extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      FirstName: '',
-      MiddleInitial: '',
-      LastName: '',
-      Email: '',
-      UserID: '',
-      Password: '',
-      PasswordCheck: '',
+      firstName: '',
+      middleInitial: '',
+      lastName: '',
+      email: '',
+      userID: '',
+      password: '',
+      passwordConfirm: '',
     };
     this.handleRegister = this.handleRegister.bind(this);
     this.fNameChange = this.fNameChange.bind(this);
@@ -23,44 +23,60 @@ class Register extends React.Component {
     this.emailChange = this.emailChange.bind(this);
     this.userIDChange = this.userIDChange.bind(this);
     this.passwordChange = this.passwordChange.bind(this);
-    this.passwordCheckChange = this.passwordCheckChange.bind(this);
+    this.passwordConfirmChange = this.passwordConfirmChange.bind(this);
   }
 
   handleRegister() {
-    console.log('Register Pressed');
+    fetch('/api/users/register', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        firstName: this.state.firstName,
+        middleInitial: this.state.middleInitial,
+        lastName: this.state.lastName,
+        email: this.state.email,
+        userID: this.state.userID,
+        password: this.state.password,
+        confirmPassword: this.state.passwordConfirm,
+      }),
+    }).then(res => res.json()).then((data) => {
+      alert(data.message);
+    });
   }
 
   fNameChange(event) {
-    this.setState({ FirstName: event.target.value });
+    this.setState({ firstName: event.target.value });
   }
 
   MIChange(event) {
-    this.setState({ MiddleInitial: event.target.value });
+    this.setState({ middleInitial: event.target.value });
   }
 
   lNameChange(event) {
-    this.setState({ LastName: event.target.value });
+    this.setState({ lastName: event.target.value });
   }
 
   emailChange(event) {
-    this.setState({ Email: event.target.value });
+    this.setState({ email: event.target.value });
   }
 
   userIDChange(event) {
-    this.setState({ UserID: event.target.value });
+    this.setState({ userID: event.target.value });
   }
 
   passwordChange(event) {
-    this.setState({ Password: event.target.value });
+    this.setState({ password: event.target.value });
   }
 
-  passwordCheckChange(event) {
-    this.setState({ PasswordCheck: event.target.value });
+  passwordConfirmChange(event) {
+    this.setState({ passwordConfirm: event.target.value });
   }
 
   checkPass() {
-    console.log(`${this.state.Password} | ${this.state.PasswordCheck}`);
-    if (this.state.Password === this.state.PasswordCheck) {
+    console.log(`${this.state.password} | ${this.state.passwordConfirm}`);
+    if (this.state.password === this.state.passwordConfirm) {
       console.log('Passwords match');
     } else {
       console.log('Passwords do not match');
@@ -77,12 +93,14 @@ class Register extends React.Component {
           <TextField text="Email" type="text" handleChange={this.emailChange} />
           <TextField text="User ID (unique)" type="text" handleChange={this.userIDChange} />
           <TextField text="Password" type="password" handleChange={this.passwordChange} />
-          <TextField text="Password (again)" type="password" handleChange={this.passwordCheckChange} onChange={this.checkPass()} />
+          <TextField text="Password (again)" type="password" handleChange={this.passwordConfirmChange} onChange={this.checkPass()} />
           <div className="ButtonWrapper">
             <Link to="/login">
               <GeneralButton text="I already have an account" />
             </Link>
-            <GeneralButton text="Register" handlePress={this.handleRegister} />
+            <Link to="/login">
+              <GeneralButton text="Register" handlePress={this.handleRegister} />
+            </Link>
           </div>
         </div>
       </div>
