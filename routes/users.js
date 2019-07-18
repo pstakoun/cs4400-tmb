@@ -1,10 +1,7 @@
 const express = require('express');
-const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 
 const { connection } = require('../services');
-
-// http://programmerblog.net/nodejs-authentication-jwt/
 
 const router = express.Router();
 
@@ -82,23 +79,7 @@ router.post('/login', (req, res) => {
       if (result1.length > 0) {
         user.admin = true;
       }
-
-      jwt.sign(user, 'supersecret', (err2, token) => res.status(200).json({ user, token }));
     });
-  });
-});
-
-/* Authenticates user */
-router.post('/authenticate', (req, res) => {
-  const { token } = req.body;
-  if (!token) {
-    return res.sendStatus(401);
-  }
-  jwt.verify(token, 'supersecret', (err, user) => {
-    if (err) {
-      throw err;
-    }
-    // TODO Get user from db by user.id
   });
 });
 
