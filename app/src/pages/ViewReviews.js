@@ -2,8 +2,8 @@ import React from 'react';
 import './ViewReviews.css';
 import '../components/Material-Icons.css';
 import { Link } from 'react-router-dom';
-import GeneralButton from '../components/GeneralButton';
 import MaterialTable from 'material-table';
+import GeneralButton from '../components/GeneralButton';
 
 
 class ViewReviews extends React.Component {
