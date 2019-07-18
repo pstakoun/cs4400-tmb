@@ -73,7 +73,7 @@ router.post('/register', (req, res) => {
 });
 
 /* Log in user */
-router.post('/login', (res, req) => {
+router.post('/login', (req, res) => {
   const {
     userID,
     password,
@@ -121,7 +121,7 @@ router.post('/login', (res, req) => {
 });
 
 /* Authenticates user */
-router.post('/authenticate', (res, req) => {
+router.post('/authenticate', (req, res) => {
   const { token } = req.body;
   if (!token) {
     return res.sendStatus(401);
