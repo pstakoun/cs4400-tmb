@@ -89,7 +89,7 @@ class LeaveReview extends React.Component {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-    station : this.state.station,
+    station : this.state.selected,
     shopping : this.state.shoppingRating,
     connection : this.state.speedRating,
     comment : this.state.comment,
@@ -104,7 +104,7 @@ class LeaveReview extends React.Component {
   }
 
   _onSelect (option) {
-    console.log('You selected ', option.label)
+    //console.log('You selected ', option.label)
     this.setState({selected: option})
   }
 
