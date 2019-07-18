@@ -8,7 +8,6 @@ class Login extends React.Component {
   constructor(props) {
     super(props);
     this.handleLogin = this.handleLogin.bind(this);
-    this.handleRegister = this.handleRegister.bind(this);
     this.userIDChange = this.userIDChange.bind(this);
     this.passwordChange = this.passwordChange.bind(this);
 
@@ -19,11 +18,18 @@ class Login extends React.Component {
   }
 
   handleLogin() {
-    console.log('Login Pressed');
-  }
-
-  handleRegister() {
-    console.log('Register Pressed');
+    fetch('/api/users/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'applcation/json',
+      },
+      body: {
+        userID: this.state.UserID,
+        password: this.state.Password,
+      },
+    }).then(res => res.json()).then((data) => {
+      alert(data.message);
+    });
   }
 
   userIDChange(event) {

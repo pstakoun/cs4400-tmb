@@ -16,6 +16,7 @@ class Register extends React.Component {
       Password: '',
       PasswordCheck: '',
     };
+    this.handleRegister = this.handleRegister.bind(this);
     this.fNameChange = this.fNameChange.bind(this);
     this.MIChange = this.MIChange.bind(this);
     this.lNameChange = this.lNameChange.bind(this);
@@ -23,6 +24,10 @@ class Register extends React.Component {
     this.userIDChange = this.userIDChange.bind(this);
     this.passwordChange = this.passwordChange.bind(this);
     this.passwordCheckChange = this.passwordCheckChange.bind(this);
+  }
+
+  handleRegister() {
+    console.log('Register Pressed');
   }
 
   fNameChange(event) {
