@@ -6,7 +6,9 @@ const { connection } = require('../services');
 const router = express.Router();
 
 /* GET users */
-router.get('/', (req, res) => res.status(200).json({}));
+router.get('/', (req, res) => {
+  res.status(200).json({});
+});
 
 /* Register user */
 router.post('/register', (req, res) => {
@@ -79,6 +81,10 @@ router.post('/login', (req, res) => {
       if (result1.length > 0) {
         user.admin = true;
       }
+
+      req.session.user = user;
+
+      res.status(200).json({ message: 'Success' });
     });
   });
 });
