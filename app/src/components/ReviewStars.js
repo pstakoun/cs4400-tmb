@@ -1,6 +1,6 @@
 import React from 'react';
 import Rater from 'react-rater';
-import 'react-rater/lib/react-rater.css'
+import 'react-rater/lib/react-rater.css';
 import './ReviewStars.css';
 
 class ReviewStars extends React.Component {

@@ -12,11 +12,11 @@ class Login extends React.Component {
   }
 
   handleLogin() {
-    console.log("Login Pressed")
+    console.log('Login Pressed');
   }
 
   handleRegister() {
-    console.log("Register Pressed")
+    console.log('Register Pressed');
   }
 
   render() {
@@ -26,11 +26,11 @@ class Login extends React.Component {
           <TextField text="ID" type="text" />
           <TextField text="Password" type="password" />
           <div className="ButtonWrapper">
-            <Link to={'/register'}>
-              <GeneralButton text="Register" handlePress={this.handleRegister}/>
+            <Link to="/register">
+              <GeneralButton text="Register" handlePress={this.handleRegister} />
             </Link>
-            <Link to={'/home'}>
-              <GeneralButton text="Login" handlePress={this.handleLogin}/>
+            <Link to="/home">
+              <GeneralButton text="Login" handlePress={this.handleLogin} />
             </Link>
           </div>
         </div>
