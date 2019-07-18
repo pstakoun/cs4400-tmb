@@ -6,7 +6,7 @@ import LeaveReview from './pages/LeaveReview';
 import PassengerHome from './pages/PassengerHome';
 import AdminHome from './pages/AdminHome';
 import Home from './pages/Home';
-
+import EditReview from './pages/EditReview'
 import BuyCard from './pages/BuyCard';
 
 
@@ -20,7 +20,9 @@ function App() {
         <Route exact path="/register" component={Register} />
         <Route exact path="/leaveReview" component={LeaveReview} />
         <Route exact path="/home" component={Home} />
-        <Route exact path="/BuyCard" component={BuyCard} />
+        <Route exact path="/passengerHome" component={PassengerHome} />
+        <Route exact path="/buyCard" component={BuyCard} />
+        <Route exact path="/editReview" component={EditReview} />
       </Switch>
     </div>
   );

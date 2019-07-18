@@ -1,5 +1,5 @@
 import React from 'react';
-import './LeaveReview.css';
+import './EditReview.css';
 import { Link } from 'react-router-dom';
 import Dropdown from 'react-dropdown';
 import GeneralButton from '../components/GeneralButton.js';
@@ -7,15 +7,15 @@ import TextField from '../components/TextField.js';
 import ReviewStars from '../components/ReviewStars.js';
 import 'react-dropdown/style.css';
 
-class LeaveReview extends React.Component {
+class EditReview extends React.Component {
   constructor(props) {
     super(props);
     this.handleRateShopping = this.handleRateShopping.bind(this);
     this.handleRateSpeed = this.handleRateSpeed.bind(this);
     this.handleCommentChange = this.handleCommentChange.bind(this);
     this.state = {
-      options: [],
-      defaultOption: '',
+      station: '',
+      rid: '',
       shoppingRating: 0,
       speedRating: 0,
       comment: '',
@@ -40,13 +40,10 @@ class LeaveReview extends React.Component {
   render() {
     return (
       <div className="Wrapper">
-        <div className="LeaveReview">
-          <Dropdown
-            options={this.state.options}
-            onChange={this._onSelect}
-            value={this.state.defaultOption}
-            placeholder="Select a Station"
-          />
+        <div className="EditReview">
+          <label className={"InfoLabel"}>Edit Review: {this.state.station}</label>
+          <label className={"InfoLabel"}>Status: {this.state.status}</label>
+          <label className={"InfoLabel"}>ID: {this.state.rid}</label>
           <ReviewStars text="Shopping" rating={this.state.shoppingRating} name="shopping" handleRate={this.handleRateShopping} />
           <ReviewStars text="Connection Speed" rating={this.state.speedRating} name="speed" handleRate={this.handleRateSpeed} />
           <textarea
@@ -56,8 +53,8 @@ class LeaveReview extends React.Component {
             value={this.state.comment}
           />
           <div className="ButtonWrapper">
-            <Link to={"/passengerHome"}>
-              <GeneralButton text="Main Menu" />
+            <Link to={"/home"}>
+              <GeneralButton text="Delete Review" />
             </Link>
             <GeneralButton text="Submit Review" />
           </div>
@@ -67,4 +64,4 @@ class LeaveReview extends React.Component {
   }
 }
 
-export default LeaveReview;
+export default EditReview;

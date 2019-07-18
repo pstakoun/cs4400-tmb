@@ -28,7 +28,7 @@ Actions:
           </Link>
           <GeneralButton text="Go on Trip" />
           <GeneralButton text="View Trips" />
-          <GeneralButton text="Edit" />
+          <GeneralButton text="Edit Profile" />
         </div>
       </div>
     </div>
