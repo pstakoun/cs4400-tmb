@@ -9,6 +9,13 @@ class Login extends React.Component {
     super(props);
     this.handleLogin = this.handleLogin.bind(this);
     this.handleRegister = this.handleRegister.bind(this);
+    this.userIDChange = this.userIDChange.bind(this);
+    this.passwordChange = this.passwordChange.bind(this);
+
+    this.state = {
+      UserID: "",
+      Password: ""
+    }
   }
 
   handleLogin() {
@@ -19,12 +26,20 @@ class Login extends React.Component {
     console.log('Register Pressed');
   }
 
+  userIDChange(event) {
+    this.setState({ UserID: event.target.value});
+  }
+
+  passwordChange(event) {
+    this.setState({ Password: event.target.value});
+  }
+
   render() {
     return (
       <div className="Wrapper">
         <div className="Login">
-          <TextField text="ID" type="text" />
-          <TextField text="Password" type="password" />
+          <TextField text="ID" type="text" handleChange={this.userIDChange}/>
+          <TextField text="Password" type="password" handleChange={this.passwordChange}/>
           <div className="ButtonWrapper">
             <Link to="/register">
               <GeneralButton text="Register" handlePress={this.handleRegister} />
