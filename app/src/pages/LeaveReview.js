@@ -56,7 +56,7 @@ class LeaveReview extends React.Component {
             value={this.state.comment}
           />
           <div className="ButtonWrapper">
-            <Link to="/passengerHome">
+            <Link to="/">
               <GeneralButton text="Main Menu" />
             </Link>
             <GeneralButton text="Submit Review" />

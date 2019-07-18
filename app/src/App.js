@@ -3,8 +3,6 @@ import { Route, Switch } from 'react-router-dom';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import LeaveReview from './pages/LeaveReview';
-import PassengerHome from './pages/PassengerHome';
-import AdminHome from './pages/AdminHome';
 import Home from './pages/Home';
 import EditReview from './pages/EditReview';
 import BuyCard from './pages/BuyCard';
@@ -17,14 +15,13 @@ function App() {
   return (
     <div className="App">
       <Switch>
-        <Route exact path="/" component={Login} />
-        <Route exact path="/register" component={Register} />
-        <Route exact path="/leaveReview" component={LeaveReview} />
-        <Route exact path="/home" component={Home} />
-        <Route exact path="/passengerHome" component={PassengerHome} />
-        <Route exact path="/buyCard" component={BuyCard} />
-        <Route exact path="/editReview" component={EditReview} />
-        <Route exact path="/viewReviews" component={ViewReviews} />
+        <Route exact path="/" component={Home} />
+        <Route path="/login" component={Login} />
+        <Route path="/register" component={Register} />
+        <Route path="/leaveReview" component={LeaveReview} />
+        <Route path="/buyCard" component={BuyCard} />
+        <Route path="/editReview" component={EditReview} />
+        <Route path="/viewReviews" component={ViewReviews} />
       </Switch>
     </div>
   );

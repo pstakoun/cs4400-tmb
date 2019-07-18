@@ -6,13 +6,8 @@ function Home() {
   return (
     <div className="Home">
       <PassengerHome />
-
     </div>
   );
 }
 
 export default Home;
-
-/* <Route exact path="/passHome" component={PassengerHome} />
-        <Route exact path="/adminHome" component={AdminHome} />
-      */

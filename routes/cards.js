@@ -6,7 +6,7 @@ const router = express.Router();
 
 /* GET cards */
 router.post('/buy', (req, res) => {
-  const card = {
+  const {
     userID,
     type,
     purchaseDateAndTime,
@@ -14,10 +14,7 @@ router.post('/buy', (req, res) => {
     expirationDate,
   } = req.body;
 
-  res.send({
-    code: 200,
-    success: 'user purchased card successfully',
-  });
+  res.status(200).json({ message: 'Success' });
 });
 
 module.exports = router;

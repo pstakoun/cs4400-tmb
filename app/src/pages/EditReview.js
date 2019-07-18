@@ -62,7 +62,7 @@ ID:
             value={this.state.comment}
           />
           <div className="ButtonWrapper">
-            <Link to="/home">
+            <Link to="/">
               <GeneralButton text="Delete Review" />
             </Link>
             <GeneralButton text="Submit Review" />

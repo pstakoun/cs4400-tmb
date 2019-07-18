@@ -3,7 +3,7 @@ import GeneralButton from '../components/GeneralButton.js';
 import './PassHome.css';
 import { Link } from 'react-router-dom';
 
-function PassengerHome() {
+function AdminHome() {
   return (
 
     <div className="Wrapper">
@@ -31,4 +31,4 @@ function PassengerHome() {
   );
 }
 
-export default PassengerHome;
+export default AdminHome;

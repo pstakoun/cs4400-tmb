@@ -17,7 +17,7 @@ class ViewReviews extends React.Component {
         <div className="ViewReviews">
           <Table />
           <div className="ButtonWrapper">
-            <Link to="/passengerHome">
+            <Link to="/">
               <GeneralButton text="Main Menu" />
             </Link>
           </div>

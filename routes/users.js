@@ -60,11 +60,11 @@ router.post('/login', (req, res) => {
       return res.status(500).json({ message: 'An error ocurred' });
     }
 
-    const user = result[0];
-
-    if (user.length === 0) {
+    if (result.length === 0) {
       return res.status(401).json({ message: 'User ID or password is incorrect' });
     }
+
+    const user = result[0];
 
     if (user.password !== password) { // TODO handle hash
       return res.status(401).json({ message: 'User ID or password is incorrect' });
@@ -87,6 +87,12 @@ router.post('/login', (req, res) => {
       res.status(200).json({ message: 'Success' });
     });
   });
+});
+
+/* Log out user */
+router.get('/logout', (req, res) => {
+  req.session.user = null;
+  res.redirect('/login');
 });
 
 module.exports = router;
