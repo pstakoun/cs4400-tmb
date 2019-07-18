@@ -18,22 +18,22 @@ class LeaveReview extends React.Component {
       defaultOption: '',
       shoppingRating: 0,
       speedRating: 0,
-      comment: ''
+      comment: '',
     };
   }
 
   handleRateShopping(rating) {
-    console.log(`Shopping Rating is: ` + this.state.shoppingRating);
-    this.setState({shoppingRating: rating});
+    console.log(`Shopping Rating is: ${this.state.shoppingRating}`);
+    this.setState({ shoppingRating: rating });
   }
 
   handleRateSpeed(rating) {
     console.log(`Connection Speed Rating is: ${rating}`);
-    this.setState({speedRating: rating});
+    this.setState({ speedRating: rating });
   }
 
   handleCommentChange(event) {
-    this.setState({comment: event.target.value});
+    this.setState({ comment: event.target.value });
   }
 
   render() {
