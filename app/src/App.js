@@ -7,6 +7,9 @@ import PassengerHome from './pages/PassengerHome';
 import AdminHome from './pages/AdminHome';
 import Home from './pages/Home';
 
+import BuyCard from './pages/BuyCard';
+
+
 import './App.css';
 
 function App() {
@@ -17,6 +20,7 @@ function App() {
         <Route exact path="/register" component={Register} />
         <Route exact path="/leaveReview" component={LeaveReview} />
         <Route exact path="/home" component={Home} />
+        <Route exact path="/BuyCard" component={BuyCard} />
       </Switch>
     </div>
   );

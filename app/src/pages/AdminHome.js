@@ -1,7 +1,7 @@
 import React from 'react';
 import GeneralButton from '../components/GeneralButton.js';
 import './PassHome.css';
-
+import { Link } from 'react-router-dom';
 
 function PassengerHome() {
 
@@ -18,9 +18,9 @@ function PassengerHome() {
 
   <b className="b">Actions:</b>
   <GeneralButton text = {"View Trips"}/>
-
-               
+  <Link to={'/BuyCard'}>
                 <GeneralButton text = {"Buy Card"}/>
+                </Link>                
                 <GeneralButton text = {"Go on Trip"}/>
                 <GeneralButton text = {"Edit Profile"}/>
                 <GeneralButton text = {"Add Station"}/>

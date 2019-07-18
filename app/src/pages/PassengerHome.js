@@ -17,12 +17,15 @@ function PassengerHome() {
     <h2>Welcome Passenger!</h2>
   </header>
 
-  <b className="b">Actions:</b>
-d             <Link to={'/LeaveReview'}>
-                <GeneralButton text = {"Leave Review"}/>
+  <b className="b">Actions:
+  </b>
+            <Link to={'/LeaveReview'}>
+                    <GeneralButton text = {"Leave Review"}/>
                 </Link>
-                <GeneralButton text = {"View Review"}/>
+                <GeneralButton text = {"View Reviews"}/>
+                <Link to={'/BuyCard'}>
                 <GeneralButton text = {"Buy Card"}/>
+                </Link>
                 <GeneralButton text = {"Go on Trip"}/>
                 <GeneralButton text = {"View Trips"}/>
                 <GeneralButton text = {"Edit"}/>
