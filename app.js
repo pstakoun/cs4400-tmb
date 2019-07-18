@@ -3,6 +3,7 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
 
+const { requireLogin, requireNoLogin, requireAdmin } = require('./services');
 const usersRouter = require('./routes/users');
 const cardsRouter = require('./routes/cards');
 const stationsRouter = require('./routes/stations');

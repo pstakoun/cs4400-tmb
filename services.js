@@ -8,7 +8,9 @@ const connection = mysql.createConnection({
 });
 connection.connect();
 
+// TODO modify to work for API routes
 const requireLogin = (req, res, next) => {
+  console.log('require login');
   if (!req.session.user) {
     return res.redirect('/login');
   }
@@ -26,6 +28,16 @@ const requireLogin = (req, res, next) => {
   });
 };
 
+// TODO modify to work for API routes
+const requireNoLogin = (req, res, next) => {
+  if (req.session.user) {
+    return res.redirect('/');
+  }
+
+  next();
+};
+
+// TODO modify to work for API routes
 const requireAdmin = (req, res, next) => {
   if (!req.session.user) {
     return res.redirect('/login');
@@ -58,5 +70,6 @@ const requireAdmin = (req, res, next) => {
 module.exports = {
   connection,
   requireLogin,
+  requireNoLogin,
   requireAdmin,
 };
