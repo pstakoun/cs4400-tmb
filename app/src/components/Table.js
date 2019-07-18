@@ -10,22 +10,34 @@ class Table extends React.Component {
     };
   }
 
+  idClicked() {
+    console.log('id clicked');
+  }
+
+  stationClicked() {
+    console.log('station sclicked');
+  }
+
   render() {
     return (
       <div style={{ maxWidth: '100%' }}>
         <MaterialTable
           columns={[
-            { title: 'ID', field: 'name' },
-            { title: 'Station', field: 'surname' },
-            { title: 'Shopping', field: 'birthYear', type: 'numeric' },
-            { title: 'Connection Speed', field: 'birthCity', lookup: { 34: 'İstanbul', 63: 'Şanlıurfa' } },
+            {
+              title: 'ID',
+              field: 'userID',
+              render: rowData => <a href="FAKE ROUTING">{rowData.userID}</a>,
+            },
+            { title: 'Station', field: 'stationName', render: rowData => <a href="FAKE ROUTING">{rowData.stationName}</a> },
+            { title: 'Shopping', field: 'shoppingRate' },
+            { title: 'Connection Speed', field: 'speedRate' },
           ]}
           data={[
             {
-              name: 'Matt', surname: 'Carroll', birthYear: 1999, birthCity: 34,
+              userID: '1', stationName: 'Catalunya', shoppingRate: 3, speedRate: 2,
             },
             {
-              name: 'Carolyn', surname: 'Carroll', birthYear: 1963, birthCity: 63,
+              userID: '2', stationName: 'Espanya', shoppingRate: 3, speedRate: 4,
             },
           ]}
           title="My Reviews"
