@@ -5,23 +5,22 @@ import GeneralButton from '../components/GeneralButton.js';
 import TextField from '../components/TextField.js';
 
 class Register extends React.Component {
-  render()
-  {
+  render() {
     return (
       <div className="Wrapper">
         <div className="Register">
-          <TextField text="First Name" type="text"/>
-          <TextField text="Middle Initial"  type="text"/>
-          <TextField text="Last Name" type="text"/>
-          <TextField text="Email" type="text"/>
-          <TextField text="User ID (unique)" type="text"/>
-          <TextField text="Password" type="password"/>
-          <TextField text="Password (again)" type="password"/>
+          <TextField text="First Name" type="text" />
+          <TextField text="Middle Initial" type="text" />
+          <TextField text="Last Name" type="text" />
+          <TextField text="Email" type="text" />
+          <TextField text="User ID (unique)" type="text" />
+          <TextField text="Password" type="password" />
+          <TextField text="Password (again)" type="password" />
           <div className="ButtonWrapper">
-            <Link to={'/'}>
-              <GeneralButton text="I already have an account"/>
+            <Link to="/">
+              <GeneralButton text="I already have an account" />
             </Link>
-            <GeneralButton text="Register"/>
+            <GeneralButton text="Register" />
           </div>
         </div>
       </div>

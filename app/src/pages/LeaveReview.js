@@ -6,13 +6,12 @@ import TextField from '../components/TextField.js';
 import ReviewStars from '../components/ReviewStars.js';
 
 class LeaveReview extends React.Component {
-  render()
-  {
+  render() {
     return (
       <div className="Wrapper">
         <div className="LeaveReview">
-          <ReviewStars text={"Shopping"}/>
-          <ReviewStars text={"Connection Speed"}/>
+          <ReviewStars text="Shopping" />
+          <ReviewStars text="Connection Speed" />
           <textarea
             rows="5"
 
