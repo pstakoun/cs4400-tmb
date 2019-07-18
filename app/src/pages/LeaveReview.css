@@ -28,6 +28,10 @@ body {
   color: white;
 }
 
+.ButtonWrapper {
+  text-align: center;
+}
+
 textarea {
   width: 340px;
 }
