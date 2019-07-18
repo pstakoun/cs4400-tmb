@@ -21,12 +21,12 @@ class Login extends React.Component {
     fetch('/api/users/login', {
       method: 'POST',
       headers: {
-        'Content-Type': 'applcation/json',
+        'Content-Type': 'application/json',
       },
-      body: {
+      body: JSON.stringify({
         userID: this.state.UserID,
         password: this.state.Password,
-      },
+      }),
     }).then(res => res.json()).then((data) => {
       alert(data.message);
     });
