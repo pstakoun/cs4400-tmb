@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import './Login.css';
 import GeneralButton from '../components/GeneralButton.js';
 import TextField from '../components/TextField.js';
@@ -12,8 +12,9 @@ class Login extends React.Component {
     this.passwordChange = this.passwordChange.bind(this);
 
     this.state = {
-      UserID: '',
-      Password: '',
+      userID: '',
+      password: '',
+      loggedIn: false,
     };
   }
 
@@ -24,20 +25,26 @@ class Login extends React.Component {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        userID: this.state.UserID,
-        password: this.state.Password,
+        userID: this.state.userID,
+        password: this.state.password,
       }),
     }).then(res => res.json()).then((data) => {
-      alert(data.message);
+      if (data.success) {
+        this.setState({
+          loggedIn: true,
+        });
+      } else {
+        alert(data.message);
+      }
     });
   }
 
   userIDChange(event) {
-    this.setState({ UserID: event.target.value });
+    this.setState({ userID: event.target.value });
   }
 
   passwordChange(event) {
-    this.setState({ Password: event.target.value });
+    this.setState({ password: event.target.value });
   }
 
   render() {
@@ -52,6 +59,7 @@ class Login extends React.Component {
             </Link>
             <GeneralButton text="Login" handlePress={this.handleLogin} />
           </div>
+          { this.state.loggedIn ? <Redirect to="/" /> : null }
         </div>
       </div>
     );

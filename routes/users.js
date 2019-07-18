@@ -43,7 +43,7 @@ router.post('/register', (req, res) => {
       console.log(err);
       return res.status(500).json({ message: 'An error ocurred' });
     }
-    res.status(200).json({ message: 'Success' });
+    res.status(200).json({ success: true, message: 'Success' });
   });
 });
 
@@ -85,7 +85,7 @@ router.post('/login', (req, res) => {
 
       req.session.user = user;
 
-      res.status(200).json({ message: 'Success' });
+      res.status(200).json({ success: true, message: 'Success' });
     });
   });
 });
