@@ -1,19 +1,12 @@
 const express = require('express');
-const mysql = require('mysql');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
+
+const { connection } = require('../services');
 
 // http://programmerblog.net/nodejs-authentication-jwt/
 
 const router = express.Router();
-
-const connection = mysql.createConnection({
-  host: 'localhost',
-  user: 'tmb-user',
-  password: 'password',
-  database: 'tmb',
-});
-connection.connect();
 
 /* GET users */
 router.get('/', (req, res) => res.status(200).json({}));
