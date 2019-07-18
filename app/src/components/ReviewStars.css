@@ -1,0 +1,28 @@
+.ReviewStars {
+  max-width: 320px;
+  margin-bottom: 20px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.ReviewStars label {
+  display: inline-block;
+  padding: 5px;
+  margin-right: 10px;
+}
+
+.ReviewStars input {
+  display: inline-block;
+  float: right;
+  font-size: 16px;
+  padding: 5px;
+  border-radius: 5px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: lightgrey;
+}
+
+.react-rater {
+  float: right;
+  margin-right: 20px;
+}

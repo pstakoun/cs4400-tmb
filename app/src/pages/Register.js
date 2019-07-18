@@ -15,14 +15,13 @@ class Register extends React.Component {
           <TextField text="Last Name" type="text"/>
           <TextField text="Email" type="text"/>
           <TextField text="User ID (unique)" type="text"/>
-          <TextField text="ID" type="text"/>
           <TextField text="Password" type="password"/>
           <TextField text="Password (again)" type="password"/>
           <div className="ButtonWrapper">
             <Link to={'/'}>
               <GeneralButton text="I already have an account"/>
             </Link>
-            <GeneralButton text="Create Account"/>
+            <GeneralButton text="Register"/>
           </div>
         </div>
       </div>

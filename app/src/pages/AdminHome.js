@@ -1,8 +1,7 @@
 import React from 'react';
 import GeneralButton from '../components/GeneralButton.js';
-import { Link } from 'react-router-dom';
 import './PassHome.css';
-
+import { Link } from 'react-router-dom';
 
 function PassengerHome() {
 
@@ -14,21 +13,19 @@ function PassengerHome() {
 
                 <div className={"ButtonWrapper"}>
                <header>
-    <h2>Welcome Passenger!</h2>
+    <h2>Welcome Admin!</h2>
   </header>
 
-  <b className="b">Actions:
-  </b>
-            <Link to={'/LeaveReview'}>
-                    <GeneralButton text = {"Leave Review"}/>
-                </Link>
-                <GeneralButton text = {"View Reviews"}/>
-                <Link to={'/BuyCard'}>
+  <b className="b">Actions:</b>
+  <GeneralButton text = {"View Trips"}/>
+  <Link to={'/BuyCard'}>
                 <GeneralButton text = {"Buy Card"}/>
-                </Link>
+                </Link>                
                 <GeneralButton text = {"Go on Trip"}/>
-                <GeneralButton text = {"View Trips"}/>
-                <GeneralButton text = {"Edit"}/>
+                <GeneralButton text = {"Edit Profile"}/>
+                <GeneralButton text = {"Add Station"}/>
+                <GeneralButton text = {"Add Line"}/>
+                <GeneralButton text = {"Review Passenger Reviews"}/>
             </div>
          </div>
     </div>
