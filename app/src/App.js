@@ -25,7 +25,7 @@ function App() {
         <PrivateRoute path="/editReview" component={EditReview} />
         <PrivateRoute path="/viewReviews" component={ViewReviews} />
         <PrivateRoute path="/stationInfo" component={StationInfo} />
-        <PrivateRoute path="/lineSummary" component={StationInfo} />
+        <PrivateRoute path="/lineSummary" component={LineSummary} />
       </Switch>
     </div>
   );

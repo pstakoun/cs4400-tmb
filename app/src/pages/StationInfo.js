@@ -11,7 +11,7 @@ class StationInfo extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: this.props.location.state.rid,
+      name: this.props.location.state.stationName,
       status: '',
       stateProvince: '',
       address: '',
@@ -26,7 +26,8 @@ class StationInfo extends React.Component {
     fetch('/api/stations/' + this.state.name).then(
       results => results.json(),
     ).then((data) => {
-      console.log(data)
+      console.log(data);
+      console.log(this.state.name);
       this.setState({
         status: data.stations[0].status,
         stateProvince: data.stations[0].state_province,
@@ -68,7 +69,7 @@ class StationInfo extends React.Component {
 
   render() {
     const lines = this.state.lines.map(function(line){
-      return <Link class={"lineLink"} to={{
+      return <Link key={line} className={"lineLink"} to={{
         pathname: '/lineSummary',
         state: {
           line: line,
@@ -104,27 +105,9 @@ class StationInfo extends React.Component {
                 {
                   title: 'ID',
                   field: 'rid',
-                  render: rowData =>
-                    <Link to={{
-                      pathname: '/editReview',
-                      state: {
-                        rid: rowData.rid
-                      }
-                    }}>
-                      {rowData.rid}
-                    </Link>,
                 },
                 { title: 'Station',
                   field: 'station_name',
-                  render: rowData =>
-                    <Link to={{
-                      pathname: '/stationInfo',
-                      state: {
-                        rid: rowData.station_name
-                      }
-                    }}>
-                      {rowData.station_name}
-                    </Link>
                 },
                 { title: 'Shopping',
                   field: 'shopping'

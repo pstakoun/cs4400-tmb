@@ -28,7 +28,7 @@ router.get('/:name', (req, res) => {
 
 /* GET stations on a given line */
 router.get('/stationLines/:line', (req, res) => {
-  connection.query('SELECT station_name, order_number FROM Station_On_Line WHERE line_name = ?', [req.params.line], (err, result) => {
+  connection.query('SELECT station_name, order_number FROM Station_On_Line WHERE line_name = ? ORDER BY order_number ASC', [req.params.line], (err, result) => {
     if (err) {
       console.log(err);
       return res.status(500).json({ message: 'An error ocurred' });

@@ -22,21 +22,12 @@ class LineSummary extends React.Component {
     ).then((data) => {
       this.setState({
         stations: data.stations,
+        stops: data.stations.length,
       });
     });
   }
 
   render() {
-    const lines = this.state.lines.map(function(line){
-      return <Link class={"lineLink"} to={{
-        pathname: '/lineSummary',
-        state: {
-          line: line,
-        }
-      }}>
-        {line}
-      </Link>;
-    });
     return (
       <div className="Wrapper">
         <div className="LineSummary">
@@ -58,7 +49,7 @@ class LineSummary extends React.Component {
                     <Link to={{
                       pathname: '/stationInfo',
                       state: {
-                        rid: rowData.station_name
+                        stationName: rowData.station_name
                       }
                     }}>
                       {rowData.station_name}
@@ -70,6 +61,9 @@ class LineSummary extends React.Component {
                 },
               ]}
               data={this.state.stations}
+              options={{
+                sorting: true
+              }}
               title="Station Reviews"
             />
           </div>
