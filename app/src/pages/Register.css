@@ -27,3 +27,13 @@ body {
     font-size: calc(10px + 2vmin);
     color: white;
 }
+
+.checkbox {
+    margin-left: 40px;
+    margin-right: 40px;
+    text-align: left;
+}
+
+.checkboxContainer {
+    text-align: center;
+}
