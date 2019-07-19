@@ -87,13 +87,16 @@ class Register extends React.Component {
     return (
       <div className="Wrapper">
         <div className="Register">
-          <TextField text="First Name" type="text" handleChange={this.fNameChange} />
+          <TextField text="First Name *" type="text" handleChange={this.fNameChange} />
           <TextField text="Middle Initial" type="text" handleChange={this.MIChange} />
-          <TextField text="Last Name" type="text" handleChange={this.lNameChange} />
-          <TextField text="Email" type="text" handleChange={this.emailChange} />
-          <TextField text="User ID (unique)" type="text" handleChange={this.userIDChange} />
-          <TextField text="Password" type="password" handleChange={this.passwordChange} />
-          <TextField text="Password (again)" type="password" handleChange={this.passwordConfirmChange} onChange={this.checkPass()} />
+          <TextField text="Last Name *" type="text" handleChange={this.lNameChange} />
+          <TextField text="Email *" type="text" handleChange={this.emailChange} />
+          <TextField text="User ID (unique) *" type="text" handleChange={this.userIDChange} />
+          <TextField text="Password *" type="password" handleChange={this.passwordChange} />
+          <TextField text="Password again *" type="password" handleChange={this.passwordConfirmChange} onChange={this.checkPass()} />
+          <div className="ButtonWrapper">
+            <h6>'* is required'</h6>
+          </div>
           <div className="ButtonWrapper">
             <Link to="/login">
               <GeneralButton text="I already have an account" />
