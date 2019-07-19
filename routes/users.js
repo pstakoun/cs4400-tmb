@@ -45,7 +45,7 @@ router.post('/register', (req, res) => {
     first_name: firstName,
     minit: middleInitial,
     last_name: lastName,
-    password, // TODO hash password
+    password,
     passenger_email: email,
   };
 
@@ -59,7 +59,7 @@ router.post('/register', (req, res) => {
 });
 
 /* Update Profile */
-router.put('/update', (req, res) => {
+router.put('/', (req, res) => {
   const {
     firstName,
     middleInitial,
@@ -69,33 +69,39 @@ router.put('/update', (req, res) => {
     password,
     confirmPassword,
   } = req.body;
+
   if (password !== confirmPassword) {
     return res.status(400).json({ message: 'Passwords do not match' });
   }
   if (password.length < 8) {
     return res.status(400).json({ message: 'Password too short' });
   }
+
   const user = {
     ID: userID,
     first_name: firstName,
     minit: middleInitial,
     last_name: lastName,
-    password, // TODO hash password
+    password,
     passenger_email: email,
+    admin: req.session.user.admin,
   };
 
-  connection.query('UPDATE User SET ? WHERE ID = ?', [review, req.session.user.ID], (err) => {
+  connection.query('UPDATE User SET ? WHERE ID = ?', [user, req.session.user.ID], (err) => {
     if (err) {
       console.log(err);
       return res.status(500).json({ message: 'An error ocurred' });
     }
+
+    req.session.user = user;
+
     res.status(200).json({ success: true, message: 'Success' });
   });
 });
 
 
 /* Delete User */
-router.delete('/delete', (req, res) => {
+router.delete('/', (req, res) => {
   connection.query('DELETE FROM User WHERE ID = ?', [req.session.user.ID], (err) => {
     if (err) {
       console.log(err);
@@ -114,6 +120,7 @@ router.post('/login', (req, res) => {
     password,
   } = req.body;
 
+  // TODO convert query to left outer join
   connection.query('SELECT * FROM User WHERE ID = ?', [userID], (err, result) => {
     if (err) {
       console.log(err);
@@ -126,11 +133,9 @@ router.post('/login', (req, res) => {
 
     const user = result[0];
 
-    if (user.password !== password) { // TODO handle hash
+    if (user.password !== password) {
       return res.status(401).json({ message: 'User ID or password is incorrect' });
     }
-
-    delete user.password;
 
     connection.query('SELECT * FROM Admin WHERE ID = ?', [userID], (err1, result1) => {
       if (err1) {
