@@ -16,6 +16,17 @@ router.get('/', (req, res) => {
   });
 });
 
+/* GET reviews for a station*/
+router.get('/:station', (req, res) => {
+  connection.query('SELECT * FROM Review WHERE station_name = ?', [req.params.station], (err, result) => {
+    if (err) {
+      console.log(err);
+      return res.status(500).json({ message: 'An error ocurred' });
+    }
+    res.status(200).json({ reviews: result });
+  });
+});
+
 /* GET pending reviews */
 router.get('/pending', (req, res) => {
   connection.query('SELECT * FROM Review WHERE approval_status = ?', ['Pending'], (err, result) => {
