@@ -6,7 +6,7 @@ const { connection } = require('../services');
 
 /* GET stations */
 router.get('/', (req, res) => {
-  connection.query('SELECT name FROM Station ORDER BY asc', (err1, result1) => {
+  connection.query('SELECT name FROM Station ORDER BY name ASC', (err1, result1) => {
     if (err1) {
       console.log(err1);
       return res.status(500).json({ message: 'An error ocurred' });

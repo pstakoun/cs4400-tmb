@@ -22,9 +22,9 @@ router.post('/add', (req, res) => {
   const review = {
     passenger_ID: req.session.user.ID,
     station_name: station,
-    shopping: shopping,
+    shopping,
     connection_speed: speed,
-    comment: comment,
+    comment,
     approver_ID: null,
     edit_timestamp: null,
     approval_status: 'Pending',
