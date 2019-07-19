@@ -29,7 +29,7 @@ class LeaveReview extends React.Component {
     fetch('/api/stations').then(
       results => results.json(),
     ).then((data) => {
-      initialStations = data.map(station => station.name);
+      initialStations = data.stations.map(stations => stations.name);
       this.setState({
         options: initialStations,
       });

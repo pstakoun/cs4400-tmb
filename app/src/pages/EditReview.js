@@ -1,9 +1,7 @@
 import React from 'react';
 import './EditReview.css';
 import { Link } from 'react-router-dom';
-import Dropdown from 'react-dropdown';
 import GeneralButton from '../components/GeneralButton';
-import TextField from '../components/TextField';
 import ReviewStars from '../components/ReviewStars';
 import 'react-dropdown/style.css';
 

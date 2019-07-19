@@ -11,6 +11,7 @@ import StationInfo from './pages/StationInfo';
 import BuyCard from './pages/BuyCard';
 import Trip from './pages/Trip';
 import ViewTrips from './pages/ViewTrips';
+import LineSummary from './pages/LineSummary';
 
 import './App.css';
 
@@ -28,6 +29,7 @@ function App() {
         <PrivateRoute path="/buyCard" component={BuyCard} />
         <PrivateRoute path="/trip" component={Trip} />
         <PrivateRoute path="/viewTrips" component={ViewTrips} />
+        <PrivateRoute path="/lineSummary" component={LineSummary} />
       </Switch>
     </div>
   );
