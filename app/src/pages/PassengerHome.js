@@ -13,22 +13,22 @@ class PassengerHome extends React.Component {
               <h2>Welcome Passenger!</h2>
             </header>
             <b className="b">Actions:</b>
-            <Link to="/LeaveReview">
+            <Link to="/leaveReview">
               <GeneralButton text="Leave Review" />
             </Link>
-            <Link to="/ViewReviews">
+            <Link to="/viewReviews">
               <GeneralButton text="View Reviews" />
             </Link>
-            <Link to="/BuyCard">
+            <Link to="/buyCard">
               <GeneralButton text="Buy Card" />
             </Link>
-            <Link to="/Trip">
+            <Link to="/trip">
               <GeneralButton text="Go on Trip" />
             </Link>
-            <Link to="/ViewTrips">
+            <Link to="/viewTrips">
               <GeneralButton text="View Trips" />
             </Link>
-            <Link to="/EditProfile">
+            <Link to="/editProfile">
               <GeneralButton text="Edit Profile" />
             </Link>
           </div>

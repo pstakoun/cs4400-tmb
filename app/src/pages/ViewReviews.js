@@ -35,36 +35,44 @@ class ViewReviews extends React.Component {
                 {
                   title: 'ID',
                   field: 'rid',
-                  render: rowData =>
+                  render: rowData => (
                     <Link to={{
                       pathname: '/editReview',
                       state: {
-                        rid: rowData.rid
-                      }
-                    }}>
+                        rid: rowData.rid,
+                      },
+                    }}
+                    >
                       {rowData.rid}
-                    </Link>,
+                    </Link>
+                  ),
                 },
-                { title: 'Station',
+                {
+                  title: 'Station',
                   field: 'station_name',
-                  render: rowData =>
+                  render: rowData => (
                     <Link to={{
                       pathname: '/stationInfo',
                       state: {
-                        rid: rowData.rid
-                      }
-                    }}>
+                        rid: rowData.rid,
+                      },
+                    }}
+                    >
                       {rowData.station_name}
                     </Link>
+                  ),
                 },
-                { title: 'Shopping',
-                  field: 'shopping'
+                {
+                  title: 'Shopping',
+                  field: 'shopping',
                 },
-                { title: 'Connection Speed',
-                  field: 'connection_speed'
+                {
+                  title: 'Connection Speed',
+                  field: 'connection_speed',
                 },
-                { title: 'Comment',
-                  field: 'comment'
+                {
+                  title: 'Comment',
+                  field: 'comment',
                 },
               ]}
               data={this.state.reviews}

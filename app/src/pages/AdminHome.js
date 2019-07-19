@@ -13,15 +13,27 @@ class AdminHome extends React.Component {
               <h2>Welcome Admin!</h2>
             </header>
             <b className="b">Actions:</b>
-            <GeneralButton text="View Trips" />
-            <Link to="/BuyCard">
+            <Link to="/viewTrips">
+              <GeneralButton text="View Trips" />
+            </Link>
+            <Link to="/buyCard">
               <GeneralButton text="Buy Card" />
             </Link>
-            <GeneralButton text="Go on Trip" />
-            <GeneralButton text="Edit Profile" />
-            <GeneralButton text="Add Station" />
-            <GeneralButton text="Add Line" />
-            <GeneralButton text="Review Passenger Reviews" />
+            <Link to="/trip">
+              <GeneralButton text="Go on Trip" />
+            </Link>
+            <Link to="/editProfile">
+              <GeneralButton text="Edit Profile" />
+            </Link>
+            <Link to="/addStation">
+              <GeneralButton text="Add Station" />
+            </Link>
+            <Link to="/addLine">
+              <GeneralButton text="Add Line" />
+            </Link>
+            <Link to="/pendingReviews">
+              <GeneralButton text="Review Passenger Reviews" />
+            </Link>
           </div>
         </div>
       </div>

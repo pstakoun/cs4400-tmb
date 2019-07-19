@@ -26,7 +26,7 @@ class EditReview extends React.Component {
   }
 
   componentWillMount() {
-    fetch('/api/reviews/' + this.state.rid).then(
+    fetch(`/api/reviews/${this.state.rid}`).then(
       results => results.json(),
     ).then((data) => {
       console.log(data);
@@ -40,7 +40,7 @@ class EditReview extends React.Component {
   }
 
   handleUpdateReview() {
-    fetch('/api/reviews/' + this.state.rid, {
+    fetch(`/api/reviews/${this.state.rid}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
@@ -61,7 +61,7 @@ class EditReview extends React.Component {
   }
 
   handleDeleteReview() {
-    fetch('/api/reviews/' + this.state.rid, {
+    fetch(`/api/reviews/${this.state.rid}`, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
@@ -96,15 +96,15 @@ class EditReview extends React.Component {
       <div className="Wrapper">
         <div className="EditReview">
           <label className="InfoLabel">
-            {"Edit Review: "}
+            {'Edit Review: '}
             {this.state.station}
           </label>
           <label className="InfoLabel">
-            {"Status: "}
+            {'Status: '}
             {this.state.status}
           </label>
           <label className="InfoLabel">
-            {"ID: "}
+            {'ID: '}
             {this.state.rid}
           </label>
           <ReviewStars text="Shopping" rating={this.state.shoppingRating} name="shopping" handleRate={this.handleRateShopping} />
@@ -117,12 +117,12 @@ class EditReview extends React.Component {
           />
           <div className="ButtonWrapper">
             <Link to="/">
-              <GeneralButton text="Delete Review" handlePress={this.handleDeleteReview}/>
+              <GeneralButton text="Delete Review" handlePress={this.handleDeleteReview} />
             </Link>
             <Link to="/">
-              <GeneralButton text="Main Menu"/>
+              <GeneralButton text="Main Menu" />
             </Link>
-            <GeneralButton text="Update Review" handlePress={this.handleUpdateReview}/>
+            <GeneralButton text="Update Review" handlePress={this.handleUpdateReview} />
           </div>
         </div>
       </div>

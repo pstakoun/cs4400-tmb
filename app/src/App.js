@@ -1,14 +1,16 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 import PrivateRoute from './components/PrivateRoute';
+import Home from './pages/Home';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import LeaveReview from './pages/LeaveReview';
-import Home from './pages/Home';
-import EditReview from './pages/EditReview';
-import BuyCard from './pages/BuyCard';
 import ViewReviews from './pages/ViewReviews';
+import EditReview from './pages/EditReview';
 import StationInfo from './pages/StationInfo';
+import BuyCard from './pages/BuyCard';
+import Trip from './pages/Trip';
+import ViewTrips from './pages/ViewTrips';
 
 import './App.css';
 
@@ -20,10 +22,12 @@ function App() {
         <Route path="/login" component={Login} />
         <Route path="/register" component={Register} />
         <PrivateRoute path="/leaveReview" component={LeaveReview} />
-        <PrivateRoute path="/buyCard" component={BuyCard} />
-        <PrivateRoute path="/editReview" component={EditReview} />
         <PrivateRoute path="/viewReviews" component={ViewReviews} />
+        <PrivateRoute path="/editReview" component={EditReview} />
         <PrivateRoute path="/stationInfo" component={StationInfo} />
+        <PrivateRoute path="/buyCard" component={BuyCard} />
+        <PrivateRoute path="/trip" component={Trip} />
+        <PrivateRoute path="/viewTrips" component={ViewTrips} />
       </Switch>
     </div>
   );
