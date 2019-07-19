@@ -1,11 +1,11 @@
 import React from 'react';
-import './StationInfo.css';
 import { Link } from 'react-router-dom';
-import GeneralButton from '../components/GeneralButton';
-import 'react-dropdown/style.css';
-import '../components/Material-Icons.css';
 import MaterialTable from 'material-table';
+import GeneralButton from '../components/GeneralButton';
 import ReviewStars from '../components/ReviewStars';
+import 'react-dropdown/style.css';
+import './StationInfo.css';
+import '../components/Material-Icons.css';
 
 class StationInfo extends React.Component {
   constructor(props) {

@@ -1,11 +1,10 @@
 import React from 'react';
-import './LeaveReview.css';
 import { Link } from 'react-router-dom';
 import Dropdown from 'react-dropdown';
-import { stat } from 'fs';
 import GeneralButton from '../components/GeneralButton';
 import ReviewStars from '../components/ReviewStars';
 import 'react-dropdown/style.css';
+import './LeaveReview.css';
 
 class LeaveReview extends React.Component {
   constructor(props) {

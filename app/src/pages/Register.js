@@ -1,8 +1,8 @@
 import React from 'react';
-import './Register.css';
 import { Link } from 'react-router-dom';
 import GeneralButton from '../components/GeneralButton';
 import TextField from '../components/TextField';
+import './Register.css';
 
 class Register extends React.Component {
   constructor(props) {

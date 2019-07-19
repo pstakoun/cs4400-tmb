@@ -1,6 +1,4 @@
 const express = require('express');
-const bcrypt = require('bcrypt');
-
 const { connection } = require('../services');
 
 const router = express.Router();

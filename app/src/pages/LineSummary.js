@@ -1,10 +1,10 @@
 import React from 'react';
-import './LineSummary.css';
 import { Link } from 'react-router-dom';
+import MaterialTable from 'material-table';
 import GeneralButton from '../components/GeneralButton';
 import 'react-dropdown/style.css';
+import './LineSummary.css';
 import '../components/Material-Icons.css';
-import MaterialTable from 'material-table';
 
 class LineSummary extends React.Component {
   constructor(props) {
