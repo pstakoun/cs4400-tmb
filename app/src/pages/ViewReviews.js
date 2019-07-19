@@ -9,6 +9,20 @@ import GeneralButton from '../components/GeneralButton';
 class ViewReviews extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      reviews: [],
+    }
+  }
+
+  componentWillMount() {
+    fetch('/api/reviews').then(
+      results => results.json(),
+    ).then((data) => {
+      console.log(data.reviews);
+      this.setState({
+        reviews: data.reviews
+      });
+    });
   }
 
   render() {
@@ -20,21 +34,14 @@ class ViewReviews extends React.Component {
               columns={[
                 {
                   title: 'ID',
-                  field: 'userID',
-                  render: rowData => <a href="FAKE ROUTING">{rowData.userID}</a>,
+                  field: 'rid',
+                  render: rowData => <a href="FAKE ROUTING">{rowData.rid}</a>,
                 },
-                { title: 'Station', field: 'stationName', render: rowData => <a href="FAKE ROUTING">{rowData.stationName}</a> },
-                { title: 'Shopping', field: 'shoppingRate' },
-                { title: 'Connection Speed', field: 'speedRate' },
+                { title: 'Station', field: 'station_name', render: rowData => <a href="FAKE ROUTING">{rowData.station_name}</a> },
+                { title: 'Shopping', field: 'shopping' },
+                { title: 'Connection Speed', field: 'connection_speed' },
               ]}
-              data={[
-                {
-                  userID: '1', stationName: 'Catalunya', shoppingRate: 3, speedRate: 2,
-                },
-                {
-                  userID: '2', stationName: 'Espanya', shoppingRate: 3, speedRate: 4,
-                },
-              ]}
+              data={this.state.reviews}
               title="My Reviews"
             />
           </div>
