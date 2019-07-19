@@ -27,6 +27,17 @@ router.get('/pending', (req, res) => {
   });
 });
 
+/* GET review */
+router.get('/:id', (req, res) => {
+  connection.query('SELECT * FROM Review WHERE rid = ?', [req.params.id], (err, result) => {
+    if (err) {
+      console.log(err);
+      return res.status(500).json({ message: 'An error ocurred' });
+    }
+    res.status(200).json({ review: result });
+  });
+});
+
 /* Add new Review */
 router.post('/add', (req, res) => {
   const {
