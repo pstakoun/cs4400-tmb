@@ -8,17 +8,6 @@ router.get('/', (req, res) => {
   res.status(200).json({});
 });
 
-/* GET current user pass */
-router.get('/pass', (req, res) => {
-  connection.query('SELECT password FROM User WHERE ID = ?', [req.session.user.ID], (err, result) => {
-    if (err) {
-      console.log(err);
-      return res.status(500).json({ message: 'An error ocurred' });
-    }
-    res.status(200).json(result);
-  });
-});
-
 /* Register user */
 router.post('/register', (req, res) => {
   const {
@@ -82,7 +71,6 @@ router.put('/', (req, res) => {
     last_name: lastName,
     password,
     passenger_email: email,
-    admin: req.session.user.admin,
   };
 
   connection.query('UPDATE User SET ? WHERE ID = ?', [user, req.session.user.ID], (err) => {
@@ -91,6 +79,7 @@ router.put('/', (req, res) => {
       return res.status(500).json({ message: 'An error ocurred' });
     }
 
+    user.admin = req.session.user.admin;
     req.session.user = user;
 
     res.status(200).json({ success: true, message: 'Success' });
