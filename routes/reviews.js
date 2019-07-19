@@ -39,7 +39,7 @@ router.get('/:id', (req, res) => {
 });
 
 /* Add new Review */
-router.post('/add', (req, res) => {
+router.post('/', (req, res) => {
   const {
     station,
     shopping,

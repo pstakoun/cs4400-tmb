@@ -25,7 +25,7 @@ class LeaveReview extends React.Component {
   }
 
   handleNewReview() {
-    fetch('/api/reviews/add', {
+    fetch('/api/reviews', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
