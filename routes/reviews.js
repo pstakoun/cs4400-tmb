@@ -38,7 +38,7 @@ router.get('/:id', (req, res) => {
   });
 });
 
-/* Add new Review */
+/* Create review */
 router.post('/', (req, res) => {
   const {
     station,
@@ -58,7 +58,47 @@ router.post('/', (req, res) => {
     approval_status: 'Pending',
   };
 
-  connection.query('INSERT INTO Review SET ?', review, (err) => {
+  connection.query('INSERT INTO Review SET ?', [review], (err) => {
+    if (err) {
+      console.log(err);
+      return res.status(500).json({ message: 'An error ocurred' });
+    }
+    res.status(200).json({ success: true, message: 'Success' });
+  });
+});
+
+/* Update review */
+router.put('/:id', (req, res) => {
+  const {
+    station,
+    shopping,
+    speed,
+    comment,
+  } = req.body;
+
+  const review = {
+    passenger_ID: req.session.user.ID,
+    station_name: station,
+    shopping,
+    connection_speed: speed,
+    comment,
+    approver_ID: null,
+    edit_timestamp: null, // TODO
+    approval_status: 'Pending',
+  };
+
+  connection.query('UPDATE Review SET ? WHERE rid = ?', [review, req.params.id], (err) => {
+    if (err) {
+      console.log(err);
+      return res.status(500).json({ message: 'An error ocurred' });
+    }
+    res.status(200).json({ success: true, message: 'Success' });
+  });
+});
+
+/* Delete review */
+router.delete('/:id', (req, res) => {
+  connection.query('DELETE FROM Review WHERE rid = ?', [req.params.id], (err) => {
     if (err) {
       console.log(err);
       return res.status(500).json({ message: 'An error ocurred' });
