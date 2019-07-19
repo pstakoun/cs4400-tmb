@@ -17,7 +17,7 @@ class LineSummary extends React.Component {
   }
 
   componentWillMount() {
-    fetch('/api/stations/stationLines/' + this.state.name).then(
+    fetch(`/api/stations/stationLines/${this.state.name}`).then(
       results => results.json(),
     ).then((data) => {
       this.setState({
@@ -32,11 +32,11 @@ class LineSummary extends React.Component {
       <div className="Wrapper">
         <div className="LineSummary">
           <label className="InfoLabel">
-            {"Line: "}
+            {'Line: '}
             {this.state.name}
           </label>
           <label className="InfoLabel">
-            {"Stops: "}
+            {'Stops: '}
             {this.state.stops}
           </label>
           <div style={{ maxWidth: '100%' }}>
@@ -45,15 +45,17 @@ class LineSummary extends React.Component {
                 {
                   title: 'Station',
                   field: 'station_name',
-                  render: rowData =>
+                  render: rowData => (
                     <Link to={{
                       pathname: '/stationInfo',
                       state: {
-                        stationName: rowData.station_name
-                      }
-                    }}>
+                        stationName: rowData.station_name,
+                      },
+                    }}
+                    >
                       {rowData.station_name}
                     </Link>
+                  ),
                 },
                 {
                   title: 'Order',
@@ -62,14 +64,14 @@ class LineSummary extends React.Component {
               ]}
               data={this.state.stations}
               options={{
-                sorting: true
+                sorting: true,
               }}
               title="Station Reviews"
             />
           </div>
           <div className="ButtonWrapper">
             <Link to="/">
-              <GeneralButton text="Main Menu"/>
+              <GeneralButton text="Main Menu" />
             </Link>
           </div>
         </div>

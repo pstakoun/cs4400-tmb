@@ -35,19 +35,19 @@ class EditProfile extends React.Component {
       console.log(data);
       this.setState({
         firstName: data.first_name,
-      middleInitial: data.minit,
-      lastName: data.last_name,
-      email: data.passenger_email,
-      userID: data.ID,
+        middleInitial: data.minit,
+        lastName: data.last_name,
+        email: data.passenger_email,
+        userID: data.ID,
       });
     });
     fetch('/api/users/pass').then(
       results => results.json(),
     ).then((data) => {
-      console.log("pass stuff" + data ); //TODO fix this shit 
+      console.log(`pass stuff${data}`); // TODO fix this shit
       this.setState({
-      password: data,
-      passwordChange: data,
+        password: data,
+        passwordChange: data,
       });
     });
   }
@@ -71,7 +71,7 @@ class EditProfile extends React.Component {
       alert(data.message);
     });
   }
-/*
+  /*
   handleUpdateReview() {
     fetch('/api/reviews/' + this.state.rid, {
       method: 'PUT',
@@ -91,7 +91,7 @@ class EditProfile extends React.Component {
         alert(data.message);
       }
     });
-  }*/
+  } */
 
   handleDeleteUser() {
     fetch('/api/users/delete', {
@@ -109,6 +109,7 @@ class EditProfile extends React.Component {
       }
     });
   }
+
   fNameChange(event) {
     this.setState({ firstName: event.target.value });
   }
@@ -152,11 +153,11 @@ class EditProfile extends React.Component {
         <div className="Register">
           <TextField text="First Name *" type="text" placeholder={this.state.firstName} handleChange={this.fNameChange} />
           <TextField text="Middle Initial" type="text" placeholder={this.state.middleInitial} handleChange={this.MIChange} />
-          <TextField text="Last Name *" type="text" placeholder = {this.state.lastName} handleChange={this.lNameChange} />
-          <TextField text="Email *" type="text"placeholder={this.state.passenger_email} handleChange={this.emailChange} />
-          <TextField text="User ID (unique) *" placeholder ={this.state.userID} type="text" handleChange={this.userIDChange} />
-          <TextField text="Password *" type="password" placeholder ={this.state.password} handleChange={this.passwordChange} />
-          <TextField text="Password again *" type="password"placeholder ={this.state.passwordConfirm} handleChange={this.passwordConfirmChange} onChange={this.checkPass()} />
+          <TextField text="Last Name *" type="text" placeholder={this.state.lastName} handleChange={this.lNameChange} />
+          <TextField text="Email *" type="text" placeholder={this.state.passenger_email} handleChange={this.emailChange} />
+          <TextField text="User ID (unique) *" placeholder={this.state.userID} type="text" handleChange={this.userIDChange} />
+          <TextField text="Password *" type="password" placeholder={this.state.password} handleChange={this.passwordChange} />
+          <TextField text="Password again *" type="password" placeholder={this.state.passwordConfirm} handleChange={this.passwordConfirmChange} onChange={this.checkPass()} />
           <div className="ButtonWrapper">
             <h6>&apos;* is required&apos;</h6>
           </div>
@@ -170,7 +171,7 @@ class EditProfile extends React.Component {
             <Link to="/menu">
               <GeneralButton text="Edit User" handlePress={this.handleEditUser} />
             </Link>
-            
+
           </div>
         </div>
       </div>
