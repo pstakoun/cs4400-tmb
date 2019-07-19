@@ -1,6 +1,6 @@
 import React from 'react';
 import './Register.css';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import GeneralButton from '../components/GeneralButton';
 import TextField from '../components/TextField';
 
@@ -15,6 +15,7 @@ class EditProfile extends React.Component {
       userID: '',
       password: '',
       passwordConfirm: '',
+      edited: false,
     };
     this.handleDeleteUser = this.handleDeleteUser.bind(this);
     this.handleEditUser = this.handleEditUser.bind(this);
@@ -62,33 +63,16 @@ class EditProfile extends React.Component {
       }),
     }).then(res => res.json()).then((data) => {
       if(data.success) {
-        alert('updated.');
+        alert('Edited User data.');
+        this.setState({
+          edited: true,
+        });
       } else {
         alert(data.message);
       }
     });
   }
-/*
-  handleUpdateReview() {
-    fetch('/api/reviews/' + this.state.rid, {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        station: this.state.station,
-        shopping: this.state.shoppingRating,
-        speed: this.state.speedRating,
-        comment: this.state.comment,
-      }),
-    }).then(res => res.json()).then((data) => {
-      if (data.success) {
-        alert('You updated this review');
-      } else {
-        alert(data.message);
-      }
-    });
-  }*/
+
 
   handleDeleteUser() {
     fetch('/api/users', {
@@ -164,7 +148,9 @@ class EditProfile extends React.Component {
             <Link to="/login">
               <GeneralButton text="Delete User" handlePress={this.handleDeleteUser} />
             </Link>
-              <GeneralButton text="Edit User" handlePress={this.handleEditUser} />
+          
+            <GeneralButton text="Edit User" handlePress={this.handleEditUser} />
+              { this.state.edited ? <Redirect to="/" /> : null }
           </div>
         </div>
       </div>
