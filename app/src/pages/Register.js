@@ -1,8 +1,8 @@
 import React from 'react';
 import './Register.css';
 import { Link } from 'react-router-dom';
-import GeneralButton from '../components/GeneralButton.js';
-import TextField from '../components/TextField.js';
+import GeneralButton from '../components/GeneralButton';
+import TextField from '../components/TextField';
 
 class Register extends React.Component {
   constructor(props) {
@@ -87,13 +87,16 @@ class Register extends React.Component {
     return (
       <div className="Wrapper">
         <div className="Register">
-          <TextField text="First Name" type="text" handleChange={this.fNameChange} />
+          <TextField text="First Name *" type="text" handleChange={this.fNameChange} />
           <TextField text="Middle Initial" type="text" handleChange={this.MIChange} />
-          <TextField text="Last Name" type="text" handleChange={this.lNameChange} />
-          <TextField text="Email" type="text" handleChange={this.emailChange} />
-          <TextField text="User ID (unique)" type="text" handleChange={this.userIDChange} />
-          <TextField text="Password" type="password" handleChange={this.passwordChange} />
-          <TextField text="Password (again)" type="password" handleChange={this.passwordConfirmChange} onChange={this.checkPass()} />
+          <TextField text="Last Name *" type="text" handleChange={this.lNameChange} />
+          <TextField text="Email *" type="text" handleChange={this.emailChange} />
+          <TextField text="User ID (unique) *" type="text" handleChange={this.userIDChange} />
+          <TextField text="Password *" type="password" handleChange={this.passwordChange} />
+          <TextField text="Password again *" type="password" handleChange={this.passwordConfirmChange} onChange={this.checkPass()} />
+          <div className="ButtonWrapper">
+            <h6>&apos;* is required&apos;</h6>
+          </div>
           <div className="ButtonWrapper">
             <Link to="/login">
               <GeneralButton text="I already have an account" />

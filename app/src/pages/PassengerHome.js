@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import GeneralButton from '../components/GeneralButton.js';
+import GeneralButton from '../components/GeneralButton';
 import './Home.css';
 
 class PassengerHome extends React.Component {
@@ -22,9 +22,15 @@ class PassengerHome extends React.Component {
             <Link to="/BuyCard">
               <GeneralButton text="Buy Card" />
             </Link>
-            <GeneralButton text="Go on Trip" />
-            <GeneralButton text="View Trips" />
-            <GeneralButton text="Edit Profile" />
+            <Link to="/Trip">
+              <GeneralButton text="Go on Trip" />
+            </Link>
+            <Link to="/ViewTrips">
+              <GeneralButton text="View Trips" />
+            </Link>
+            <Link to="/EditProfile">
+              <GeneralButton text="Edit Profile" />
+            </Link>
           </div>
         </div>
       </div>

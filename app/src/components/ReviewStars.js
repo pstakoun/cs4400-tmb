@@ -8,7 +8,13 @@ class ReviewStars extends React.Component {
     return (
       <div className="ReviewStars">
         <label>{this.props.text}</label>
-        <Rater total={5} rating={this.props.rating} onRate={({ rating }) => { this.props.handleRate(rating); }} />
+        <Rater
+          total={5}
+          rating={this.props.rating}
+          onRate={({ rating }) => {
+            this.props.handleRate(rating);
+          }}
+        />
       </div>
     );
   }

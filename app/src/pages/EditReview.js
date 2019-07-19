@@ -2,9 +2,9 @@ import React from 'react';
 import './EditReview.css';
 import { Link } from 'react-router-dom';
 import Dropdown from 'react-dropdown';
-import GeneralButton from '../components/GeneralButton.js';
-import TextField from '../components/TextField.js';
-import ReviewStars from '../components/ReviewStars.js';
+import GeneralButton from '../components/GeneralButton';
+import TextField from '../components/TextField';
+import ReviewStars from '../components/ReviewStars';
 import 'react-dropdown/style.css';
 
 class EditReview extends React.Component {

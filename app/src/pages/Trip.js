@@ -2,10 +2,10 @@ import React from 'react';
 import './LeaveReview.css';
 import { Link } from 'react-router-dom';
 import Dropdown from 'react-dropdown';
-import GeneralButton from '../components/GeneralButton.js';
-import ReviewStars from '../components/ReviewStars.js';
-import 'react-dropdown/style.css';
 import { stat } from 'fs';
+import GeneralButton from '../components/GeneralButton';
+import ReviewStars from '../components/ReviewStars';
+import 'react-dropdown/style.css';
 
 class LeaveReview extends React.Component {
   constructor(props) {
@@ -14,7 +14,7 @@ class LeaveReview extends React.Component {
     this.handleRateSpeed = this.handleRateSpeed.bind(this);
     this.handleCommentChange = this.handleCommentChange.bind(this);
     this.handleNewReview = this.handleNewReview.bind(this);
-    this._onSelect = this._onSelect.bind(this);
+    this.onSelect = this.onSelect.bind(this);
     this.state = {
       options: [],
       selected: '',
@@ -72,7 +72,7 @@ class LeaveReview extends React.Component {
     this.setState({ comment: event.target.value });
   }
 
-  _onSelect(option) {
+  onSelect(option) {
     // console.log('You selected ', option.label)
     this.setState({ selected: option });
   }
@@ -86,7 +86,7 @@ class LeaveReview extends React.Component {
           <Dropdown
             options={(this.state.options)}
             value={defaultOption}
-            onChange={this._onSelect}
+            onChange={this.onSelect}
             placeholder="Select a Station"
           />
           <ReviewStars text="Shopping" rating={this.state.shoppingRating} name="shopping" handleRate={this.handleRateShopping} />

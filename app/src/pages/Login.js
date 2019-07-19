@@ -1,8 +1,8 @@
 import React from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import './Login.css';
-import GeneralButton from '../components/GeneralButton.js';
-import TextField from '../components/TextField.js';
+import GeneralButton from '../components/GeneralButton';
+import TextField from '../components/TextField';
 
 class Login extends React.Component {
   constructor(props) {
