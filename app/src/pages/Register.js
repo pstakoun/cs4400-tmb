@@ -1,8 +1,8 @@
 import React from 'react';
 import './Register.css';
 import { Link } from 'react-router-dom';
-import GeneralButton from '../components/GeneralButton.js';
-import TextField from '../components/TextField.js';
+import GeneralButton from '../components/GeneralButton';
+import TextField from '../components/TextField';
 
 class Register extends React.Component {
   constructor(props) {
@@ -95,7 +95,7 @@ class Register extends React.Component {
           <TextField text="Password *" type="password" handleChange={this.passwordChange} />
           <TextField text="Password again *" type="password" handleChange={this.passwordConfirmChange} onChange={this.checkPass()} />
           <div className="ButtonWrapper">
-            <h6>'* is required'</h6>
+            <h6>&apos;* is required&apos;</h6>
           </div>
           <div className="ButtonWrapper">
             <Link to="/login">

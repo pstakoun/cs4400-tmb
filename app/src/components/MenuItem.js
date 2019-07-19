@@ -1,6 +1,6 @@
 import React from 'react';
 import Card from 'react';
-import './Button.css';
+import './GeneralButton.css';
 
 class MenuItem extends React.Component {
   constructor(props) {

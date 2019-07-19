@@ -7,7 +7,7 @@ const router = express.Router();
 
 /* GET cards */
 router.get('/list', (req, res) => {
-  connection.query('SELECT * FROM Card', card, (err) => {
+  connection.query('SELECT * FROM Card', (err) => {
     if (err) {
       console.log(err);
       return res.status(500).json({ message: 'An error ocurred' });
