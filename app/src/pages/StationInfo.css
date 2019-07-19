@@ -11,6 +11,10 @@ body {
   margin: 0 auto;
 }
 
+.ReviewStars {
+  margin-left: 20px;
+}
+
 .ButtonWrapper {
   margin: auto;
   text-align: center;
@@ -29,4 +33,9 @@ body {
 
 .ButtonWrapper {
   text-align: center;
+}
+
+.lineLink {
+  padding-right: 5px;
+  padding-left: 5px;
 }

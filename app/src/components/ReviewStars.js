@@ -10,6 +10,7 @@ class ReviewStars extends React.Component {
         <label>{this.props.text}</label>
         <Rater
           total={5}
+          interactive={this.props.interactive}
           rating={this.props.rating}
           onRate={({ rating }) => {
             this.props.handleRate(rating);

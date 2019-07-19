@@ -15,4 +15,15 @@ router.get('/', (req, res) => {
   });
 });
 
+/* GET lines */
+router.get('/:name', (req, res) => {
+  connection.query('SELECT line_name FROM Station_On_Line WHERE station_name = ?', [req.params.name], (err, result) => {
+    if (err) {
+      console.log(err);
+      return res.status(500).json({ message: 'An error ocurred' });
+    }
+    res.status(200).json({ lines: result });
+  });
+});
+
 module.exports = router;
