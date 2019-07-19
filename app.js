@@ -1,9 +1,7 @@
 const express = require('express');
 const path = require('path');
-const cookieParser = require('cookie-parser');
 const session = require('express-session');
 
-const { requireLogin, requireNoLogin, requireAdmin } = require('./services');
 const usersRouter = require('./routes/users');
 const cardsRouter = require('./routes/cards');
 const stationsRouter = require('./routes/stations');
@@ -22,8 +20,14 @@ app.use(session({
   secret: 'tmbsupersecret',
   resave: false,
   saveUninitialized: false,
+  cookie: {
+    httpOnly: false,
+  },
 }));
 
+app.use('/api/me', (req, res) => {
+  res.status(req.session.user ? 200 : 404).json(req.session.user);
+});
 app.use('/api/users', usersRouter);
 app.use('/api/cards', cardsRouter);
 app.use('/api/stations', stationsRouter);

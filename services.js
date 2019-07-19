@@ -10,7 +10,6 @@ connection.connect();
 
 // TODO modify to work for API routes
 const requireLogin = (req, res, next) => {
-  console.log('require login');
   if (!req.session.user) {
     return res.redirect('/login');
   }
