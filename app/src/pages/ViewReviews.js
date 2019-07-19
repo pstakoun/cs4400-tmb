@@ -51,7 +51,7 @@ class ViewReviews extends React.Component {
                     <Link to={{
                       pathname: '/stationInfo',
                       state: {
-                      rid: rowData.station_name
+                      stationName: rowData.station_name
                     }
                     }}>
                       {rowData.station_name}

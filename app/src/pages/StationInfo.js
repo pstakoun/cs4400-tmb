@@ -10,9 +10,6 @@ import ReviewStars from '../components/ReviewStars';
 class StationInfo extends React.Component {
   constructor(props) {
     super(props);
-    this.handleRateShopping = this.handleRateShopping.bind(this);
-    this.handleRateSpeed = this.handleRateSpeed.bind(this);
-    this.handleCommentChange = this.handleCommentChange.bind(this);
     this.state = {
       name: this.props.location.state.rid,
       status: '',
@@ -29,12 +26,13 @@ class StationInfo extends React.Component {
     fetch('/api/stations/' + this.state.name).then(
       results => results.json(),
     ).then((data) => {
+      console.log(data)
       this.setState({
-        status: data.station[0].status,
-        stateProvince: data.station[0].state_province,
-        address: data.station[0].address,
-        zipcode: data.station[0].zipcode,
-        city: data.station[0].city,
+        status: data.stations[0].status,
+        stateProvince: data.stations[0].state_province,
+        address: data.stations[0].address,
+        zipcode: data.stations[0].zipcode,
+        city: data.stations[0].city,
         avgShoppingRating: 0,
         avgSpeedRating: 0,
       });
@@ -66,20 +64,6 @@ class StationInfo extends React.Component {
         avgSpeedRating: data.ratings[0].avgSpeed,
       });
     });
-  }
-
-  handleRateShopping(rating) {
-    console.log(`Shopping Rating is: ${this.state.shoppingRating}`);
-    this.setState({ shoppingRating: rating });
-  }
-
-  handleRateSpeed(rating) {
-    console.log(`Connection Speed Rating is: ${rating}`);
-    this.setState({ speedRating: rating });
-  }
-
-  handleCommentChange(event) {
-    this.setState({ comment: event.target.value });
   }
 
   render() {
