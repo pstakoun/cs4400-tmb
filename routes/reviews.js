@@ -1,4 +1,7 @@
 const express = require('express');
+const bcrypt = require('bcrypt');
+
+const { connection } = require('../services');
 
 const router = express.Router();
 
@@ -7,43 +10,25 @@ router.get('/', (req, res) => {
   // TODO
 });
 
-module.exports = router;
-
-
 /* Add new Review */
 router.post('/add', (req, res) => {
   const {
-    passenger,
     station,
     shopping,
-    connection,
+    speed,
     comment,
   } = req.body;
 
-  review = {
-    passenger_ID: passenger,
+  const review = {
+    passenger_ID: req.session.user.ID,
     station_name: station,
-    shopping,
-    connection_speed: connection,
-    comment,
-    approver_ID: NULL,
-    edit_timestamp: NULL,
+    shopping: shopping,
+    connection_speed: speed,
+    comment: comment,
+    approver_ID: null,
+    edit_timestamp: null,
     approval_status: 'Pending',
-
   };
-  /* passenger_ID varchar(255),
-    rid int,
-    shopping int,
-    connection_speed int,
-    comment text,
-    approver_ID varchar(255),
-    approval_status varchar(255),
-    edit_timestamp Datetime,
-    station_name varchar(255) NOT NULL,
-    PRIMARY KEY (passenger_ID, rid),
-    FOREIGN KEY(passenger_ID) REFERENCES User(ID),
-    FOREIGN KEY(approver_ID) REFERENCES Admin(ID),
-    FOREIGN KEY(station_name) REFERENCES Station(name) */
 
   connection.query('INSERT INTO Review SET ?', review, (err) => {
     if (err) {
@@ -53,3 +38,5 @@ router.post('/add', (req, res) => {
     res.status(200).json({ success: true, message: 'Success' });
   });
 });
+
+module.exports = router;

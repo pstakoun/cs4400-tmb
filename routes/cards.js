@@ -6,8 +6,14 @@ const { connection } = require('../services');
 const router = express.Router();
 
 /* GET cards */
-router.get('/', (req, res) => {
-  res.status(200).json({});
+router.get('/list', (req, res) => {
+  connection.query('SELECT * FROM Card', card, (err) => {
+    if (err) {
+      console.log(err);
+      return res.status(500).json({ message: 'An error ocurred' });
+    }
+    res.status(200).json({ success: true, message: 'Success' });
+  });
 });
 
 /* GET cards */

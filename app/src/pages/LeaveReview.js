@@ -3,7 +3,6 @@ import './LeaveReview.css';
 import { Link } from 'react-router-dom';
 import Dropdown from 'react-dropdown';
 import GeneralButton from '../components/GeneralButton.js';
-import TextField from '../components/TextField.js';
 import ReviewStars from '../components/ReviewStars.js';
 import 'react-dropdown/style.css';
 import { stat } from 'fs';
@@ -14,33 +13,32 @@ class LeaveReview extends React.Component {
     this.handleRateShopping = this.handleRateShopping.bind(this);
     this.handleRateSpeed = this.handleRateSpeed.bind(this);
     this.handleCommentChange = this.handleCommentChange.bind(this);
-    this._onSelect = this._onSelect.bind(this)
+    this.handleNewReview = this.handleNewReview.bind(this);
+    this._onSelect = this._onSelect.bind(this);
     this.state = {
       options: [],
       selected: '',
       shoppingRating: 0,
       speedRating: 0,
       comment: '',
-      status: 'pending',
     };
   }
 
-  
-  handleLogin() {
-    fetch('/api/users/login', {
+  handleNewReview() {
+    fetch('/api/reviews/add', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        userID: this.state.userID,
-        password: this.state.password,
+        station: this.state.selected.value,
+        shopping: this.state.shoppingRating,
+        speed: this.state.speedRating,
+        comment: this.state.comment,
       }),
     }).then(res => res.json()).then((data) => {
       if (data.success) {
-        this.setState({
-          loggedIn: true,
-        });
+        alert("You created a review");
       } else {
         alert(data.message);
       }
@@ -60,7 +58,7 @@ class LeaveReview extends React.Component {
   });
 }
 
-  
+
 
   handleRateShopping(rating) {
     console.log(`Shopping Rating is: ${this.state.shoppingRating}`);
@@ -74,33 +72,6 @@ class LeaveReview extends React.Component {
 
   handleCommentChange(event) {
     this.setState({ comment: event.target.value });
-  }
-
-
-  handleDropdownUpdate(value) {
-    this.setState({currentOptions: value})
-  }
-
-
-  handleNewReview() {
-    fetch('/api/reviews/add', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-    station : this.state.selected,
-    shopping : this.state.shoppingRating,
-    connection : this.state.speedRating,
-    comment : this.state.comment,
-      }),
-    }).then(res => res.json()).then((data) => {
-      if (data.success) {
-        //TODO idk wht goes here
-      } else {
-        alert(data.message);
-      }
-    });
   }
 
   _onSelect (option) {
