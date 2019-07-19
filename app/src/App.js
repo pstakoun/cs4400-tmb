@@ -7,6 +7,7 @@ import Register from './pages/Register';
 import LeaveReview from './pages/LeaveReview';
 import ViewReviews from './pages/ViewReviews';
 import EditReview from './pages/EditReview';
+import EditProfile from './pages/EditProfile';
 import StationInfo from './pages/StationInfo';
 import BuyCard from './pages/BuyCard';
 import Trip from './pages/Trip';
@@ -24,6 +25,7 @@ function App() {
         <PrivateRoute path="/leaveReview" component={LeaveReview} />
         <PrivateRoute path="/viewReviews" component={ViewReviews} />
         <PrivateRoute path="/editReview" component={EditReview} />
+        <PrivateRoute path="/editProfile" component={EditProfile} />
         <PrivateRoute path="/stationInfo" component={StationInfo} />
         <PrivateRoute path="/buyCard" component={BuyCard} />
         <PrivateRoute path="/trip" component={Trip} />
