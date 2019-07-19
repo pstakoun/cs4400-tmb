@@ -1,10 +1,9 @@
 import React from 'react';
-import './ViewReviews.css';
-import '../components/Material-Icons.css';
 import { Link } from 'react-router-dom';
 import MaterialTable from 'material-table';
 import GeneralButton from '../components/GeneralButton';
-
+import './ViewReviews.css';
+import '../components/Material-Icons.css';
 
 class ViewReviews extends React.Component {
   constructor(props) {
