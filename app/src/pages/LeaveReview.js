@@ -88,7 +88,7 @@ class LeaveReview extends React.Component {
             value={defaultOption}
             onChange={this._onSelect}
             placeholder="Select a Station"
-          />
+          /> 
           <ReviewStars text="Shopping" rating={this.state.shoppingRating} name="shopping" handleRate={this.handleRateShopping} />
           <ReviewStars text="Connection Speed" rating={this.state.speedRating} name="speed" handleRate={this.handleRateSpeed} />
           <textarea
