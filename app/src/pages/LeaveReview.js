@@ -38,7 +38,7 @@ class LeaveReview extends React.Component {
       }),
     }).then(res => res.json()).then((data) => {
       if (data.success) {
-        alert("You created a review");
+        alert('You created a review');
       } else {
         alert(data.message);
       }
@@ -72,9 +72,9 @@ class LeaveReview extends React.Component {
     this.setState({ comment: event.target.value });
   }
 
-  _onSelect (option) {
-    //console.log('You selected ', option.label)
-    this.setState({selected: option})
+  _onSelect(option) {
+    // console.log('You selected ', option.label)
+    this.setState({ selected: option });
   }
 
   render() {
