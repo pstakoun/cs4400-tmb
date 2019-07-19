@@ -21,10 +21,10 @@ class BuyCard extends React.Component {
     const date = `${today.getFullYear()}-${today.getMonth() + 1}-${today.getDate()}`;
     const futureDate = `${future.getFullYear()}-${future.getMonth() + 1}-${future.getDate()}`;
     const time = `${today.getHours()}:${today.getMinutes()}:${today.getSeconds()}`;
-    this.state.dateTime = `${date} ${time}`;
-    this.state.futureDateTime = `${futureDate} ${time}`;
-    console.log(this.state.dateTime);
-    console.log(this.state.futureDateTime);
+    this.setState({
+      dateTime: `${date} ${time}`,
+      futureDateTime: `${futureDate} ${time}`,
+    });
   }
 
   handlePurchase(name, uses, daysRemaining) {
@@ -60,7 +60,6 @@ class BuyCard extends React.Component {
             <header>
               <h3>Buy Trip Card</h3>
             </header>
-
             <b className="b">Pick Card Type:</b>
             <GeneralButton text="T-mes" handlePress={this.handlePurchase.bind(this, 'T-mes', null, 30)} />
             <GeneralButton text="T-10" handlePress={this.handlePurchase.bind(this, 'T-10', 10, null)} />
