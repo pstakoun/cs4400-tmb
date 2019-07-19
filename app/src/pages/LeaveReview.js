@@ -26,14 +26,16 @@ class LeaveReview extends React.Component {
 
   componentWillMount() {
     let initialStations = [];
-    fetch('/api/stations').then(
-      results => results.json(),
-    ).then((data) => {
-      initialStations = data.stations.map(stations => stations.name);
-      this.setState({
-        options: initialStations,
+    fetch('/api/stations')
+      .then(res => res.json()).then((data) => {
+        if (!data.stations) {
+          return;
+        }
+        initialStations = data.stations.map(stations => stations.name);
+        this.setState({
+          options: initialStations,
+        });
       });
-    });
   }
 
   handleNewReview() {

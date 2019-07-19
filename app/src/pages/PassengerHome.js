@@ -15,15 +15,15 @@ class PassengerHome extends React.Component {
   handleLogout(event) {
     event.preventDefault();
     fetch('/api/users/logout', {
-      method: 'POST'
+      method: 'POST',
     })
-    .then((res) => res.json()).then((data) => {
-      if (data.success) {
-        this.setState({
-          loggedOut: true,
-        });
-      }
-    })
+      .then(res => res.json()).then((data) => {
+        if (data.success) {
+          this.setState({
+            loggedOut: true,
+          });
+        }
+      });
   }
 
   render() {
