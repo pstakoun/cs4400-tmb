@@ -1,8 +1,8 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import './Register.css';
+import { Link, Redirect } from 'react-router-dom';
 import GeneralButton from '../components/GeneralButton';
 import TextField from '../components/TextField';
-import './Register.css';
 
 class EditProfile extends React.Component {
   constructor(props) {
@@ -15,6 +15,7 @@ class EditProfile extends React.Component {
       userID: '',
       password: '',
       passwordConfirm: '',
+      edited: false,
     };
     this.handleDeleteUser = this.handleDeleteUser.bind(this);
     this.handleEditUser = this.handleEditUser.bind(this);
@@ -35,26 +36,19 @@ class EditProfile extends React.Component {
       console.log(data);
       this.setState({
         firstName: data.first_name,
-        middleInitial: data.minit,
-        lastName: data.last_name,
-        email: data.passenger_email,
-        userID: data.ID,
-      });
-    });
-    fetch('/api/users/pass').then(
-      results => results.json(),
-    ).then((data) => {
-      console.log(`pass stuff${data}`); // TODO fix this shit
-      this.setState({
-        password: data,
-        passwordChange: data,
+      middleInitial: data.minit,
+      lastName: data.last_name,
+  email: data.passenger_email,
+      userID: data.ID,
+      password: data.password,
+      passwordConfirm: data.password,
       });
     });
   }
 
   handleEditUser() {
-    fetch('/api/users/register', {
-      method: 'POST',
+    fetch('/api/users', {
+      method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
       },
@@ -68,33 +62,20 @@ class EditProfile extends React.Component {
         confirmPassword: this.state.passwordConfirm,
       }),
     }).then(res => res.json()).then((data) => {
-      alert(data.message);
-    });
-  }
-  /*
-  handleUpdateReview() {
-    fetch('/api/reviews/' + this.state.rid, {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        station: this.state.station,
-        shopping: this.state.shoppingRating,
-        speed: this.state.speedRating,
-        comment: this.state.comment,
-      }),
-    }).then(res => res.json()).then((data) => {
-      if (data.success) {
-        alert('You updated this review');
+      if(data.success) {
+        alert('Edited User data.');
+        this.setState({
+          edited: true,
+        });
       } else {
         alert(data.message);
       }
     });
-  } */
+  }
+
 
   handleDeleteUser() {
-    fetch('/api/users/delete', {
+    fetch('/api/users', {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
@@ -109,7 +90,6 @@ class EditProfile extends React.Component {
       }
     });
   }
-
   fNameChange(event) {
     this.setState({ firstName: event.target.value });
   }
@@ -151,13 +131,13 @@ class EditProfile extends React.Component {
     return (
       <div className="Wrapper">
         <div className="Register">
-          <TextField text="First Name *" type="text" placeholder={this.state.firstName} handleChange={this.fNameChange} />
-          <TextField text="Middle Initial" type="text" placeholder={this.state.middleInitial} handleChange={this.MIChange} />
-          <TextField text="Last Name *" type="text" placeholder={this.state.lastName} handleChange={this.lNameChange} />
-          <TextField text="Email *" type="text" placeholder={this.state.passenger_email} handleChange={this.emailChange} />
-          <TextField text="User ID (unique) *" placeholder={this.state.userID} type="text" handleChange={this.userIDChange} />
-          <TextField text="Password *" type="password" placeholder={this.state.password} handleChange={this.passwordChange} />
-          <TextField text="Password again *" type="password" placeholder={this.state.passwordConfirm} handleChange={this.passwordConfirmChange} onChange={this.checkPass()} />
+          <TextField text="First Name *" type="text" value={this.state.firstName} handleChange={this.fNameChange} />
+          <TextField text="Middle Initial" type="text" value={this.state.middleInitial} handleChange={this.MIChange} />
+          <TextField text="Last Name *" type="text" value = {this.state.lastName} handleChange={this.lNameChange} />
+          <TextField text="Email *" type="text"value={this.state.passenger_email} handleChange={this.emailChange} />
+          <TextField text="User ID (unique) *" value ={this.state.userID} type="text" handleChange={this.userIDChange} />
+          <TextField text="Password *" type="password" value ={this.state.password} handleChange={this.passwordChange} />
+          <TextField text="Password again *" type="password" value ={this.state.passwordConfirm} handleChange={this.passwordConfirmChange} onChange={this.checkPass()} />
           <div className="ButtonWrapper">
             <h6>&apos;* is required&apos;</h6>
           </div>
@@ -168,10 +148,9 @@ class EditProfile extends React.Component {
             <Link to="/login">
               <GeneralButton text="Delete User" handlePress={this.handleDeleteUser} />
             </Link>
-            <Link to="/menu">
-              <GeneralButton text="Edit User" handlePress={this.handleEditUser} />
-            </Link>
-
+          
+            <GeneralButton text="Edit User" handlePress={this.handleEditUser} />
+              { this.state.edited ? <Redirect to="/" /> : null }
           </div>
         </div>
       </div>
@@ -180,3 +159,4 @@ class EditProfile extends React.Component {
 }
 
 export default EditProfile;
+
