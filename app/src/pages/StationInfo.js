@@ -26,11 +26,11 @@ class StationInfo extends React.Component {
     ).then((data) => {
       console.log(data);
       this.setState({
-        status: data.stations[0].status,
-        stateProvince: data.stations[0].state_province,
-        address: data.stations[0].address,
-        zipcode: data.stations[0].zipcode,
-        city: data.stations[0].city,
+        status: data.station[0].status,
+        stateProvince: data.station[0].state_province,
+        address: data.station[0].address,
+        zipcode: data.station[0].zipcode,
+        city: data.station[0].city,
       });
     });
   }
@@ -65,12 +65,6 @@ class StationInfo extends React.Component {
             {"Address: "}
             {this.state.address + ', ' + this.state.zipcode + ' ' + this.state.city}
           </label>
-          <textarea
-            rows="5"
-            placeholder="Comment here..."
-            onChange={this.handleCommentChange}
-            value={this.state.comment}
-          />
           <div className="ButtonWrapper">
             <Link to="/">
               <GeneralButton text="Main Menu"/>

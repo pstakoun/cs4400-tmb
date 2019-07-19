@@ -26,15 +26,4 @@ router.get('/:name', (req, res) => {
   });
 });
 
-/* GET stations */
-router.get('/:name', (req, res) => {
-  connection.query('SELECT * FROM Station WHERE name = ?', [req.params.name], (err, result) => {
-    if (err) {
-      console.log(err);
-      return res.status(500).json({ message: 'An error ocurred' });
-    }
-    res.status(200).json({ stations: result });
-  });
-});
-
 module.exports = router;
