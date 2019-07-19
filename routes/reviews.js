@@ -7,7 +7,24 @@ const router = express.Router();
 
 /* GET reviews */
 router.get('/', (req, res) => {
-  // TODO
+  connection.query('SELECT * FROM Review WHERE passenger_ID = ?', [req.session.user.ID], (err, result) => {
+    if (err) {
+      console.log(err);
+      return res.status(500).json({ message: 'An error ocurred' });
+    }
+    res.status(200).json({ reviews: result });
+  });
+});
+
+/* GET pending reviews */
+router.get('/pending', (req, res) => {
+  connection.query('SELECT * FROM Review WHERE approval_status = ?', ['Pending'], (err, result) => {
+    if (err) {
+      console.log(err);
+      return res.status(500).json({ message: 'An error ocurred' });
+    }
+    res.status(200).json({ reviews: result });
+  });
 });
 
 /* Add new Review */
