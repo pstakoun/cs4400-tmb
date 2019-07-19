@@ -35,11 +35,30 @@ class ViewReviews extends React.Component {
                 {
                   title: 'ID',
                   field: 'rid',
-                  render: rowData => <a href="FAKE ROUTING">{rowData.rid}</a>,
+                  render: rowData =>
+                    <Link to={{
+                      pathname: '/editReview',
+                      state: {
+                        rid: rowData.rid
+                      }
+                    }}>
+                      <a>{rowData.rid}</a>
+                    </Link>,
                 },
-                { title: 'Station', field: 'station_name', render: rowData => <a href="FAKE ROUTING">{rowData.station_name}</a> },
-                { title: 'Shopping', field: 'shopping' },
-                { title: 'Connection Speed', field: 'connection_speed' },
+                { title: 'Station',
+                  field: 'station_name',
+                  render: rowData =>
+                    <a>{rowData.station_name}</a>
+                },
+                { title: 'Shopping',
+                  field: 'shopping'
+                },
+                { title: 'Connection Speed',
+                  field: 'connection_speed'
+                },
+                { title: 'Comment',
+                  field: 'comment'
+                },
               ]}
               data={this.state.reviews}
               title="My Reviews"

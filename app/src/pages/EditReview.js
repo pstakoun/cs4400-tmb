@@ -15,12 +15,26 @@ class EditReview extends React.Component {
     this.handleCommentChange = this.handleCommentChange.bind(this);
     this.state = {
       station: '',
-      rid: '',
+      rid: this.props.location.state.rid,
       shoppingRating: 0,
       speedRating: 0,
       comment: '',
       status: 'pending',
     };
+  }
+
+  componentWillMount() {
+    fetch('/api/reviews/' + this.state.rid).then(
+      results => results.json(),
+    ).then((data) => {
+      console.log(data);
+      this.setState({
+        station: data.review[0].station_name,
+        shoppingRating: data.review[0].shopping,
+        speedRating: data.review[0].connection_speed,
+        comment: data.review[0].comment,
+      });
+    });
   }
 
   handleRateShopping(rating) {
@@ -42,15 +56,15 @@ class EditReview extends React.Component {
       <div className="Wrapper">
         <div className="EditReview">
           <label className="InfoLabel">
-Edit Review:
+            {"Edit Review: "}
             {this.state.station}
           </label>
           <label className="InfoLabel">
-Status:
+            {"Status: "}
             {this.state.status}
           </label>
           <label className="InfoLabel">
-ID:
+            {"ID: "}
             {this.state.rid}
           </label>
           <ReviewStars text="Shopping" rating={this.state.shoppingRating} name="shopping" handleRate={this.handleRateShopping} />
