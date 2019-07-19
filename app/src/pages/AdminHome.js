@@ -1,7 +1,7 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import GeneralButton from '../components/GeneralButton.js';
 import './Home.css';
-import { Link } from 'react-router-dom';
 
 class AdminHome extends React.Component {
   render() {
