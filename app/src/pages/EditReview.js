@@ -13,6 +13,8 @@ class EditReview extends React.Component {
     this.handleRateShopping = this.handleRateShopping.bind(this);
     this.handleRateSpeed = this.handleRateSpeed.bind(this);
     this.handleCommentChange = this.handleCommentChange.bind(this);
+    this.handleUpdateReview = this.handleUpdateReview.bind(this);
+    this.handleDeleteReview = this.handleDeleteReview.bind(this);
     this.state = {
       station: '',
       rid: this.props.location.state.rid,
@@ -34,6 +36,44 @@ class EditReview extends React.Component {
         speedRating: data.review[0].connection_speed,
         comment: data.review[0].comment,
       });
+    });
+  }
+
+  handleUpdateReview() {
+    fetch('/api/reviews/' + this.state.rid, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        station: this.state.station,
+        shopping: this.state.shoppingRating,
+        speed: this.state.speedRating,
+        comment: this.state.comment,
+      }),
+    }).then(res => res.json()).then((data) => {
+      if (data.success) {
+        alert('You updated this review');
+      } else {
+        alert(data.message);
+      }
+    });
+  }
+
+  handleDeleteReview() {
+    fetch('/api/reviews/' + this.state.rid, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+      }),
+    }).then(res => res.json()).then((data) => {
+      if (data.success) {
+        alert('You deleted this review');
+      } else {
+        alert(data.message);
+      }
     });
   }
 
@@ -77,9 +117,12 @@ class EditReview extends React.Component {
           />
           <div className="ButtonWrapper">
             <Link to="/">
-              <GeneralButton text="Delete Review" />
+              <GeneralButton text="Delete Review" handlePress={this.handleDeleteReview}/>
             </Link>
-            <GeneralButton text="Submit Review" />
+            <Link to="/">
+              <GeneralButton text="Main Menu"/>
+            </Link>
+            <GeneralButton text="Update Review" handlePress={this.handleUpdateReview}/>
           </div>
         </div>
       </div>

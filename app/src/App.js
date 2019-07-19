@@ -8,6 +8,7 @@ import Home from './pages/Home';
 import EditReview from './pages/EditReview';
 import BuyCard from './pages/BuyCard';
 import ViewReviews from './pages/ViewReviews';
+import StationInfo from './pages/StationInfo';
 
 import './App.css';
 
@@ -22,6 +23,7 @@ function App() {
         <PrivateRoute path="/buyCard" component={BuyCard} />
         <PrivateRoute path="/editReview" component={EditReview} />
         <PrivateRoute path="/viewReviews" component={ViewReviews} />
+        <PrivateRoute path="/stationInfo" component={StationInfo} />
       </Switch>
     </div>
   );

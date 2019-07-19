@@ -42,13 +42,20 @@ class ViewReviews extends React.Component {
                         rid: rowData.rid
                       }
                     }}>
-                      <a>{rowData.rid}</a>
+                      {rowData.rid}
                     </Link>,
                 },
                 { title: 'Station',
                   field: 'station_name',
                   render: rowData =>
-                    <a>{rowData.station_name}</a>
+                    <Link to={{
+                      pathname: '/stationInfo',
+                      state: {
+                        rid: rowData.rid
+                      }
+                    }}>
+                      {rowData.station_name}
+                    </Link>
                 },
                 { title: 'Shopping',
                   field: 'shopping'
