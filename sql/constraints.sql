@@ -23,5 +23,3 @@ ALTER TABLE Review ADD CONSTRAINT shopping CHECK(shopping > 0 AND shopping <= 5)
 ALTER TABLE Review ALTER approval_status SET DEFAULT 'Pending';
 
 
-
-#station info view select
