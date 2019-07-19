@@ -11,7 +11,7 @@ class ViewReviews extends React.Component {
     super(props);
     this.state = {
       reviews: [],
-    }
+    };
   }
 
   componentWillMount() {
@@ -20,7 +20,7 @@ class ViewReviews extends React.Component {
     ).then((data) => {
       console.log(data.reviews);
       this.setState({
-        reviews: data.reviews
+        reviews: data.reviews,
       });
     });
   }
