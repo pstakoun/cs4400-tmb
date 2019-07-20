@@ -6,18 +6,14 @@ const AdminRoute = ({
 }) => (
   <Route
     {...rest}
-    render={(props) => {
-      pathChange(props.location);
-      return ((user && user.ID) ? (
-        (user.admin) ? (
-          <Component {...props} />
-        ) : (
-          <Redirect to="/" />
-        )
-      ) : (
-        <Redirect to="/login" />
-      ));
-    }}
+    render={props => ((user && user.ID) ? ((user.admin) ? (
+      <Component {...props} />
+    ) : (
+      <Redirect to="/" />
+    )
+    ) : (
+      <Redirect to="/login" />
+    ))}
   />
 );
 

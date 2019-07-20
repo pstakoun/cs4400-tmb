@@ -2,18 +2,15 @@ import React from 'react';
 import { Redirect, Route } from 'react-router-dom';
 
 const PrivateRoute = ({
-  component: Component, user, pathChange, ...rest
+  component: Component, user, ...rest
 }) => (
   <Route
     {...rest}
-    render={(props) => {
-      pathChange(props.location);
-      return ((user && user.ID) ? (
-        <Component {...props} />
-      ) : (
-        <Redirect to="/login" />
-      ));
-    }}
+    render={props => ((user && user.ID) ? (
+      <Component {...props} />
+    ) : (
+      <Redirect to="/login" />
+    ))}
   />
 );
 

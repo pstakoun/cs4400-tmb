@@ -6,14 +6,11 @@ const PublicRoute = ({
 }) => (
   <Route
     {...rest}
-    render={(props) => {
-      pathChange(props.location);
-      return (!(user && user.ID) ? (
-        <Component {...props} />
-      ) : (
-        <Redirect to="/" />
-      ));
-    }}
+    render={props => (!(user && user.ID) ? (
+      <Component {...props} />
+    ) : (
+      <Redirect to="/" />
+    ))}
   />
 );
 
