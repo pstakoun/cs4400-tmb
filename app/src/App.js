@@ -15,6 +15,9 @@ import BuyCard from './pages/BuyCard';
 import Trip from './pages/Trip';
 import ViewTrips from './pages/ViewTrips';
 import LineSummary from './pages/LineSummary';
+import AddStation from './pages/AddStation';
+import AddLine from './pages/AddLine';
+import PendingReviews from './pages/PendingReviews';
 import './App.css';
 
 class App extends React.Component {
@@ -60,6 +63,9 @@ class App extends React.Component {
           <PrivateRoute path="/trip" component={Trip} user={this.state.user} />
           <PrivateRoute path="/viewTrips" component={ViewTrips} user={this.state.user} />
           <PrivateRoute path="/lineSummary" component={LineSummary} user={this.state.user} />
+          <AdminRoute path="/addStation" component={AddStation} user={this.state.user} />
+          <AdminRoute path="/addLine" component={AddLine} user={this.state.user} />
+          <AdminRoute path="/pendingReviews" component={PendingReviews} user={this.state.user} />
         </Switch>
       </div>
     );
