@@ -26,21 +26,20 @@ class StationInfo extends React.Component {
     fetch(`/api/stations/${this.state.name}`).then(
       results => results.json(),
     ).then((data) => {
-      console.log(data);
-      console.log(this.state.name);
+      const station = data.station;
       this.setState({
-        status: data.stations[0].status,
-        stateProvince: data.stations[0].state_province,
-        address: data.stations[0].address,
-        zipcode: data.stations[0].zipcode,
-        city: data.stations[0].city,
+        status: station.status,
+        stateProvince: station.state_province,
+        address: station.address,
+        zipcode: station.zipcode,
+        city: station.city,
         avgShoppingRating: 0,
         avgSpeedRating: 0,
       });
     });
 
     let initialLines = [];
-    fetch(`/api/lines/${this.state.name}`).then(
+    fetch(`/api/stations/${this.state.name}/lines`).then(
       results => results.json(),
     ).then((data) => {
       initialLines = data.lines.map(lines => lines.line_name);
@@ -49,7 +48,7 @@ class StationInfo extends React.Component {
       });
     });
 
-    fetch(`/api/reviews/${this.state.name}`).then(
+    fetch(`/api/stations/${this.state.name}/reviews`).then(
       results => results.json(),
     ).then((data) => {
       this.setState({
@@ -57,12 +56,12 @@ class StationInfo extends React.Component {
       });
     });
 
-    fetch(`/api/reviews/${this.state.name}/ratings`).then(
+    fetch(`/api/stations/${this.state.name}/ratings`).then(
       results => results.json(),
     ).then((data) => {
       this.setState({
-        avgShoppingRating: data.ratings[0].avgShopping,
-        avgSpeedRating: data.ratings[0].avgSpeed,
+        avgShoppingRating: data.ratings.avgShopping,
+        avgSpeedRating: data.ratings.avgSpeed,
       });
     });
   }

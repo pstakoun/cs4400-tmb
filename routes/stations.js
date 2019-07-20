@@ -21,18 +21,21 @@ router.get('/:name', (req, res) => {
       console.log(err);
       return res.status(500).json({ message: 'An error ocurred' });
     }
-    res.status(200).json({ station: result });
+    if (result.length === 0) {
+      return res.sendStatus(404);
+    }
+    res.status(200).json({ station: result[0] });
   });
 });
 
 /* GET line */
-router.get('/:name/line', (req, res) => {
+router.get('/:name/lines', (req, res) => {
   connection.query('SELECT line_name FROM Station_On_Line WHERE station_name = ?', [req.params.name], (err, result) => {
     if (err) {
       console.log(err);
       return res.status(500).json({ message: 'An error ocurred' });
     }
-    res.status(200).json({ line: result });
+    res.status(200).json({ lines: result });
   });
 });
 
@@ -54,7 +57,10 @@ router.get('/:name/ratings', (req, res) => {
       console.log(err);
       return res.status(500).json({ message: 'An error ocurred' });
     }
-    res.status(200).json({ ratings: result });
+    if (result.length === 0) {
+      res.sendStatus(404);
+    }
+    res.status(200).json({ ratings: result[0] });
   });
 });
 

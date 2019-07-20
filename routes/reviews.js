@@ -32,7 +32,10 @@ router.get('/:id', (req, res) => {
       console.log(err);
       return res.status(500).json({ message: 'An error ocurred' });
     }
-    res.status(200).json({ review: result });
+    if (result.length === 0) {
+      return res.sendStatus(404);
+    }
+    res.status(200).json({ review: result[0] });
   });
 });
 
