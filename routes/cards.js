@@ -14,8 +14,8 @@ router.get('/', (req, res) => {
   });
 });
 
-/* POST cards */
-router.post('/purchase', (req, res) => {
+/* Buy card */
+router.post('/', (req, res) => {
   const {
     type,
     purchaseDateAndTime,

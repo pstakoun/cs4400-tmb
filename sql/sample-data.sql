@@ -3,9 +3,11 @@ INSERT INTO Line VALUES('L1');
 INSERT INTO User VALUES('chall68',	'Charles',	'J',	'Hall',	'pwdpwdpwd', NULL);
 INSERT INTO User VALUES('wwhite12',	'Walter',	'H',	'White', 'pass1234', NULL);
 INSERT INTO User VALUES ('peter', 'Peter', 'A', 'Stakoun', 'password', NULL);
+INSERT INTO User VALUES ('peter-admin', 'Peter', 'A', 'Stakoun', 'password', NULL);
 INSERT INTO User VALUES('a',	'Andreas',	'J',	'Paljug',	'asdfasdf', NULL);
 
 INSERT INTO Admin VALUES('wwhite12');
+INSERT INTO Admin VALUES('peter-admin');
 INSERT INTO Card VALUES ('chall68',	'T-mes',	'2019-06-08 10:27:00',	NULL,	
 '2019-07-08 10:27:00');
 INSERT INTO Station VALUES('Catalunya',	'open',	'Catalonia',	'08002 Barcelona', '08002', 'Barcelona');

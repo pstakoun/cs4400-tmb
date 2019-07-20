@@ -14,31 +14,9 @@ router.get('/', (req, res) => {
   });
 });
 
-/* GET reviews for a station */
-router.get('/:station', (req, res) => {
-  connection.query("SELECT * FROM Review WHERE approval_status = 'approved' AND station_name = ?", [req.params.station], (err, result) => {
-    if (err) {
-      console.log(err);
-      return res.status(500).json({ message: 'An error ocurred' });
-    }
-    res.status(200).json({ reviews: result });
-  });
-});
-
-/* GET average ragings for a station */
-router.get('/:station/ratings', (req, res) => {
-  connection.query("SELECT AVG(shopping) AS avgShopping, AVG(connection_speed) AS avgSpeed FROM Review WHERE approval_status = 'approved' AND station_name = ?", [req.params.station], (err, result) => {
-    if (err) {
-      console.log(err);
-      return res.status(500).json({ message: 'An error ocurred' });
-    }
-    res.status(200).json({ ratings: result });
-  });
-});
-
 /* GET pending reviews */
 router.get('/pending', (req, res) => {
-  connection.query('SELECT * FROM Review WHERE approval_status = ?', ['Pending'], (err, result) => {
+  connection.query('SELECT * FROM Review WHERE approval_status = ?', ['pending'], (err, result) => {
     if (err) {
       console.log(err);
       return res.status(500).json({ message: 'An error ocurred' });
@@ -75,7 +53,7 @@ router.post('/', (req, res) => {
     comment,
     approver_ID: null,
     edit_timestamp: null,
-    approval_status: 'Pending',
+    approval_status: 'pending',
   };
 
   connection.query('INSERT INTO Review SET ?', [review], (err) => {
@@ -104,7 +82,7 @@ router.put('/:id', (req, res) => {
     comment,
     approver_ID: null,
     edit_timestamp: null, // TODO
-    approval_status: 'Pending',
+    approval_status: 'pending',
   };
 
   connection.query('UPDATE Review SET ? WHERE rid = ?', [review, req.params.id], (err) => {

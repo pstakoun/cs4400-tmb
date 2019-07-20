@@ -28,11 +28,12 @@ class EditReview extends React.Component {
       results => results.json(),
     ).then((data) => {
       console.log(data);
+      const { review } = data;
       this.setState({
-        station: data.review[0].station_name,
-        shoppingRating: data.review[0].shopping,
-        speedRating: data.review[0].connection_speed,
-        comment: data.review[0].comment,
+        station: review.station_name,
+        shoppingRating: review.shopping,
+        speedRating: review.connection_speed,
+        comment: review.comment,
       });
     });
   }
@@ -76,7 +77,7 @@ class EditReview extends React.Component {
   }
 
   handleRateShopping(rating) {
-    console.log(`Shopping Rating is: ${this.state.shoppingRating}`);
+    console.log(`Shopping Rating is: ${rating}`);
     this.setState({ shoppingRating: rating });
   }
 
