@@ -45,61 +45,6 @@ router.post('/register', (req, res) => {
   });
 });
 
-/* Update Profile */
-router.put('/', (req, res) => {
-  const {
-    firstName,
-    middleInitial,
-    lastName,
-    email,
-    userID,
-    password,
-    confirmPassword,
-  } = req.body;
-
-  if (password !== confirmPassword) {
-    return res.status(400).json({ message: 'Passwords do not match' });
-  }
-  if (password.length < 8) {
-    return res.status(400).json({ message: 'Password too short' });
-  }
-
-  const user = {
-    ID: userID,
-    first_name: firstName,
-    minit: middleInitial,
-    last_name: lastName,
-    password,
-    passenger_email: email,
-  };
-
-  connection.query('UPDATE User SET ? WHERE ID = ?', [user, req.session.user.ID], (err) => {
-    if (err) {
-      console.log(err);
-      return res.status(500).json({ message: 'An error ocurred' });
-    }
-
-    user.admin = req.session.user.admin;
-    req.session.user = user;
-
-    res.status(200).json({ success: true, message: 'Success' });
-  });
-});
-
-
-/* Delete User */
-router.delete('/', (req, res) => {
-  connection.query('DELETE FROM User WHERE ID = ?', [req.session.user.ID], (err) => {
-    if (err) {
-      console.log(err);
-      return res.status(500).json({ message: 'An error ocurred' });
-    }
-    req.session.user = null;
-    res.status(200).json({ success: true, message: 'Success' });
-  });
-});
-
-
 /* Log in user */
 router.post('/login', (req, res) => {
   const {
@@ -145,6 +90,59 @@ router.post('/login', (req, res) => {
 router.post('/logout', (req, res) => {
   req.session.user = null;
   res.status(200).json({ success: true, message: 'Success' });
+});
+
+/* Update Profile */
+router.put('/', (req, res) => {
+  const {
+    firstName,
+    middleInitial,
+    lastName,
+    email,
+    userID,
+    password,
+    confirmPassword,
+  } = req.body;
+
+  if (password !== confirmPassword) {
+    return res.status(400).json({ message: 'Passwords do not match' });
+  }
+  if (password.length < 8) {
+    return res.status(400).json({ message: 'Password too short' });
+  }
+
+  const user = {
+    ID: userID,
+    first_name: firstName,
+    minit: middleInitial,
+    last_name: lastName,
+    password,
+    passenger_email: email,
+  };
+
+  connection.query('UPDATE User SET ? WHERE ID = ?', [user, req.session.user.ID], (err) => {
+    if (err) {
+      console.log(err);
+      return res.status(500).json({ message: 'An error ocurred' });
+    }
+
+    user.admin = req.session.user.admin;
+    req.session.user = user;
+
+    res.status(200).json({ success: true, message: 'Success' });
+  });
+});
+
+/* Delete User */
+router.delete('/', (req, res) => {
+  connection.query('DELETE FROM User WHERE ID = ?', [req.session.user.ID], (err) => {
+    if (err) {
+      console.log(err);
+      return res.status(500).json({ message: 'An error ocurred' });
+    }
+    req.session.user = null;
+    res.status(200).json({ success: true, message: 'Success' });
+  });
 });
 
 module.exports = router;

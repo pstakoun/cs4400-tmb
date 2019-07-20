@@ -15,14 +15,14 @@ router.get('/', (req, res) => {
   });
 });
 
-/* GET lines */
-router.get('/:name', (req, res) => {
-  connection.query('SELECT line_name FROM Station_On_Line WHERE station_name = ?', [req.params.name], (err, result) => {
+/* GET stations on a given line */
+router.get('/:name/stations', (req, res) => {
+  connection.query('SELECT station_name, order_number FROM Station_On_Line WHERE line_name = ? ORDER BY order_number ASC', [req.params.line], (err, result) => {
     if (err) {
       console.log(err);
       return res.status(500).json({ message: 'An error ocurred' });
     }
-    res.status(200).json({ lines: result });
+    res.status(200).json({ stations: result });
   });
 });
 

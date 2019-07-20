@@ -1,9 +1,31 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import GeneralButton from '../components/GeneralButton';
 import './Home.css';
 
 class AdminHome extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      loggedOut: false,
+    };
+    this.handleLogout = this.handleLogout.bind(this);
+  }
+
+  handleLogout(event) {
+    event.preventDefault();
+    fetch('/api/users/logout', {
+      method: 'POST',
+    })
+      .then(res => res.json()).then((data) => {
+        if (data.success) {
+          this.setState({
+            loggedOut: true,
+          });
+        }
+      });
+  }
+
   render() {
     return (
       <div className="Wrapper">
@@ -34,6 +56,8 @@ class AdminHome extends React.Component {
             <Link to="/pendingReviews">
               <GeneralButton text="Review Passenger Reviews" />
             </Link>
+            <GeneralButton text="Log Out" handlePress={this.handleLogout} />
+            { this.state.loggedOut ? <Redirect to="/login" /> : null }
           </div>
         </div>
       </div>

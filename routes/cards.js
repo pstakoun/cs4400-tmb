@@ -4,7 +4,7 @@ const { connection } = require('../services');
 const router = express.Router();
 
 /* GET cards */
-router.get('/list', (req, res) => {
+router.get('/', (req, res) => {
   connection.query('SELECT * FROM Card', (err) => {
     if (err) {
       console.log(err);
@@ -14,8 +14,8 @@ router.get('/list', (req, res) => {
   });
 });
 
-/* GET cards */
-router.post('/purchase', (req, res) => {
+/* Buy card */
+router.post('/', (req, res) => {
   const {
     type,
     purchaseDateAndTime,
