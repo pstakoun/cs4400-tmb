@@ -101,9 +101,9 @@ class Register extends React.Component {
           <TextField text="Password *" type="password" handleChange={this.passwordChange} />
           <TextField text="Password again *" type="password" handleChange={this.passwordConfirmChange} onChange={this.checkPass()} />
           <div className="checkbox">
-            <br/>
+            <br />
             <label>I want to store my password in plaintext and have it shown to me every time I edit my profile *</label>
-            <br/>
+            <br />
             <div className="checkboxContainer">
               <input
                 type="checkbox"
