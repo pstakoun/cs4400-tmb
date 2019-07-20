@@ -82,7 +82,7 @@ router.put('/:id', (req, res) => {
     comment,
     approver_ID: null,
     edit_timestamp: null, // TODO
-    approval_status: 'Pending',
+    approval_status: 'pending',
   };
 
   connection.query('UPDATE Review SET ? WHERE rid = ?', [review, req.params.id], (err) => {
