@@ -17,7 +17,7 @@ class LineSummary extends React.Component {
   }
 
   componentWillMount() {
-    fetch(`/api/stations/stationLines/${this.state.name}`).then(
+    fetch(`/api/lines/${this.state.name}/stations`).then(
       results => results.json(),
     ).then((data) => {
       this.setState({

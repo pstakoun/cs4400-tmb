@@ -53,7 +53,7 @@ class PendingReviews extends React.Component {
                     <Link to={{
                       pathname: '/stationInfo',
                       state: {
-                        rid: rowData.rid,
+                        stationName: rowData.station_name,
                       },
                     }}
                     >

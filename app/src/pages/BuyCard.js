@@ -20,7 +20,7 @@ class BuyCard extends React.Component {
       futureDateTime = future.format('YYYY-MM-DD HH:mm:ss');
     }
 
-    fetch('/api/cards/purchase', {
+    fetch('/api/cards', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
