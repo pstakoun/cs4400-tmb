@@ -4,17 +4,17 @@ const { connection } = require('../services');
 const router = express.Router();
 
 /* GET cards */
-router.get('/list', (req, res) => {
-  connection.query('SELECT * FROM Card', (err) => {
+router.get('/', (req, res) => {
+  connection.query('SELECT * FROM Card', (err, result) => {
     if (err) {
       console.log(err);
       return res.status(500).json({ message: 'An error ocurred' });
     }
-    res.status(200).json({ success: true, message: 'Success' });
+    res.status(200).json({ cards: result });
   });
 });
 
-/* GET cards */
+/* POST cards */
 router.post('/purchase', (req, res) => {
   const {
     type,

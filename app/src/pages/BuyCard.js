@@ -8,29 +8,18 @@ import './BuyCard.css';
 class BuyCard extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      dateTime: '',
-      futureDateTime: '',
-    };
-  }
-
-  calculateDateTimes(days) {
-    const today = new Date();
-    const future = new Date();
-    future.setDate(future.getDate() + days);
-    const date = `${today.getFullYear()}-${today.getMonth() + 1}-${today.getDate()}`;
-    const futureDate = `${future.getFullYear()}-${future.getMonth() + 1}-${future.getDate()}`;
-    const time = `${today.getHours()}:${today.getMinutes()}:${today.getSeconds()}`;
-    this.setState({
-      dateTime: `${date} ${time}`,
-      futureDateTime: `${futureDate} ${time}`,
-    });
   }
 
   handlePurchase(name, uses, daysRemaining) {
+    const moment = require('moment');
+    let now = moment();
+    let purchaseDateTime = now.format('YYYY-MM-DD HH:mm:ss');
+    let futureDateTime = null;
     if (daysRemaining != null) {
-      this.calculateDateTimes(daysRemaining);
+      let future = moment().add(30, 'days');
+      futureDateTime = future.format('YYYY-MM-DD HH:mm:ss');
     }
+
     fetch('/api/cards/purchase', {
       method: 'POST',
       headers: {
@@ -39,9 +28,9 @@ class BuyCard extends React.Component {
 
       body: JSON.stringify({
         type: name,
-        purchaseDateAndTime: this.state.dateTime,
+        purchaseDateAndTime: purchaseDateTime,
         usesLeft: uses,
-        expirationDate: this.state.futureDateTime,
+        expirationDate: futureDateTime,
       }),
     }).then(res => res.json()).then((data) => {
       if (data.success) {
