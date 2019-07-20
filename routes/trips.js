@@ -6,7 +6,13 @@ const { connection } = require('../services');
 const router = express.Router();
 /* GET trips */
 router.get('/', (req, res) => {
-  // TODO
+  connection.query('SELECT * FROM Trip', (err, result) => {
+    if (err) {
+      console.log(err);
+      return res.status(500).json({ message: 'An error ocurred' });
+    }
+    res.status(200).json({ trips: result });
+  });
 });
 
 /* Create review */
