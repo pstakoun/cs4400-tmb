@@ -1,18 +1,23 @@
 import React from 'react';
 import { Redirect, Route } from 'react-router-dom';
 
-const AdminRoute = ({ component: Component, user, ...rest }) => (
+const AdminRoute = ({
+  component: Component, user, pathChange, ...rest
+}) => (
   <Route
     {...rest}
-    render={props => ((user && user.ID) ? (
-      (user.admin) ? (
-        <Component {...props} />
+    render={(props) => {
+      pathChange(props.location);
+      return ((user && user.ID) ? (
+        (user.admin) ? (
+          <Component {...props} />
+        ) : (
+          <Redirect to="/" />
+        )
       ) : (
-        <Redirect to="/" />
-      )
-    ) : (
-      <Redirect to="/login" />
-    ))}
+        <Redirect to="/login" />
+      ));
+    }}
   />
 );
 

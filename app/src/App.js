@@ -25,16 +25,23 @@ class App extends React.Component {
     super(props);
     this.state = {
       user: null,
+      path: '',
     };
     this.updateUser = this.updateUser.bind(this);
+    this.pathChange = this.pathChange.bind(this);
   }
 
-  componentWillMount() {
+  componentDidMount() {
     this.updateUser();
   }
 
-  componentDidUpdate() {
-    this.updateUser();
+  pathChange(path) {
+    if (path !== this.state.path) {
+      this.setState({
+        path,
+      });
+      this.updateUser();
+    }
   }
 
   updateUser() {
@@ -51,21 +58,21 @@ class App extends React.Component {
     return (
       <div className="App">
         <Switch>
-          <PrivateRoute exact path="/" component={Home} user={this.state.user} />
-          <PublicRoute path="/login" component={Login} user={this.state.user} />
-          <PublicRoute path="/register" component={Register} user={this.state.user} />
-          <PrivateRoute path="/leaveReview" component={LeaveReview} user={this.state.user} />
-          <PrivateRoute path="/viewReviews" component={ViewReviews} user={this.state.user} />
-          <PrivateRoute path="/editReview" component={EditReview} user={this.state.user} />
-          <PrivateRoute path="/editProfile" component={EditProfile} user={this.state.user} />
-          <PrivateRoute path="/stationInfo" component={StationInfo} user={this.state.user} />
-          <PrivateRoute path="/buyCard" component={BuyCard} user={this.state.user} />
-          <PrivateRoute path="/trip" component={Trip} user={this.state.user} />
-          <PrivateRoute path="/viewTrips" component={ViewTrips} user={this.state.user} />
-          <PrivateRoute path="/lineSummary" component={LineSummary} user={this.state.user} />
-          <AdminRoute path="/addStation" component={AddStation} user={this.state.user} />
-          <AdminRoute path="/addLine" component={AddLine} user={this.state.user} />
-          <AdminRoute path="/pendingReviews" component={PendingReviews} user={this.state.user} />
+          <PrivateRoute exact path="/" component={Home} user={this.state.user} pathChange={this.pathChange} />
+          <PublicRoute path="/login" component={Login} user={this.state.user} pathChange={this.pathChange} />
+          <PublicRoute path="/register" component={Register} user={this.state.user} pathChange={this.pathChange} />
+          <PrivateRoute path="/leaveReview" component={LeaveReview} user={this.state.user} pathChange={this.pathChange} />
+          <PrivateRoute path="/viewReviews" component={ViewReviews} user={this.state.user} pathChange={this.pathChange} />
+          <PrivateRoute path="/editReview" component={EditReview} user={this.state.user} pathChange={this.pathChange} />
+          <PrivateRoute path="/editProfile" component={EditProfile} user={this.state.user} pathChange={this.pathChange} />
+          <PrivateRoute path="/stationInfo" component={StationInfo} user={this.state.user} pathChange={this.pathChange} />
+          <PrivateRoute path="/buyCard" component={BuyCard} user={this.state.user} pathChange={this.pathChange} />
+          <PrivateRoute path="/trip" component={Trip} user={this.state.user} pathChange={this.pathChange} />
+          <PrivateRoute path="/viewTrips" component={ViewTrips} user={this.state.user} pathChange={this.pathChange} />
+          <PrivateRoute path="/lineSummary" component={LineSummary} user={this.state.user} pathChange={this.pathChange} />
+          <AdminRoute path="/addStation" component={AddStation} user={this.state.user} pathChange={this.pathChange} />
+          <AdminRoute path="/addLine" component={AddLine} user={this.state.user} pathChange={this.pathChange} />
+          <AdminRoute path="/pendingReviews" component={PendingReviews} user={this.state.user} pathChange={this.pathChange} />
         </Switch>
       </div>
     );
