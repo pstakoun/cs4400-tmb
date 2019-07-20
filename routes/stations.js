@@ -3,7 +3,6 @@ const express = require('express');
 const router = express.Router();
 const { connection } = require('../services');
 
-
 /* GET stations */
 router.get('/', (req, res) => {
   connection.query('SELECT name FROM Station ORDER BY name ASC', (err, result) => {

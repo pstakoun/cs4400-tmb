@@ -1,16 +1,15 @@
 const express = require('express');
-const bcrypt = require('bcrypt');
-
 const { connection } = require('../services');
 
 const router = express.Router();
+
 /* GET trips */
 router.get('/', (req, res) => {
   // TODO
 });
 
-/* Create review */
-router.post('/add', (req, res) => {
+/* Create trip */
+router.post('/', (req, res) => {
   const {
     type,
     purchaseDateTime,
