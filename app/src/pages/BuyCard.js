@@ -12,11 +12,11 @@ class BuyCard extends React.Component {
 
   handlePurchase(name, uses, daysRemaining) {
     const moment = require('moment');
-    let now = moment();
-    let purchaseDateTime = now.format('YYYY-MM-DD HH:mm:ss');
+    const now = moment();
+    const purchaseDateTime = now.format('YYYY-MM-DD HH:mm:ss');
     let futureDateTime = null;
     if (daysRemaining != null) {
-      let future = moment().add(30, 'days');
+      const future = moment().add(30, 'days');
       futureDateTime = future.format('YYYY-MM-DD HH:mm:ss');
     }
 
