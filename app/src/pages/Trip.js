@@ -39,8 +39,8 @@ class Trip extends React.Component {
       results => results.json(),
     ).then((data) => {
       console.log(data);
-      initialCards = data.cards.map((card, i) => ({value: i, label: card.type + ' (' + card.purchase_date_time.slice(0, 19).replace('T', ' ') + ')'}));
-      initialFullCards = data.cards.map((card) => ({type: card.type, purchaseDate: card.purchase_date_time.slice(0, 19).replace('T', ' ')}));
+      initialCards = data.cards.map((card, i) => ({ value: i, label: `${card.type} (${card.purchase_date_time.slice(0, 19).replace('T', ' ')})` }));
+      initialFullCards = data.cards.map(card => ({ type: card.type, purchaseDate: card.purchase_date_time.slice(0, 19).replace('T', ' ') }));
       console.log(initialFullCards);
       this.setState({
         cards: initialCards,
@@ -51,14 +51,14 @@ class Trip extends React.Component {
 
   handleTripGenerate() {
     const moment = require('moment');
-    let now = moment();
-    let startDateTime = now.format('YYYY-MM-DD HH:mm:ss');
+    const now = moment();
+    const startDateTime = now.format('YYYY-MM-DD HH:mm:ss');
 
 
-    let then = moment("20111031", "YYYYMMDDHHmmss");
-    let sqlDate = this.state.fullCards[this.state.selectedCard.value].purchaseDate;
+    const then = moment('20111031', 'YYYYMMDDHHmmss');
+    const sqlDate = this.state.fullCards[this.state.selectedCard.value].purchaseDate;
 
-    let dateTimeParts= sqlDate.split(/[- :]/);
+    const dateTimeParts = sqlDate.split(/[- :]/);
     dateTimeParts[1]--;
 
     const dateObject = new Date(...dateTimeParts);
@@ -71,7 +71,7 @@ class Trip extends React.Component {
       body: JSON.stringify({
         type: this.state.fullCards[this.state.selectedCard.value].type,
         purchaseDateTime: this.state.fullCards[this.state.selectedCard.value].purchaseDate,
-        startDateTime: startDateTime,
+        startDateTime,
         fromStation: this.state.selectedStation.value,
       }),
     }).then(res => res.json()).then((data) => {
@@ -119,7 +119,7 @@ class Trip extends React.Component {
             <Link to="/">
               <GeneralButton text="Main Menu" />
             </Link>
-            <GeneralButton text="Embark" handlePress={this.handleTripGenerate}/>
+            <GeneralButton text="Embark" handlePress={this.handleTripGenerate} />
           </div>
         </div>
       </div>

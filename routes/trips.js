@@ -1,9 +1,8 @@
 const express = require('express');
-const bcrypt = require('bcrypt');
-
 const { connection } = require('../services');
 
 const router = express.Router();
+
 /* GET trips */
 router.get('/', (req, res) => {
   connection.query('SELECT * FROM Trip', (err, result) => {
@@ -15,8 +14,8 @@ router.get('/', (req, res) => {
   });
 });
 
-/* Create review */
-router.post('/add', (req, res) => {
+/* Create trip */
+router.post('/', (req, res) => {
   const {
     type,
     purchaseDateTime,

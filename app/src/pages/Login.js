@@ -51,8 +51,8 @@ class Login extends React.Component {
     return (
       <div className="Wrapper">
         <div className="Login">
-          <TextField text="ID" type="text" handleChange={this.userIDChange} />
-          <TextField text="Password" type="password" handleChange={this.passwordChange} />
+          <TextField text="ID" type="text" handleChange={this.userIDChange} onEnter={this.handleLogin} />
+          <TextField text="Password" type="password" handleChange={this.passwordChange} onEnter={this.handleLogin} />
           <div className="ButtonWrapper">
             <Link to="/register">
               <GeneralButton text="Register" />

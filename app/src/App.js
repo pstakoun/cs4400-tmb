@@ -1,5 +1,5 @@
 import React from 'react';
-import { Switch, withRouter } from 'react-router-dom';
+import { Route, Switch, withRouter } from 'react-router-dom';
 import PublicRoute from './components/PublicRoute';
 import PrivateRoute from './components/PrivateRoute';
 import AdminRoute from './components/AdminRoute';
@@ -18,6 +18,7 @@ import LineSummary from './pages/LineSummary';
 import AddStation from './pages/AddStation';
 import AddLine from './pages/AddLine';
 import PendingReviews from './pages/PendingReviews';
+import NotFound from './pages/NotFound';
 import './App.css';
 
 class App extends React.Component {
@@ -68,6 +69,7 @@ class App extends React.Component {
           <AdminRoute path="/addStation" component={AddStation} user={this.state.user} />
           <AdminRoute path="/addLine" component={AddLine} user={this.state.user} />
           <AdminRoute path="/pendingReviews" component={PendingReviews} user={this.state.user} />
+          <Route component={NotFound} />
         </Switch>
       </div>
     );
