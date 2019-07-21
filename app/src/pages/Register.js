@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import GeneralButton from '../components/GeneralButton';
 import TextField from '../components/TextField';
 import './Register.css';
@@ -16,6 +16,7 @@ class Register extends React.Component {
       password: '',
       passwordConfirm: '',
       passwordAgreement: false,
+      registered: false,
     };
     this.handleRegister = this.handleRegister.bind(this);
     this.fNameChange = this.fNameChange.bind(this);
@@ -45,6 +46,11 @@ class Register extends React.Component {
       }),
     }).then(res => res.json()).then((data) => {
       alert(data.message);
+      if (data.success) {
+        this.setState({
+          registered: true,
+        });
+      }
     });
   }
 
@@ -120,6 +126,7 @@ class Register extends React.Component {
               <GeneralButton text="I already have an account" />
             </Link>
             <GeneralButton text="Register" handlePress={this.handleRegister} />
+            { this.state.registered ? <Redirect to="/login" /> : null }
           </div>
         </div>
       </div>
