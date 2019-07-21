@@ -6,7 +6,7 @@ INSERT INTO User VALUES ('peter', 'Peter', 'A', 'Stakoun', 'password', 'peter@st
 INSERT INTO User VALUES ('peter-admin', 'Peter', 'A', 'Stakoun', 'password', NULL);
 INSERT INTO User VALUES('a',	'Andreas',	'J',	'Paljug',	'asdfasdf', NULL);
 
-INSERT INTO Admin VALUES('matt-admin');
+INSERT INTO Admin VALUES('wwhite12');
 INSERT INTO Admin VALUES('peter-admin');
 INSERT INTO Card VALUES ('chall68',	'T-mes',	'2019-06-08 10:27:00',	NULL,
 '2019-07-08 10:27:00');

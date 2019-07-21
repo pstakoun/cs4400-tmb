@@ -20,11 +20,26 @@ router.post('/register', (req, res) => {
     confirmPassword,
   } = req.body;
 
-  if (password !== confirmPassword) {
-    return res.status(400).json({ message: 'Passwords do not match' });
+  let errorMessage = null;
+
+  if (!firstName) {
+    errorMessage = 'First Name is required';
+  } else if (!lastName) {
+    errorMessage = 'Last Name is required';
+  } else if (!email) {
+    errorMessage = 'Email is required';
+  } else if (!userID) {
+    errorMessage = 'User ID is required';
+  } else if (!password) {
+    errorMessage = 'Password is required';
+  } else if (password !== confirmPassword) {
+    errorMessage = 'Passwords do not match';
+  } else if (password.length < 8) {
+    errorMessage = 'Password too short';
   }
-  if (password.length < 8) {
-    return res.status(400).json({ message: 'Password too short' });
+
+  if (errorMessage) {
+    return res.status(400).json({ message: errorMessage });
   }
 
   const user = {
@@ -38,6 +53,9 @@ router.post('/register', (req, res) => {
 
   connection.query('INSERT INTO User SET ?', user, (err) => {
     if (err) {
+      if (err.code === 'ER_DUP_ENTRY') {
+        return res.status(400).json({ message: 'User ID must be unique' });
+      }
       console.log(err);
       return res.status(500).json({ message: 'An error ocurred' });
     }
@@ -103,11 +121,24 @@ router.put('/', (req, res) => {
     confirmPassword,
   } = req.body;
 
-  if (password !== confirmPassword) {
-    return res.status(400).json({ message: 'Passwords do not match' });
+  let errorMessage = null;
+
+  if (!firstName) {
+    errorMessage = 'First Name is required';
+  } else if (!lastName) {
+    errorMessage = 'Last Name is required';
+  } else if (!email) {
+    errorMessage = 'Email is required';
+  } else if (!userID) {
+    errorMessage = 'User ID is required';
+  } else if (password !== confirmPassword) {
+    errorMessage = 'Passwords do not match';
+  } else if (password.length < 8) {
+    errorMessage = 'Password too short';
   }
-  if (password.length < 8) {
-    return res.status(400).json({ message: 'Password too short' });
+
+  if (errorMessage) {
+    return res.status(400).json({ message: errorMessage });
   }
 
   const user = {
@@ -121,6 +152,9 @@ router.put('/', (req, res) => {
 
   connection.query('UPDATE User SET ? WHERE ID = ?', [user, req.session.user.ID], (err) => {
     if (err) {
+      if (err.code === 'ER_DUP_ENTRY') {
+        return res.status(400).json({ message: 'User ID must be unique' });
+      }
       console.log(err);
       return res.status(500).json({ message: 'An error ocurred' });
     }

@@ -119,9 +119,7 @@ class Register extends React.Component {
             <Link to="/login">
               <GeneralButton text="I already have an account" />
             </Link>
-            <Link to="/login">
-              <GeneralButton text="Register" handlePress={this.handleRegister} />
-            </Link>
+            <GeneralButton text="Register" handlePress={this.handleRegister} />
           </div>
         </div>
       </div>
