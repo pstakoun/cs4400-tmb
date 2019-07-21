@@ -8,13 +8,13 @@ class EditProfile extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      firstName: '',
-      middleInitial: '',
-      lastName: '',
-      email: '',
-      userID: '',
-      password: '',
-      passwordConfirm: '',
+      firstName: props.user.first_name,
+      middleInitial: props.user.minit,
+      lastName: props.user.last_name,
+      email: props.user.passenger_email,
+      userID: props.user.ID,
+      password: props.user.password,
+      passwordConfirm: props.user.password,
       edited: false,
     };
     this.handleDeleteUser = this.handleDeleteUser.bind(this);
@@ -27,23 +27,6 @@ class EditProfile extends React.Component {
     this.userIDChange = this.userIDChange.bind(this);
     this.passwordChange = this.passwordChange.bind(this);
     this.passwordConfirmChange = this.passwordConfirmChange.bind(this);
-  }
-
-  componentWillMount() {
-    fetch('/api/me').then(
-      results => results.json(),
-    ).then((data) => {
-      console.log(data);
-      this.setState({
-        firstName: data.first_name,
-        middleInitial: data.minit,
-        lastName: data.last_name,
-        email: data.passenger_email,
-        userID: data.ID,
-        password: data.password,
-        passwordConfirm: data.password,
-      });
-    });
   }
 
   handleEditUser() {
@@ -63,7 +46,7 @@ class EditProfile extends React.Component {
       }),
     }).then(res => res.json()).then((data) => {
       if (data.success) {
-        alert('Edited User data.');
+        alert('User updated.');
         this.setState({
           edited: true,
         });
@@ -84,7 +67,7 @@ class EditProfile extends React.Component {
       }),
     }).then(res => res.json()).then((data) => {
       if (data.success) {
-        alert('You deleted this user. Please log back in.');
+        alert('User deleted. Please log back in.');
       } else {
         alert(data.message);
       }
@@ -147,11 +130,10 @@ class EditProfile extends React.Component {
               <GeneralButton text="Main Menu" />
             </Link>
             <Link to="/login">
-              <GeneralButton text="Delete User" handlePress={this.handleDeleteUser} />
+              <GeneralButton text="Delete" handlePress={this.handleDeleteUser} />
             </Link>
-
-            <GeneralButton text="Edit User" handlePress={this.handleEditUser} />
-            { this.state.edited ? <Redirect to="/" /> : null }
+            <GeneralButton text="Update" handlePress={this.handleEditUser} />
+            { /* this.state.edited ? <Redirect to="/" /> : null */ }
           </div>
         </div>
       </div>

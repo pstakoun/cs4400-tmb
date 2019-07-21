@@ -7,11 +7,10 @@ const AdminRoute = ({
   <Route
     {...rest}
     render={props => ((user && user.ID) ? ((user.admin) ? (
-      <Component {...props} />
+      <Component user={user} {...props} />
     ) : (
       <Redirect to="/" />
-    )
-    ) : (
+    )) : (
       <Redirect to="/login" />
     ))}
   />
