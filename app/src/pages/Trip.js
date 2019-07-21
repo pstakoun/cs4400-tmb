@@ -35,7 +35,7 @@ class Trip extends React.Component {
 
     let initialCards = [];
     let initialFullCards = [];
-    fetch('/api/cards/').then(
+    fetch('/api/cards').then(
       results => results.json(),
     ).then((data) => {
       console.log(data);
@@ -63,7 +63,7 @@ class Trip extends React.Component {
 
     const dateObject = new Date(...dateTimeParts);
 
-    fetch('/api/trips/add', {
+    fetch('/api/trips', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
