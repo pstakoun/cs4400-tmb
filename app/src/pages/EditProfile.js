@@ -102,15 +102,6 @@ class EditProfile extends React.Component {
     this.setState({ passwordConfirm: event.target.value });
   }
 
-  checkPass() {
-    console.log(`${this.state.password} | ${this.state.passwordConfirm}`);
-    if (this.state.password === this.state.passwordConfirm) {
-      console.log('Passwords match');
-    } else {
-      console.log('Passwords do not match');
-    }
-  }
-
   render() {
     return (
       <div className="Wrapper">
@@ -119,9 +110,9 @@ class EditProfile extends React.Component {
           <TextField text="Middle Initial" type="text" value={this.state.middleInitial} handleChange={this.MIChange} />
           <TextField text="Last Name *" type="text" value={this.state.lastName} handleChange={this.lNameChange} />
           <TextField text="Email *" type="text" value={this.state.email} handleChange={this.emailChange} />
-          <TextField text="User ID (unique) *" value={this.state.userID} type="text" handleChange={this.userIDChange} />
+          <TextField text="User ID (unique) *" type="text" value={this.state.userID} handleChange={this.userIDChange} />
           <TextField text="Password *" type="password" value={this.state.password} handleChange={this.passwordChange} />
-          <TextField text="Password again *" type="password" value={this.state.passwordConfirm} handleChange={this.passwordConfirmChange} onChange={this.checkPass()} />
+          <TextField text="Password again *" type="password" value={this.state.passwordConfirm} handleChange={this.passwordConfirmChange} />
           <div className="ButtonWrapper">
             <h6>&apos;* is required&apos;</h6>
           </div>

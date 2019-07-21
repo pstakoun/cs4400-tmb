@@ -27,7 +27,6 @@ class EditReview extends React.Component {
     fetch(`/api/reviews/${this.state.rid}`).then(
       results => results.json(),
     ).then((data) => {
-      console.log(data);
       const { review } = data;
       this.setState({
         station: review.station_name,
@@ -64,12 +63,10 @@ class EditReview extends React.Component {
   }
 
   handleRateShopping(rating) {
-    console.log(`Shopping Rating is: ${rating}`);
     this.setState({ shoppingRating: rating });
   }
 
   handleRateSpeed(rating) {
-    console.log(`Connection Speed Rating is: ${rating}`);
     this.setState({ speedRating: rating });
   }
 

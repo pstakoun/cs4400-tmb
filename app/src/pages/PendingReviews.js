@@ -18,7 +18,6 @@ class PendingReviews extends React.Component {
     fetch('/api/reviews/pending').then(
       results => results.json(),
     ).then((data) => {
-      console.log(data.reviews);
       this.setState({
         reviews: data.reviews,
       });

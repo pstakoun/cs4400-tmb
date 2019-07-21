@@ -86,15 +86,6 @@ class Register extends React.Component {
     this.setState({ passwordAgreement: event.target.checked });
   }
 
-  checkPass() {
-    console.log(`${this.state.password} | ${this.state.passwordConfirm}`);
-    if (this.state.password === this.state.passwordConfirm) {
-      console.log('Passwords match');
-    } else {
-      console.log('Passwords do not match');
-    }
-  }
-
   render() {
     return (
       <div className="Wrapper">
@@ -105,7 +96,7 @@ class Register extends React.Component {
           <TextField text="Email *" type="text" handleChange={this.emailChange} />
           <TextField text="User ID (unique) *" type="text" handleChange={this.userIDChange} />
           <TextField text="Password *" type="password" handleChange={this.passwordChange} />
-          <TextField text="Password again *" type="password" handleChange={this.passwordConfirmChange} onChange={this.checkPass()} />
+          <TextField text="Password again *" type="password" handleChange={this.passwordConfirmChange} />
           <div className="checkbox">
             <br />
             <label>I want to store my password in plaintext and have it shown to me every time I edit my profile *</label>
