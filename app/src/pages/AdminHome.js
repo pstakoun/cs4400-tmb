@@ -32,7 +32,10 @@ class AdminHome extends React.Component {
         <div className="Cards">
           <div className="ButtonWrapper">
             <header>
-              <h2>Welcome Admin!</h2>
+              <h2>
+Welcome
+                {this.props.user ? (`${this.props.user.first_name} ${this.props.user.last_name}`) : null}
+              </h2>
             </header>
             <b className="b">Actions:</b>
             <Link to="/viewTrips">
