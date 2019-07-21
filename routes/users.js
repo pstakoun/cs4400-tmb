@@ -131,6 +131,8 @@ router.put('/', (req, res) => {
     errorMessage = 'Email is required';
   } else if (!userID) {
     errorMessage = 'User ID is required';
+  } else if (!password) {
+    errorMessage = 'Password is required';
   } else if (password !== confirmPassword) {
     errorMessage = 'Passwords do not match';
   } else if (password.length < 8) {
