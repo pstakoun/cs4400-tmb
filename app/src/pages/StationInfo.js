@@ -23,10 +23,10 @@ class StationInfo extends React.Component {
   }
 
   componentWillMount() {
-    fetch('/api/stations/' + this.state.name).then(
+    fetch(`/api/stations/${this.state.name}`).then(
       results => results.json(),
     ).then((data) => {
-      const station = data.station;
+      const { station } = data;
       this.setState({
         status: station.status,
         stateProvince: station.state_province,
@@ -44,7 +44,7 @@ class StationInfo extends React.Component {
     ).then((data) => {
       initialLines = data.lines.map(lines => lines.line_name);
       this.setState({
-        lines: initialLines
+        lines: initialLines,
       });
     });
 
@@ -67,37 +67,41 @@ class StationInfo extends React.Component {
   }
 
   render() {
-    const lines = this.state.lines.map(function(line){
-      return <Link key={line} className={"lineLink"} to={{
-        pathname: '/lineSummary',
-        state: {
-          line: line,
-        }
-      }}>
+    const lines = this.state.lines.map(line => (
+      <Link
+        key={line}
+        className="lineLink"
+        to={{
+          pathname: '/lineSummary',
+          state: {
+            line,
+          },
+        }}
+      >
         {line}
-      </Link>;
-    });
+      </Link>
+    ));
     return (
       <div className="Wrapper">
         <div className="StationInfo">
           <label className="InfoLabel">
-            {"Station: "}
+            {'Station: '}
             {this.state.name}
           </label>
           <label className="InfoLabel">
-            {"Status: "}
+            {'Status: '}
             {this.state.status}
           </label>
           <label className="InfoLabel">
-            {"Address: "}
-            {this.state.address + ', ' + this.state.zipcode + ' ' + this.state.city}
+            {'Address: '}
+            {`${this.state.address}, ${this.state.zipcode} ${this.state.city}`}
           </label>
           <label className="InfoLabel">
-            {"Lines: "}
+            {'Lines: '}
             {lines}
           </label>
-          <ReviewStars text="Average Shopping" interactive={false} rating={this.state.avgShoppingRating}/>
-          <ReviewStars text="Average Connection Speed" interactive={false} rating={this.state.avgSpeedRating}/>
+          <ReviewStars text="Average Shopping" interactive={false} rating={this.state.avgShoppingRating} />
+          <ReviewStars text="Average Connection Speed" interactive={false} rating={this.state.avgSpeedRating} />
           <div style={{ maxWidth: '100%' }}>
             <MaterialTable
               columns={[
@@ -105,17 +109,21 @@ class StationInfo extends React.Component {
                   title: 'ID',
                   field: 'rid',
                 },
-                { title: 'Station',
+                {
+                  title: 'Station',
                   field: 'station_name',
                 },
-                { title: 'Shopping',
-                  field: 'shopping'
+                {
+                  title: 'Shopping',
+                  field: 'shopping',
                 },
-                { title: 'Connection Speed',
-                  field: 'connection_speed'
+                {
+                  title: 'Connection Speed',
+                  field: 'connection_speed',
                 },
-                { title: 'Comment',
-                  field: 'comment'
+                {
+                  title: 'Comment',
+                  field: 'comment',
                 },
               ]}
               data={this.state.reviews}
@@ -124,7 +132,7 @@ class StationInfo extends React.Component {
           </div>
           <div className="ButtonWrapper">
             <Link to="/">
-              <GeneralButton text="Main Menu"/>
+              <GeneralButton text="Main Menu" />
             </Link>
           </div>
         </div>

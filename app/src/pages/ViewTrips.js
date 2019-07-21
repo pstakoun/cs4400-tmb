@@ -16,16 +16,18 @@ class ViewTrips extends React.Component {
 
   componentWillMount() {
     let initialTrips = [];
-    fetch(`/api/trips/`).then(
+    fetch('/api/trips/').then(
       results => results.json(),
     ).then((data) => {
       console.log(data);
-      initialTrips = data.trips.map((trip) => ({user_ID: trip.user_ID,
-                                                card_type: trip.card_type,
-                                                start_date_time: trip.start_date_time.slice(0, 19).replace('T', ' '),
-                                                end_date_time: trip.end_date_time,
-                                                from_station_name: trip.from_station_name ,
-                                                to_station_name: trip.to_station_name }));
+      initialTrips = data.trips.map(trip => ({
+        user_ID: trip.user_ID,
+        card_type: trip.card_type,
+        start_date_time: trip.start_date_time.slice(0, 19).replace('T', ' '),
+        end_date_time: trip.end_date_time,
+        from_station_name: trip.from_station_name,
+        to_station_name: trip.to_station_name,
+      }));
       this.setState({
         trips: initialTrips,
       });

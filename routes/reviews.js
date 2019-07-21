@@ -119,7 +119,7 @@ router.delete('/:id', (req, res) => {
   });
 });
 
-/* Delete review for another user*/
+/* Delete review for another user */
 router.delete('/:id/:user/delete', (req, res) => {
   connection.query('DELETE FROM Review WHERE rid = ? AND passenger_ID = ?', [req.params.id, req.params.user], (err) => {
     if (err) {

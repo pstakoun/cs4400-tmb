@@ -52,7 +52,6 @@ router.post('/login', (req, res) => {
     password,
   } = req.body;
 
-  // TODO convert query to left outer join
   connection.query('SELECT * FROM User WHERE ID = ?', [userID], (err, result) => {
     if (err) {
       console.log(err);

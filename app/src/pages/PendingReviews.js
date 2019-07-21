@@ -35,7 +35,7 @@ class PendingReviews extends React.Component {
       }),
     }).then(res => res.json()).then((data) => {
       if (data.success) {
-        if(!alert('You approved this review')){window.location.reload();}
+        if (!alert('You approved this review')) { window.location.reload(); }
       } else {
         alert(data.message);
       }
@@ -52,7 +52,7 @@ class PendingReviews extends React.Component {
       }),
     }).then(res => res.json()).then((data) => {
       if (data.success) {
-        if(!alert('You deleted this review')){window.location.reload();}
+        if (!alert('You deleted this review')) { window.location.reload(); }
       } else {
         alert(data.message);
       }
@@ -104,13 +104,13 @@ class PendingReviews extends React.Component {
                 {
                   icon: 'check',
                   tooltip: 'Approve Review',
-                  onClick: (event, rowData) => this.handleApproveReview(rowData.passenger_ID, rowData.rid)
+                  onClick: (event, rowData) => this.handleApproveReview(rowData.passenger_ID, rowData.rid),
                 },
                 {
                   icon: 'delete',
                   tooltip: 'Delete Review',
-                  onClick: (event, rowData) => this.handleDeleteReview(rowData.passenger_ID, rowData.rid)
-                }
+                  onClick: (event, rowData) => this.handleDeleteReview(rowData.passenger_ID, rowData.rid),
+                },
               ]}
               title="Pending Reviews"
             />
