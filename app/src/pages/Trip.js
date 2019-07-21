@@ -1,25 +1,24 @@
 import React from 'react';
-
-import './Trip.css';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import Dropdown from 'react-dropdown';
 import GeneralButton from '../components/GeneralButton';
 import 'react-dropdown/style.css';
+import './Trip.css';
 
 class Trip extends React.Component {
   constructor(props) {
     super(props);
-    this.onSelectStation = this.onSelectStation.bind(this);
-    this.onSelectCard = this.onSelectCard.bind(this);
-    this.handleTripGenerate = this.handleTripGenerate.bind(this);
     this.state = {
       stations: [],
       cards: [],
       fullCards: [],
       selectedStation: '',
       selectedCard: '',
-      dateTime: '',
+      created: false,
     };
+    this.onSelectStation = this.onSelectStation.bind(this);
+    this.onSelectCard = this.onSelectCard.bind(this);
+    this.handleTripGenerate = this.handleTripGenerate.bind(this);
   }
 
   componentWillMount() {
@@ -38,10 +37,8 @@ class Trip extends React.Component {
     fetch('/api/cards').then(
       results => results.json(),
     ).then((data) => {
-      console.log(data);
       initialCards = data.cards.map((card, i) => ({ value: i, label: `${card.type} (${card.purchase_date_time.slice(0, 19).replace('T', ' ')})` }));
-      initialFullCards = data.cards.map(card => ({ type: card.type, purchaseDate: card.purchase_date_time.slice(0, 19).replace('T', ' ') }));
-      console.log(initialFullCards);
+      initialFullCards = data.cards.map(card => ({ type: card.type, purchaseDate: card.purchase_date_time }));
       this.setState({
         cards: initialCards,
         fullCards: initialFullCards,
@@ -50,19 +47,6 @@ class Trip extends React.Component {
   }
 
   handleTripGenerate() {
-    const moment = require('moment');
-    const now = moment();
-    const startDateTime = now.format('YYYY-MM-DD HH:mm:ss');
-
-
-    const then = moment('20111031', 'YYYYMMDDHHmmss');
-    const sqlDate = this.state.fullCards[this.state.selectedCard.value].purchaseDate;
-
-    const dateTimeParts = sqlDate.split(/[- :]/);
-    dateTimeParts[1]--;
-
-    const dateObject = new Date(...dateTimeParts);
-
     fetch('/api/trips', {
       method: 'POST',
       headers: {
@@ -71,15 +55,15 @@ class Trip extends React.Component {
       body: JSON.stringify({
         type: this.state.fullCards[this.state.selectedCard.value].type,
         purchaseDateTime: this.state.fullCards[this.state.selectedCard.value].purchaseDate,
-        startDateTime,
         fromStation: this.state.selectedStation.value,
       }),
     }).then(res => res.json()).then((data) => {
       if (data.success) {
-        alert('You created a review');
-      } else {
-        alert(data.message);
+        this.setState({
+          created: true,
+        });
       }
+      alert(data.message);
     });
   }
 
@@ -120,6 +104,7 @@ class Trip extends React.Component {
               <GeneralButton text="Main Menu" />
             </Link>
             <GeneralButton text="Embark" handlePress={this.handleTripGenerate} />
+            { this.state.created ? <Redirect to="/" /> : null }
           </div>
         </div>
       </div>

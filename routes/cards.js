@@ -33,6 +33,18 @@ router.get('/', (req, res) => {
   });
 });
 
+/* GET valid cards */
+router.get('/valid', (req, res) => {
+  // TODO
+  connection.query('SELECT * FROM Card WHERE user_ID = ?', [req.session.user.ID], (err, result) => {
+    if (err) {
+      console.log(err);
+      return res.status(500).json({ message: 'An error ocurred' });
+    }
+    res.status(200).json({ cards: result });
+  });
+});
+
 /* Buy card */
 router.post('/', (req, res) => {
   const { type } = req.body;
