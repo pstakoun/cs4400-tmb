@@ -51,28 +51,15 @@ class EditReview extends React.Component {
         comment: this.state.comment,
       }),
     }).then(res => res.json()).then((data) => {
-      if (data.success) {
-        alert('You updated this review');
-      } else {
-        alert(data.message);
-      }
+      alert(data.message);
     });
   }
 
   handleDeleteReview() {
     fetch(`/api/reviews/${this.state.rid}`, {
       method: 'DELETE',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-      }),
     }).then(res => res.json()).then((data) => {
-      if (data.success) {
-        alert('You deleted this review');
-      } else {
-        alert(data.message);
-      }
+      alert(data.message);
     });
   }
 

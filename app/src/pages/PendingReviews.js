@@ -31,14 +31,13 @@ class PendingReviews extends React.Component {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({
-      }),
     }).then(res => res.json()).then((data) => {
       if (data.success) {
-        if (!alert('You approved this review')) { window.location.reload(); }
-      } else {
-        alert(data.message);
+        this.setState({
+          reviews: this.state.reviews.filter(review => !(review.rid === rid && review.passenger_ID === user_id)),
+        });
       }
+      alert(data.message);
     });
   }
 
@@ -48,14 +47,13 @@ class PendingReviews extends React.Component {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({
-      }),
     }).then(res => res.json()).then((data) => {
       if (data.success) {
-        if (!alert('You deleted this review')) { window.location.reload(); }
-      } else {
-        alert(data.message);
+        this.setState({
+          reviews: this.state.reviews.filter(review => !(review.rid === rid && review.passenger_ID === user_id)),
+        });
       }
+      alert(data.message);
     });
   }
 

@@ -53,13 +53,11 @@ class LeaveReview extends React.Component {
       }),
     }).then(res => res.json()).then((data) => {
       if (data.success) {
-        alert('Review created');
         this.setState({
           created: true,
         });
-      } else {
-        alert(data.message);
       }
+      alert(data.message);
     });
   }
 

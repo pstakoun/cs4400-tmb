@@ -65,7 +65,7 @@ router.post('/', (req, res) => {
       console.log(err);
       return res.status(500).json({ message: 'An error occurred' });
     }
-    res.status(200).json({ success: true, message: 'Success' });
+    res.status(200).json({ success: true, message: 'Review created' });
   });
 });
 
@@ -94,18 +94,18 @@ router.put('/:id', (req, res) => {
       console.log(err);
       return res.status(500).json({ message: 'An error occurred' });
     }
-    res.status(200).json({ success: true, message: 'Success' });
+    res.status(200).json({ success: true, message: 'Review updated' });
   });
 });
 
-/* Update review */
+/* Approve review */
 router.put('/:id/:user/approve', (req, res) => {
   connection.query("UPDATE Review SET approval_status = 'approved' WHERE rid = ? AND passenger_ID = ?", [req.params.id, req.params.user], (err) => {
     if (err) {
       console.log(err);
       return res.status(500).json({ message: 'An error occurred' });
     }
-    res.status(200).json({ success: true, message: 'Success' });
+    res.status(200).json({ success: true, message: 'Review approved' });
   });
 });
 
@@ -116,7 +116,7 @@ router.delete('/:id', (req, res) => {
       console.log(err);
       return res.status(500).json({ message: 'An error occurred' });
     }
-    res.status(200).json({ success: true, message: 'Success' });
+    res.status(200).json({ success: true, message: 'Review deleted' });
   });
 });
 
@@ -127,7 +127,7 @@ router.delete('/:id/:user/delete', (req, res) => {
       console.log(err);
       return res.status(500).json({ message: 'An error occurred' });
     }
-    res.status(200).json({ success: true, message: 'Success' });
+    res.status(200).json({ success: true, message: 'Review deleted' });
   });
 });
 
