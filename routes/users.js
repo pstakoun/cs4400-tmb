@@ -70,7 +70,7 @@ router.post('/login', (req, res) => {
     password,
   } = req.body;
 
-  connection.query('SELECT * FROM User WHERE ID = ?', [userID], (err, result) => {
+  connection.query('SELECT User.*, Admin.ID AS admin FROM User LEFT JOIN Admin ON User.ID = Admin.ID WHERE User.ID = ?', [userID], (err, result) => {
     if (err) {
       console.log(err);
       return res.status(500).json({ message: 'An error ocurred' });
@@ -81,25 +81,15 @@ router.post('/login', (req, res) => {
     }
 
     const user = result[0];
+    user.admin = !!user.admin;
 
     if (user.password !== password) {
       return res.status(401).json({ message: 'User ID or password is incorrect' });
     }
 
-    connection.query('SELECT * FROM Admin WHERE ID = ?', [userID], (err1, result1) => {
-      if (err1) {
-        console.log(err1.message);
-        return res.status(500).json({ message: 'An error ocurred' });
-      }
+    req.session.user = user;
 
-      if (result1.length > 0) {
-        user.admin = true;
-      }
-
-      req.session.user = user;
-
-      res.status(200).json({ success: true, message: 'Success' });
-    });
+    res.status(200).json({ success: true, message: 'Success' });
   });
 });
 
