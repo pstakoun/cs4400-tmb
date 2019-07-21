@@ -6,7 +6,7 @@ const router = express.Router();
 const types = {
   'T-mes': {
     uses: null,
-    days: 30,
+    days: null,
   },
   'T-10': {
     uses: 10,
@@ -48,9 +48,12 @@ router.get('/valid', (req, res) => {
 /* Buy card */
 router.post('/', (req, res) => {
   const { type } = req.body;
-  const expirationDate = types[type].days ? new Date() : null;
+  let expirationDate = types[type].days ? new Date() : null;
   if (expirationDate) {
     expirationDate.setDate(expirationDate.getDate() + types[type].days);
+  } else if (type === 'T-mes') {
+    expirationDate = new Date();
+    expirationDate = new Date(expirationDate.setMonth(expirationDate.getMonth() + 1));
   }
 
   const card = {
