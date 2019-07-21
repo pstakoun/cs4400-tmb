@@ -59,6 +59,7 @@ router.post('/', (req, res) => {
     approval_status: 'pending',
   };
 
+  // TODO shopping and connection_speed must be set
   connection.query('INSERT INTO Review SET ?', [review], (err) => {
     if (err) {
       console.log(err);

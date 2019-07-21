@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import Dropdown from 'react-dropdown';
 import GeneralButton from '../components/GeneralButton';
 import ReviewStars from '../components/ReviewStars';
@@ -20,6 +20,7 @@ class LeaveReview extends React.Component {
       shoppingRating: 0,
       speedRating: 0,
       comment: '',
+      created: false,
     };
   }
 
@@ -38,6 +39,7 @@ class LeaveReview extends React.Component {
   }
 
   handleNewReview() {
+    // TODO shoppingRating and speedRating must be set
     fetch('/api/reviews', {
       method: 'POST',
       headers: {
@@ -51,7 +53,10 @@ class LeaveReview extends React.Component {
       }),
     }).then(res => res.json()).then((data) => {
       if (data.success) {
-        alert('You created a review');
+        alert('Review created');
+        this.setState({
+          created: true,
+        });
       } else {
         alert(data.message);
       }
@@ -59,12 +64,10 @@ class LeaveReview extends React.Component {
   }
 
   handleRateShopping(rating) {
-    console.log(`Shopping Rating is: ${this.state.shoppingRating}`);
     this.setState({ shoppingRating: rating });
   }
 
   handleRateSpeed(rating) {
-    console.log(`Connection Speed Rating is: ${rating}`);
     this.setState({ speedRating: rating });
   }
 
@@ -73,7 +76,6 @@ class LeaveReview extends React.Component {
   }
 
   onSelect(option) {
-    // console.log('You selected ', option.label)
     this.setState({ selected: option });
   }
 
@@ -102,6 +104,7 @@ class LeaveReview extends React.Component {
               <GeneralButton text="Main Menu" />
             </Link>
             <GeneralButton text="Submit Review" handlePress={this.handleNewReview} />
+            { this.state.created ? <Redirect to="/" /> : null }
           </div>
         </div>
       </div>

@@ -11,6 +11,8 @@ INSERT INTO Admin VALUES('peter-admin');
 INSERT INTO Card VALUES ('chall68',	'T-mes',	'2019-06-08 10:27:00',	NULL,
 '2019-07-08 10:27:00');
 INSERT INTO Station VALUES('Catalunya',	'open',	'Catalonia',	'08002 Barcelona', '08002', 'Barcelona');
+INSERT INTO Station VALUES('Crapalunya',	'closed',	'Catalonia',	'80080 Barcelona', '80080', 'Barcelona');
+INSERT INTO Station VALUES('Poopalunya',	'open',	'Catalonia',	'80085 Barcelona', '80085', 'Barcelona');
 
 INSERT INTO Trip VALUES ('chall68',	'T-mes',	'2019-06-08 10:27:00','2019-06-08 10:29:00',		NULL,
 'Catalunya', NULL);
