@@ -73,6 +73,10 @@ class ViewReviews extends React.Component {
                   title: 'Comment',
                   field: 'comment',
                 },
+                {
+                  title: 'Approval Status',
+                  field: 'approval_status',
+                },
               ]}
               data={this.state.reviews}
               title="My Reviews"

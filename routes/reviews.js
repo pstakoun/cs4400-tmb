@@ -8,7 +8,7 @@ router.get('/', (req, res) => {
   connection.query('SELECT * FROM Review WHERE passenger_ID = ?', [req.session.user.ID], (err, result) => {
     if (err) {
       console.log(err);
-      return res.status(500).json({ message: 'An error ocurred' });
+      return res.status(500).json({ message: 'An error occurred' });
     }
     res.status(200).json({ reviews: result });
   });
@@ -19,7 +19,7 @@ router.get('/pending', (req, res) => {
   connection.query('SELECT * FROM Review WHERE approval_status = ?', ['pending'], (err, result) => {
     if (err) {
       console.log(err);
-      return res.status(500).json({ message: 'An error ocurred' });
+      return res.status(500).json({ message: 'An error occurred' });
     }
     res.status(200).json({ reviews: result });
   });
@@ -30,7 +30,7 @@ router.get('/:id', (req, res) => {
   connection.query('SELECT * FROM Review WHERE rid = ?', [req.params.id], (err, result) => {
     if (err) {
       console.log(err);
-      return res.status(500).json({ message: 'An error ocurred' });
+      return res.status(500).json({ message: 'An error occurred' });
     }
     if (result.length === 0) {
       return res.sendStatus(404);
@@ -62,7 +62,7 @@ router.post('/', (req, res) => {
   connection.query('INSERT INTO Review SET ?', [review], (err) => {
     if (err) {
       console.log(err);
-      return res.status(500).json({ message: 'An error ocurred' });
+      return res.status(500).json({ message: 'An error occurred' });
     }
     res.status(200).json({ success: true, message: 'Success' });
   });
@@ -91,7 +91,18 @@ router.put('/:id', (req, res) => {
   connection.query('UPDATE Review SET ? WHERE rid = ?', [review, req.params.id], (err) => {
     if (err) {
       console.log(err);
-      return res.status(500).json({ message: 'An error ocurred' });
+      return res.status(500).json({ message: 'An error occurred' });
+    }
+    res.status(200).json({ success: true, message: 'Success' });
+  });
+});
+
+/* Update review */
+router.put('/:id/:user/approve', (req, res) => {
+  connection.query("UPDATE Review SET approval_status = 'approved' WHERE rid = ? AND passenger_ID = ?", [req.params.id, req.params.user], (err) => {
+    if (err) {
+      console.log(err);
+      return res.status(500).json({ message: 'An error occurred' });
     }
     res.status(200).json({ success: true, message: 'Success' });
   });
@@ -99,10 +110,21 @@ router.put('/:id', (req, res) => {
 
 /* Delete review */
 router.delete('/:id', (req, res) => {
-  connection.query('DELETE FROM Review WHERE rid = ?', [req.params.id], (err) => {
+  connection.query('DELETE FROM Review WHERE rid = ? AND passenger_ID = ?', [req.params.id, req.session.user.ID], (err) => {
     if (err) {
       console.log(err);
-      return res.status(500).json({ message: 'An error ocurred' });
+      return res.status(500).json({ message: 'An error occurred' });
+    }
+    res.status(200).json({ success: true, message: 'Success' });
+  });
+});
+
+/* Delete review for another user*/
+router.delete('/:id/:user/delete', (req, res) => {
+  connection.query('DELETE FROM Review WHERE rid = ? AND passenger_ID = ?', [req.params.id, req.params.user], (err) => {
+    if (err) {
+      console.log(err);
+      return res.status(500).json({ message: 'An error occurred' });
     }
     res.status(200).json({ success: true, message: 'Success' });
   });
