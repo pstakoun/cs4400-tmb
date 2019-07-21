@@ -19,7 +19,6 @@ class ViewTrips extends React.Component {
     fetch('/api/trips/').then(
       results => results.json(),
     ).then((data) => {
-      console.log(data);
       initialTrips = data.trips.map(trip => ({
         user_ID: trip.user_ID,
         card_type: trip.card_type,
