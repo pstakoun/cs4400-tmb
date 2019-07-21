@@ -37,7 +37,7 @@ router.post('/', (req, res) => {
     if (card.expiration_date && card.expiration_date < new Date().setHours(0, 0, 0, 0)) {
       return res.status(400).json({ message: 'Card expired' });
     }
-    if (card.uses_left && card.uses_left < 1) {
+    if (card.uses_left !== null && card.uses_left < 1) {
       return res.status(400).json({ message: 'No uses left' });
     }
 
