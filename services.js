@@ -5,6 +5,7 @@ const connection = mysql.createConnection({
   user: 'tmb-user',
   password: 'password',
   database: 'TMB',
+  timezone: 'UTC',
 });
 connection.connect();
 

@@ -5,7 +5,7 @@ const router = express.Router();
 
 /* GET trips */
 router.get('/', (req, res) => {
-  connection.query('SELECT * FROM Trip', (err, result) => {
+  connection.query('SELECT * FROM Trip WHERE user_ID = ?', [req.session.user.ID], (err, result) => {
     if (err) {
       console.log(err);
       return res.status(500).json({ message: 'An error ocurred' });
