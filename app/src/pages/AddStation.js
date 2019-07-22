@@ -71,6 +71,8 @@ class AddStation extends React.Component {
     }).then(res => res.json()).then((data) => {
       if (!data.success) {
         alert(data.message);
+      } else {
+        if(!alert(this.state.stationName + ' has been added')){window.location.reload();}
       }
     });
   }
