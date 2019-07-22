@@ -71,6 +71,7 @@ class ViewReviews extends React.Component {
                 {
                   title: 'Comment',
                   field: 'comment',
+                  sorting: false,
                 },
                 {
                   title: 'Approval Status',

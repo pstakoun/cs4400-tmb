@@ -58,10 +58,12 @@ class ViewTrips extends React.Component {
                 {
                   title: 'End Date Time',
                   field: 'end_date_time_display',
+                  sorting: false,
                 },
                 {
                   title: 'Card Used',
                   field: 'card_type',
+                  sorting: false,
                 },
                 {
                   title: 'From',
