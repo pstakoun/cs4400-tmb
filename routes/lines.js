@@ -75,4 +75,23 @@ router.post('/', (req, res) => {
     });
 });
 
+/* GET station with a given order number */
+router.put('/order', (req, res) => {
+  const {
+    orderNumber,
+    line,
+    station,
+  } = req.body;
+  if (orderNumber < 1) {
+    return res.status(400).json({ message: 'Order number must be positive' });
+  }
+  connection.query('UPDATE Station_On_Line SET order_number = ? WHERE line_name = ? AND station_name = ?', [orderNumber, line, station], (err, result) => {
+    if (err) {
+      console.log(err);
+      return res.status(500).json({ message: 'An error ocurred' });
+    }
+    res.status(200).json({});
+  });
+});
+
 module.exports = router;

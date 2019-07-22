@@ -7,7 +7,7 @@ import 'react-dropdown/style.css';
 import '../components/Material-Icons.css';
 import MaterialTable from 'material-table';
 import ReviewStars from '../components/ReviewStars';
-import Dropdown from "react-dropdown";
+import Dropdown from 'react-dropdown';
 
 class StationInfoAdmin extends React.Component {
   constructor(props) {
@@ -84,11 +84,11 @@ class StationInfoAdmin extends React.Component {
     }).then(res => res.json()).then((data) => {
       alert(data.message);
     });
-    this.setState({ state: option});
+    this.setState({ state: option });
   }
 
   onSelectStatus(option) {
-    this.setState({ selected: option});
+    this.setState({ selected: option });
     this.handleUpdateStatus(option.value);
   }
 
@@ -116,7 +116,7 @@ class StationInfoAdmin extends React.Component {
             {this.state.name}
           </label>
           <label className="InfoLabel">
-            <div className={'textWrapper'}>
+            <div className="textWrapper">
               {'Status: '}
               <Dropdown
                 options={['Open', 'Half Capacity', 'Closed']}
