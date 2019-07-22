@@ -29,6 +29,10 @@ class LineSummary extends React.Component {
 
   handleChangeOrder(orderNumber, increment) {
     const target = orderNumber + increment;
+    if (target < 1) {
+      alert('Order number must be positive');
+      return;
+    }
     let initialIndex = -1;
     let swapIndex = -1;
     const { stations } = this.state;
@@ -44,8 +48,38 @@ class LineSummary extends React.Component {
       return;
     }
     stations[initialIndex].order_number = target;
+    fetch('/api/lines/order', {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        orderNumber: target,
+        line: this.state.name,
+        station: stations[initialIndex].station_name,
+      }),
+    }).then(res => res.json()).then(data => {
+      if (data.message) {
+        alert(data.message);
+      }
+    })
     if (swapIndex !== -1) {
       stations[swapIndex].order_number = orderNumber;
+      fetch('/api/lines/order', {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          orderNumber,
+          line: this.state.name,
+          station: stations[swapIndex].station_name,
+        }),
+      }).then(res => res.json()).then(data => {
+        if (data.message) {
+          alert(data.message);
+        }
+      })
     }
     this.setState({
       stations,

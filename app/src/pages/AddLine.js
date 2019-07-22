@@ -44,7 +44,7 @@ class AddLine extends React.Component {
   }
 
   handleAddLine() {
-    fetch('/api/lines/', {
+    fetch('/api/lines', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
