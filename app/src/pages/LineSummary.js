@@ -28,7 +28,28 @@ class LineSummary extends React.Component {
   }
 
   handleChangeOrder(orderNumber, increment) {
-    console.log(this.state.stations);
+    const target = orderNumber + increment;
+    let initialIndex = -1;
+    let swapIndex = -1;
+    const { stations } = this.state;
+    for (let i = 0; i < stations.length; i++) {
+      if (stations[i].order_number === orderNumber) {
+        initialIndex = i;
+      }
+      if (stations[i].order_number === target) {
+        swapIndex = i;
+      }
+    }
+    if (initialIndex === -1) {
+      return;
+    }
+    stations[initialIndex].order_number = target;
+    if (swapIndex !== -1) {
+      stations[swapIndex].order_number = orderNumber;
+    }
+    this.setState({
+      stations,
+    });
   }
 
   render() {
@@ -64,6 +85,7 @@ class LineSummary extends React.Component {
                 {
                   title: 'Order',
                   field: 'order_number',
+                  defaultSort: 'asc',
                 },
               ]}
               data={this.state.stations}

@@ -33,14 +33,14 @@ class AddLine extends React.Component {
     let initialStations = [];
     fetch('/api/stations/')
       .then(res => res.json()).then((data) => {
-      if (!data.stations) {
-        return;
-      }
-      initialStations = data.stations.map(station => station.name);
-      this.setState({
-        stations: initialStations,
+        if (!data.stations) {
+          return;
+        }
+        initialStations = data.stations.map(station => station.name);
+        this.setState({
+          stations: initialStations,
+        });
       });
-    });
   }
 
   handleAddLine() {
@@ -56,9 +56,7 @@ class AddLine extends React.Component {
     }).then(res => res.json()).then((data) => {
       if (!data.success) {
         alert(data.message);
-      } else {
-        if(!alert(this.state.lineName + ' has been added')){window.location.reload();}
-      }
+      } else if (!alert(`${this.state.lineName} has been added`)) { window.location.reload(); }
     });
   }
 
@@ -72,7 +70,7 @@ class AddLine extends React.Component {
       let updatedLines = this.state.addedStations;
       const newElement = {
         name,
-        order_num: orderNum
+        order_num: orderNum,
       };
       if (orderNum == null || orderNum.length < 1) {
         alert('Please enter in an order number');
