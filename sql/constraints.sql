@@ -9,13 +9,13 @@ ALTER TABLE User ADD CONSTRAINT passenger_email CHECK (Length(passenger_email) !
 ALTER TABLE User ADD CONSTRAINT pass_length CHECK (Length(password) > 7);
 
 
-# Constraints for adding reviews. 
+# Constraints for adding reviews.
 ALTER TABLE Review MODIFY COLUMN rid INT NOT NULL AUTO_INCREMENT UNIQUE;
 ALTER TABLE Review ADD CONSTRAINT connection_speed  CHECK(connection_speed > 0 AND connection_speed <= 5) ;
 ALTER TABLE Review MODIFY COLUMN connection_speed INT NOT NULL;
 ALTER TABLE Review ADD CONSTRAINT shopping   CHECK(shopping > 0 AND shopping <= 5);
 ALTER TABLE Review MODIFY COLUMN shopping INT NOT NULL;
-ALTER TABLE Review ALTER approval_status SET DEFAULT 'Pending';
+ALTER TABLE Review ALTER approval_status SET DEFAULT 'pending';
 
 # Card Datetime
 ALTER TABLE Card MODIFY COLUMN purchase_date_time Datetime DEFAULT CURRENT_TIMESTAMP;
@@ -36,12 +36,6 @@ ALTER TABLE Trip MODIFY COLUMN end_date_time Datetime NULL ON UPDATE CURRENT_TIM
 
 # TODO!
 #drop foriegn key for admin
-#add cascade 
+#add cascade
 #todo fix error messages for all constraints.
 #continue adding and double checking constraints as we go.
-
-
-
-
-
-
