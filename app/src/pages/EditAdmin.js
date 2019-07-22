@@ -14,7 +14,6 @@ class EditAdmin extends React.Component {
       firstName: props.user.first_name,
       middleInitial: props.user.minit,
       lastName: props.user.last_name,
-      email: props.user.passenger_email,
       userID: props.user.ID,
       password: props.user.password,
       passwordConfirm: props.user.password,
@@ -26,14 +25,13 @@ class EditAdmin extends React.Component {
     this.fNameChange = this.fNameChange.bind(this);
     this.MIChange = this.MIChange.bind(this);
     this.lNameChange = this.lNameChange.bind(this);
-    this.emailChange = this.emailChange.bind(this);
     this.userIDChange = this.userIDChange.bind(this);
     this.passwordChange = this.passwordChange.bind(this);
     this.passwordConfirmChange = this.passwordConfirmChange.bind(this);
   }
 
   handleEditUser() {
-    fetch('/api/users', {
+    fetch('/api/users/admin', {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
@@ -87,10 +85,6 @@ class EditAdmin extends React.Component {
 
   lNameChange(event) {
     this.setState({ lastName: event.target.value });
-  }
-
-  emailChange(event) {
-    this.setState({ email: event.target.value });
   }
 
   userIDChange(event) {

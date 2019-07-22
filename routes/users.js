@@ -158,6 +158,64 @@ router.put('/', (req, res) => {
   });
 });
 
+
+
+/* Update Profile Admin */
+router.put('/Admin', (req, res) => {
+  const {
+    firstName,
+    middleInitial,
+    lastName,
+    userID,
+    password,
+    confirmPassword,
+  } = req.body;
+
+  let errorMessage = null;
+
+  if (!firstName) {
+    errorMessage = 'First Name is required';
+  } else if (!lastName) {
+    errorMessage = 'Last Name is required';
+  } else if (!userID) {
+    errorMessage = 'User ID is required';
+  } else if (!password) {
+    errorMessage = 'Password is required';
+  } else if (password !== confirmPassword) {
+    errorMessage = 'Passwords do not match';
+  } else if (password.length < 8) {
+    errorMessage = 'Password too short';
+  }
+
+  if (errorMessage) {
+    return res.status(400).json({ message: errorMessage });
+  }
+
+  const user = {
+    ID: userID,
+    first_name: firstName,
+    minit: middleInitial,
+    last_name: lastName,
+    password,
+  };
+
+  connection.query('UPDATE User SET ? WHERE ID = ?', [user, req.session.user.ID], (err) => {
+    if (err) {
+      if (err.code === 'ER_DUP_ENTRY') {
+        return res.status(400).json({ message: 'User ID must be unique' });
+      }
+      console.log(err);
+      return res.status(500).json({ message: 'An error ocurred' });
+    }
+
+    user.admin = req.session.user.admin;
+    req.session.user = user;
+
+    res.status(200).json({ success: true, message: 'Success' });
+  });
+});
+
+
 /* Delete User */
 router.delete('/', (req, res) => {
   connection.query('DELETE FROM User WHERE ID = ?', [req.session.user.ID], (err) => {
@@ -165,15 +223,6 @@ router.delete('/', (req, res) => {
       console.log(err);
       return res.status(500).json({ message: 'An error ocurred' });
     }
-
-
-
-    
-
-
-
-
-
     req.session.user = null;
     res.status(200).json({ success: true, message: 'Success' });
   });
