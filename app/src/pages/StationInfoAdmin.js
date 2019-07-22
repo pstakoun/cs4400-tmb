@@ -119,7 +119,7 @@ class StationInfoAdmin extends React.Component {
             <div className={'textWrapper'}>
               {'Status: '}
               <Dropdown
-                options={['Open', 'Half-Open', 'Closed']}
+                options={['Open', 'Half Capacity', 'Closed']}
                 value={defaultStationOption}
                 onChange={this.onSelectStatus}
               />

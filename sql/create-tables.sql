@@ -71,7 +71,7 @@ CREATE TABLE Review
     connection_speed int NOT NULL,
     comment text,
     approver_ID varchar(255) DEFAULT NULL,
-    approval_status varchar(255) DEFAULT 'pending',
+    approval_status varchar(255) DEFAULT 'Pending',
     edit_timestamp Datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
     station_name varchar(255) NOT NULL,
     PRIMARY KEY (passenger_ID, rid),

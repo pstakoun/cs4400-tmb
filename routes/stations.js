@@ -66,7 +66,7 @@ router.get('/:name/ratings', (req, res) => {
 
 /* Update station status */
 router.put('/:name/:status/update', (req, res) => {
-  connection.query("UPDATE Station SET status = ? WHERE name = ?", [req.params.status, req.params.name], (err) => {
+  connection.query('UPDATE Station SET status = ? WHERE name = ?', [req.params.status, req.params.name], (err) => {
     if (err) {
       console.log(err);
       return res.status(500).json({ message: 'An error occurred' });
