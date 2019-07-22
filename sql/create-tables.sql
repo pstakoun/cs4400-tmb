@@ -87,7 +87,7 @@ CREATE TABLE Admin_Add_Line
     date_time Datetime DEFAULT CURRENT_TIMESTAMP,
 	FOREIGN KEY(admin_ID) REFERENCES Admin(ID) ON DELETE CASCADE ON UPDATE CASCADE,
 	FOREIGN KEY(line_name) REFERENCES Line(name) ON DELETE CASCADE ON UPDATE CASCADE
-    );
+);
 
 CREATE TABLE Admin_Add_Station
 (
@@ -106,4 +106,4 @@ CREATE TABLE Station_On_Line
     PRIMARY KEY(station_name, line_name),
 	FOREIGN KEY(station_name) REFERENCES Station(name),
     FOREIGN KEY(line_name) REFERENCES Line(name)
-)
+);
