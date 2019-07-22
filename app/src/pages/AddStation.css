@@ -1,0 +1,17 @@
+.Dropdown-root {
+  margin-bottom: 0px;
+}
+
+.newLineWrapper .TextField {
+  display: inline-block;
+  margin-bottom: 0px;
+}
+
+.newLineWrapper .GeneralButton, .newLineWrapper input {
+  display: inline-block;
+  float: none !important;
+}
+
+.newLineWrapper {
+  text-align: center;
+}
