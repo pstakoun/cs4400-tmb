@@ -1,0 +1,125 @@
+QA for application!
+
+Overall project requirements. All requirements require sequel queiries (basic option), and frontend display/entering specifications. More details in the phase3.pdf
+
+
+To do: 17, 18, 19, 7, 8,
+
+Finished:   12, 13, 14, 15, 16, , 20
+
+In progress: 5, 6, 11
+
+
+TODO’s
+5: don’t allow sorting by comments.
+6. (Fix edit, grey it out until edited)
+11 embarking with Empty card crashes the form. (Grey out or fix)
+12 don’t allow sorting by end date time or card used.
+13
+
+
+
+QA tested Front: 1, 2, 3, 4, 9, 10,
+
+QA tested back:
+
+
+FRejected review.
+
+
+
+
+Credentials:
+1) User login. input(id, password) Just check if inserted id and password match.
+
+2) Registration. input(First, MI, Last, Email, User Id (unique), Password, Confirm Password)
+constraints: userid unique,  confirm password (must match), and password must have at least 8 characters.
+
+Passenger Only:
+3) (FRONT END) Passenger Landing page. buttons for each passenger functionality
+
+4) Leave Review. input(station (dropdown alphabetical), shopping rating, connection speed, comment (optional))
+note: default status of a review is pending (approval)
+
+5) View Reviews. (Front end mostly) populate a table with all user reviews.
+displays(id, station, shopping, conection speed, comment, approval status)
+sortable by anything except comment.
+Should link to the edit page from id, and the station page from the station name.
+
+6) Edit Review. pulls all data from current review on view reviews page. (show status as pending or approved)
+Delete review deletes the review. Save review resets status to pending.
+
+7) Station info. displays info on station (address, lines, avg shopping, avg connection speed, reviews)
+display calculate average values for shopping / connection speed ratings.
+Lines must link to line summaries.
+Only display approved reviews and use in calcuation of average values.
+
+8) Line Summary. display(line name, stations, order, number of stops) sortable by stations or order. Station link to station summary page.
+
+9) Edit profile. new user input page, prepolated with existing data.
+Delete. cascading: deletes subsequent reviews cards and trips.
+userid still unique, password and confirm password are still equal.
+
+Passenger and Admin (both)
+
+10) Buy Card.
+Clicking on any of the four buttons should“buy” that card for the user.
+options:
+●T-mes cards expire a month from when theyare purchased (i.e. if it is purchased March21, it expires April 21) and have infiniteuses
+●T-10 cards have 10 uses and never expire
+●T-50/30 cards have 50 uses over the span of30 days
+●T-jove cards have infinite uses and last for 90 days
+
+11) Go on a Trip. input(Start station (dropdown in alphabetical order), card's used, (all users valid card's))
+clicking embark begins the trip and uses one use on a card.
+cannot embark without a valid card.
+End datetime starts a s null, as well as end station
+start datetime is current date and time.
+
+12) view trips.  displays(start date, end datetime, card used, from, to)
+sortable by start datetime, from and to
+stations clickable.
+click and update each trip.
+
+13) Update Trip. input the end station (like rodalies) and updates that value for that specific trip.  Uses current timne as the end datetime.
+(ask if you can update multiple times.)
+
+Admin Only
+14) Admin Landing. Passenger with more functionality.
+
+15) review passenger reviews:
+Should pull all pending reviews from the database.
+station is clickable
+Approve reject. removes from table and appropriately stores the approval or rejection.
+
+16) edit profile. same as user without email.
+delete (cascade) removes all stations or lines added by the admin.
+on delete Reviews approved should remain approved with a null admin id.
+
+17) Add station. input(station name (unique), street address, city, state, province, post/zipcode (combination of add info unique), line, order number (must be new),add station button)
+displays table of lines station is already pending to be added on.
+
+18) Add Line. input(line name, stations (dropdown), order number, add station button, add line button)
+displays table of stations pending on this line (if it were to be created)
+
+19) Line summary. (same as 8)
+functionality to delete stations from line and update.
+Order should also be able to be edited (preventing overlap)
+
+20) Station info. (same as 7)
+able to edit status: closed, open, or  half capacity
+
+
+Query types:
+
+Fill this out! not sure yet!
+
+
+UI types required.
+Landing: Passenger 3, Admin 14, Buy Card 10
+
+Form: login 1, registration 2, Leave review 4, Edit Review 6, edit profile 9, Go on a trip 11, Update trip 13, edit admin profile 16,
+
+Table: View Reviews 5, Station info 7, Line Summary 8, View Trips 12, review reviews 15, Line Summary admin 19, Station Info 20
+
+Form with dynamic table: Add station 17, Add Line 18,
