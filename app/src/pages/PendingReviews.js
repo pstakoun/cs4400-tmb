@@ -8,7 +8,7 @@ import '../components/Material-Icons.css';
 class PendingReviews extends React.Component {
   constructor(props) {
     super(props);
-    this.handleDeleteReview = this.handleDeleteReview.bind(this);
+    //this.handleRejectReview = this.handleDeleteReview.bind(this);
     this.state = {
       reviews: [],
     };
@@ -39,7 +39,23 @@ class PendingReviews extends React.Component {
       alert(data.message);
     });
   }
-
+ 
+  handleRejectReview(user_id, rid) {
+    fetch(`/api/reviews/${rid}/${user_id}/reject`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    }).then(res => res.json()).then((data) => {
+      if (data.success) {
+        this.setState({
+          reviews: this.state.reviews.filter(review => !(review.rid === rid && review.passenger_ID === user_id)),
+        });
+      }
+      alert(data.message);
+    });
+  }
+  /*
   handleDeleteReview(user_id, rid) {
     fetch(`/api/reviews/${rid}/${user_id}/delete`, {
       method: 'DELETE',
@@ -55,7 +71,7 @@ class PendingReviews extends React.Component {
       alert(data.message);
     });
   }
-
+*/
 
   render() {
     return (
@@ -105,8 +121,8 @@ class PendingReviews extends React.Component {
                 },
                 {
                   icon: 'delete',
-                  tooltip: 'Delete Review',
-                  onClick: (event, rowData) => this.handleDeleteReview(rowData.passenger_ID, rowData.rid),
+                  tooltip: 'Reject Review',
+                  onClick: (event, rowData) => this.handleRejectReview(rowData.passenger_ID, rowData.rid),
                 },
               ]}
               title="Pending Reviews"
