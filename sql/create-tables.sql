@@ -4,7 +4,8 @@ GRANT ALL PRIVILEGES ON TMB.* TO 'tmb-user'@'localhost';
 USE TMB;
 
 CREATE TABLE User
-(    ID varchar(255),
+(
+	ID varchar(255),
     first_name varchar(255),
     minit char(1),
     last_name varchar(255),
