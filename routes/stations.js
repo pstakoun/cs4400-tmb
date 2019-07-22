@@ -75,5 +75,70 @@ router.put('/:name/:status/update', (req, res) => {
   });
 });
 
+/* Create station */
+router.post('/', (req, res) => {
+  const {
+    name,
+    status,
+    stateProvince,
+    address,
+    zipcode,
+    city,
+    newLines,
+  } = req.body;
+
+  const createDate = new Date();
+
+  const station = {
+    name,
+    status,
+    state_province: stateProvince,
+    address,
+    zipcode,
+    city,
+  };
+
+  const mappedLines = newLines.map(lines => ({
+    station_name: name,
+    line_name: lines.name,
+    order_number: lines.order_num,
+  }));
+
+  const adminAdd = {
+    station_name: name,
+    admin_ID: req.session.user.ID,
+    date_time: createDate,
+  };
+
+  connection.query('INSERT INTO Station SET ?', [station], (err) => {
+    if (err) {
+      console.log(err);
+      return res.status(500).json({ message: 'An error occurred' });
+    }
+  });
+  
+  connection.query('INSERT INTO Admin_Add_Station SET ?', [adminAdd], (err) => {
+    if (err) {
+      console.log(err);
+      return res.status(500).json({ message: 'An error occurred' });
+    }
+  });
+
+  mappedLines.forEach((item) => {
+    connection.query('INSERT INTO Station_On_Line SET ?', [item], (err) => {
+      if (err) {
+        console.log(err);
+        return res.status(500)
+          .json({ message: 'An error occurred' });
+      }
+    });
+  });
+  res.status(200)
+    .json({
+      success: true,
+      message: 'Station created',
+    });
+});
+
 
 module.exports = router;
