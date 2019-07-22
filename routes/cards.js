@@ -24,19 +24,7 @@ const types = {
 
 /* GET cards */
 router.get('/', (req, res) => {
-  connection.query('SELECT * FROM Card WHERE user_ID = ?', [req.session.user.ID], (err, result) => {
-    if (err) {
-      console.log(err);
-      return res.status(500).json({ message: 'An error ocurred' });
-    }
-    res.status(200).json({ cards: result });
-  });
-});
-
-/* GET valid cards */
-router.get('/valid', (req, res) => {
-  // TODO
-  connection.query('SELECT * FROM Card WHERE user_ID = ?', [req.session.user.ID], (err, result) => {
+  connection.query('SELECT * FROM Card WHERE user_ID = ? AND (expiration_date IS NULL OR expiration_date >= CURRENT_TIMESTAMP) AND (uses_left IS NULL OR uses_left > 0)', [req.session.user.ID], (err, result) => {
     if (err) {
       console.log(err);
       return res.status(500).json({ message: 'An error ocurred' });
