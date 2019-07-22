@@ -108,12 +108,23 @@ router.put('/:id', (req, res) => {
 
 /* Approve review */
 router.put('/:id/:user/approve', (req, res) => {
-  connection.query("UPDATE Review SET approval_status = 'approved', approver_ID = ? WHERE rid = ? AND passenger_ID = ?", [req.session.user.ID, req.params.id, req.params.user], (err) => {
+  connection.query("UPDATE Review SET approval_status = 'Approved', approver_ID = ? WHERE rid = ? AND passenger_ID = ?", [req.session.user.ID, req.params.id, req.params.user], (err) => {
     if (err) {
       console.log(err);
       return res.status(500).json({ message: 'An error occurred' });
     }
-    res.status(200).json({ success: true, message: 'Review approved' });
+    res.status(200).json({ success: true, message: 'Review Approved' });
+  });
+});
+
+/* Reject review */
+router.put('/:id/:user/reject', (req, res) => {
+  connection.query("UPDATE Review SET approval_status = 'Rejected', approver_ID = ? WHERE rid = ? AND passenger_ID = ?", [req.session.user.ID, req.params.id, req.params.user], (err) => {
+    if (err) {
+      console.log(err);
+      return res.status(500).json({ message: 'An error occurred' });
+    }
+    res.status(200).json({ success: true, message: 'Review Rejected' });
   });
 });
 
@@ -128,15 +139,5 @@ router.delete('/:id', (req, res) => {
   });
 });
 
-/* Delete review for another user */
-router.delete('/:id/:user/delete', (req, res) => {
-  connection.query('DELETE FROM Review WHERE rid = ? AND passenger_ID = ?', [req.params.id, req.params.user], (err) => {
-    if (err) {
-      console.log(err);
-      return res.status(500).json({ message: 'An error occurred' });
-    }
-    res.status(200).json({ success: true, message: 'Review deleted' });
-  });
-});
 
 module.exports = router;

@@ -100,12 +100,16 @@ class EditReview extends React.Component {
           />
           <div className="ButtonWrapper">
             <Link to="/">
-              <GeneralButton text="Delete Review" handlePress={this.handleDeleteReview} />
+              <GeneralButton text="Delete" handlePress={this.handleDeleteReview} />
+            </Link>
+            //TODO grey out update until field is edited.
+            <GeneralButton text="Update" handlePress={this.handleUpdateReview} />
+            <Link to="/viewReviews">
+              <GeneralButton text="View All Reviews" />
             </Link>
             <Link to="/">
               <GeneralButton text="Main Menu" />
             </Link>
-            <GeneralButton text="Update Review" handlePress={this.handleUpdateReview} />
           </div>
         </div>
       </div>

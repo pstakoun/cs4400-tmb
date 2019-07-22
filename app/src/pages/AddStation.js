@@ -65,7 +65,7 @@ class AddStation extends React.Component {
         stateProvince: this.state.stateProvince,
         zipcode: this.state.zipcode,
         newLines: this.state.addedLines,
-        //TODO figure out what status should be default
+        // TODO figure out what status should be default
         status: 'Open',
       }),
     }).then(res => res.json()).then((data) => {
@@ -87,14 +87,14 @@ class AddStation extends React.Component {
       let updatedLines = this.state.addedLines;
       const newElement = {
         name,
-        order_num: orderNum
+        order_num: orderNum,
       };
       if (orderNum == null || orderNum.length < 1) {
         alert('Please enter in an order number');
       } else if (this.state.addedLines.some(line => (line.name === name))) {
         alert('A line can only be in a station once');
       } else {
-        this.checkOrderNumber(newElement, result => {
+        this.checkOrderNumber(newElement, (result) => {
           if (result) {
             alert('That order number already exists beyond this station');
           } else {
@@ -117,7 +117,7 @@ class AddStation extends React.Component {
       results => results.json(),
     ).then((data) => {
       if (data.matches[0].matched === 1) {
-        console.log("wtf");
+        console.log('wtf');
         return cb(true);
       }
       cb(false);

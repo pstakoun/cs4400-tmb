@@ -8,7 +8,6 @@ import '../components/Material-Icons.css';
 class PendingReviews extends React.Component {
   constructor(props) {
     super(props);
-    this.handleDeleteReview = this.handleDeleteReview.bind(this);
     this.state = {
       reviews: [],
     };
@@ -40,9 +39,9 @@ class PendingReviews extends React.Component {
     });
   }
 
-  handleDeleteReview(user_id, rid) {
-    fetch(`/api/reviews/${rid}/${user_id}/delete`, {
-      method: 'DELETE',
+  handleRejectReview(user_id, rid) {
+    fetch(`/api/reviews/${rid}/${user_id}/reject`, {
+      method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
       },
@@ -55,7 +54,6 @@ class PendingReviews extends React.Component {
       alert(data.message);
     });
   }
-
 
   render() {
     return (
@@ -104,9 +102,9 @@ class PendingReviews extends React.Component {
                   onClick: (event, rowData) => this.handleApproveReview(rowData.passenger_ID, rowData.rid),
                 },
                 {
-                  icon: 'delete',
-                  tooltip: 'Delete Review',
-                  onClick: (event, rowData) => this.handleDeleteReview(rowData.passenger_ID, rowData.rid),
+                  icon: 'close',
+                  tooltip: 'Reject Review',
+                  onClick: (event, rowData) => this.handleRejectReview(rowData.passenger_ID, rowData.rid),
                 },
               ]}
               title="Pending Reviews"
