@@ -10,7 +10,7 @@ CREATE TABLE User
     minit char(1),
     last_name varchar(255) NOT NULL,
     password varchar(255) NOT NULL,
-    passenger_email varchar(255) NOT NULL,
+    passenger_email varchar(255),
     PRIMARY KEY (ID)
 );
 
@@ -70,9 +70,9 @@ CREATE TABLE Review
     shopping int NOT NULL,
     connection_speed int NOT NULL,
     comment text,
-    approver_ID varchar(255),
+    approver_ID varchar(255) DEFAULT NULL,
     approval_status varchar(255) DEFAULT 'pending',
-    edit_timestamp Datetime,
+    edit_timestamp Datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
     station_name varchar(255) NOT NULL,
     PRIMARY KEY (passenger_ID, rid),
 	FOREIGN KEY(passenger_ID) REFERENCES User(ID) ON DELETE CASCADE ON UPDATE CASCADE,
@@ -84,7 +84,7 @@ CREATE TABLE Admin_Add_Line
 (
     line_name varchar(255) PRIMARY KEY,
     admin_ID varchar(255),
-    date_time Datetime,
+    date_time Datetime DEFAULT CURRENT_TIMESTAMP,
 	FOREIGN KEY(admin_ID) REFERENCES Admin(ID) ON DELETE CASCADE ON UPDATE CASCADE,
 	FOREIGN KEY(line_name) REFERENCES Line(name) ON DELETE CASCADE ON UPDATE CASCADE
 );
@@ -93,7 +93,7 @@ CREATE TABLE Admin_Add_Station
 (
     station_name varchar(255) PRIMARY KEY,
     admin_ID varchar(255),
-    date_time Datetime,
+    date_time Datetime DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY(admin_ID) REFERENCES Admin(ID) ON DELETE CASCADE ON UPDATE CASCADE,
     FOREIGN KEY(station_name) REFERENCES Station(name) ON DELETE CASCADE ON UPDATE CASCADE
 );
