@@ -165,7 +165,7 @@ router.delete('/', (req, res) => {
       console.log(err);
       return res.status(500).json({ message: 'An error ocurred' });
     }
-    if (req.session.user.admin) {   //TEST THIS
+    if (req.session.user.admin) { // TEST THIS
       connection.query("UPDATE Review SET approval_status = 'Pending' WHERE approver_id IS NULL;", (err) => {});
     }
     req.session.user = null;

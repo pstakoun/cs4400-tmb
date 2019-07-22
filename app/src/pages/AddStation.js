@@ -21,6 +21,7 @@ class AddStation extends React.Component {
     this.zipCodeChange = this.zipCodeChange.bind(this);
     this.onSelect = this.onSelect.bind(this);
     this.orderFieldChange = this.orderFieldChange.bind(this);
+    this.handleAddLine = this.handleAddLine.bind(this);
 
     this.state = {
       stationName: '',
@@ -39,29 +40,33 @@ class AddStation extends React.Component {
     let initialLines = [];
     fetch('/api/lines/')
       .then(res => res.json()).then((data) => {
-      if (!data.lines) {
-        return;
-      }
-      initialLines = data.lines.map(lines => lines.name);
-      this.setState({
-        lines: initialLines,
+        if (!data.lines) {
+          return;
+        }
+        initialLines = data.lines.map(lines => lines.name);
+        this.setState({
+          lines: initialLines,
+        });
       });
-    });
   }
 
   handleAddStation() {
-    //TODO add a station
+    // TODO add a station
   }
 
-  handleAddLine(name, orderNum) {
-    var updatedLines = this.state.addedLines;
-    let newElement = [{name: name, order_num: orderNum, }];
+  handleAddLine() {
+    const name = this.state.selected.value;
+    const orderNum = this.state.orderField;
+    let updatedLines = this.state.addedLines;
+    const newElement = { name, order_num: orderNum };
     if (updatedLines != null) {
-      updatedLines.push(newElement[0]);
+      updatedLines.push(newElement);
     } else {
-      updatedLines = [newElement[0]];
+      updatedLines = [newElement];
     }
-    console.log(updatedLines);
+    this.setState({
+      addedLines: updatedLines,
+    });
   }
 
   stationNameChange(event) {
@@ -109,10 +114,10 @@ class AddStation extends React.Component {
             placeholder="Select a Line"
           />
           <div className="newLineWrapper">
-            <TextField placeholder={"Order"} text={null} handleChange={this.orderFieldChange}/>
-            <GeneralButton text={"Add Line"} handleChange={this.handleAddLine(this.state.selected.value, this.state.orderField)}/>
+            <TextField placeholder="Order" text={null} handleChange={this.orderFieldChange} />
+            <GeneralButton text="Add Line" handlePress={this.handleAddLine} />
           </div>
-          <div style={{ maxWidth: '100%'}}>
+          <div style={{ maxWidth: '100%' }}>
             <MaterialTable
               columns={[
                 {
