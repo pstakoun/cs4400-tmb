@@ -20,6 +20,7 @@ class AddStation extends React.Component {
     this.stateProvinceChange = this.stateProvinceChange.bind(this);
     this.zipCodeChange = this.zipCodeChange.bind(this);
     this.onSelect = this.onSelect.bind(this);
+    this.orderFieldChange = this.orderFieldChange.bind(this);
 
     this.state = {
       stationName: '',
@@ -30,6 +31,7 @@ class AddStation extends React.Component {
       lines: [],
       selected: '',
       addedLines: [],
+      orderField: '',
     };
   }
 
@@ -51,12 +53,15 @@ class AddStation extends React.Component {
     //TODO add a station
   }
 
-  handleAddLine() {
-    //TODO does work to add line to stations
-  }
-
-  updateLines() {
-    //TODO updates the table with the added lines
+  handleAddLine(name, orderNum) {
+    var updatedLines = this.state.addedLines;
+    let newElement = [{name: name, order_num: orderNum, }];
+    if (updatedLines != null) {
+      updatedLines.push(newElement[0]);
+    } else {
+      updatedLines = [newElement[0]];
+    }
+    console.log(updatedLines);
   }
 
   stationNameChange(event) {
@@ -77,6 +82,10 @@ class AddStation extends React.Component {
 
   zipCodeChange(event) {
     this.setState({ zipCode: event.target.value });
+  }
+
+  orderFieldChange(event) {
+    this.setState({ orderField: event.target.value });
   }
 
   onSelect(option) {
@@ -100,8 +109,8 @@ class AddStation extends React.Component {
             placeholder="Select a Line"
           />
           <div className="newLineWrapper">
-            <TextField placeholder={"Order"} text={null}/>
-            <GeneralButton text={"Add Line"} handleChange={this.handleAddLine}/>
+            <TextField placeholder={"Order"} text={null} handleChange={this.orderFieldChange}/>
+            <GeneralButton text={"Add Line"} handleChange={this.handleAddLine(this.state.selected.value, this.state.orderField)}/>
           </div>
           <div style={{ maxWidth: '100%'}}>
             <MaterialTable
@@ -112,7 +121,7 @@ class AddStation extends React.Component {
                 },
                 {
                   title: 'Order',
-                  field: 'order_number',
+                  field: 'order_num',
                 },
               ]}
               data={this.state.addedLines}
