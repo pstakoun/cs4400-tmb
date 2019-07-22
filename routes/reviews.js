@@ -48,7 +48,6 @@ router.post('/', (req, res) => {
     comment,
   } = req.body;
 
-  // TODO implement in sql
   if (!shopping || !speed) {
     return res.status(400).json({ message: 'Ratings cannot be empty' });
   }
@@ -62,9 +61,6 @@ router.post('/', (req, res) => {
     shopping,
     connection_speed: speed,
     comment,
-    approver_ID: null, // TODO implement in sql
-    edit_timestamp: null, // TODO implement in sql
-    approval_status: 'pending', // TODO implement in sql
   };
 
   connection.query('INSERT INTO Review SET ?', [review], (err) => {
@@ -85,7 +81,6 @@ router.put('/:id', (req, res) => {
     comment,
   } = req.body;
 
-  // TODO implement in sql
   if (!shopping || !speed) {
     return res.status(400).json({ message: 'Ratings cannot be empty' });
   }
@@ -98,9 +93,8 @@ router.put('/:id', (req, res) => {
     shopping,
     connection_speed: speed,
     comment,
-    approver_ID: null, // TODO implement in sql
-    edit_timestamp: null, // TODO implement in sql
-    approval_status: 'pending', // TODO implement in sql
+    approver_ID: null,
+    approval_status: 'pending',
   };
 
   connection.query('UPDATE Review SET ? WHERE rid = ? AND passenger_ID = ?', [review, req.params.id, req.session.user.ID], (err) => {
