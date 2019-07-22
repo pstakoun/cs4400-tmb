@@ -102,6 +102,7 @@ class EditReview extends React.Component {
             <Link to="/">
               <GeneralButton text="Delete" handlePress={this.handleDeleteReview} />
             </Link>
+            //TODO grey out update until field is edited.
             <GeneralButton text="Update" handlePress={this.handleUpdateReview} />
             <Link to="/viewReviews">
               <GeneralButton text="View All Reviews"/>
