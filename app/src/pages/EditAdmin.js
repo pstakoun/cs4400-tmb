@@ -107,8 +107,8 @@ class EditAdmin extends React.Component {
           <TextField text="Middle Initial" type="text" value={this.state.middleInitial} handleChange={this.MIChange} />
           <TextField text="Last Name *" type="text" value={this.state.lastName} handleChange={this.lNameChange} />
           <TextField text="User ID (unique) *" type="text" value={this.state.userID} handleChange={this.userIDChange} />
-          <TextField text="Password *" type="password" value={this.state.password} handleChange={this.passwordChange} />
-          <TextField text="Password again *" type="password" value={this.state.passwordConfirm} handleChange={this.passwordConfirmChange} />
+          <TextField text="Password *" type="text" value={this.state.password} handleChange={this.passwordChange} />
+          <TextField text="Password again *" type="text" value={this.state.passwordConfirm} handleChange={this.passwordConfirmChange} />
           <div className="ButtonWrapper">
             <h6>&apos;* is required&apos;</h6>
           </div>
