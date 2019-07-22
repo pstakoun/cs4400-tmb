@@ -6,7 +6,7 @@ const router = express.Router();
 const types = {
   'T-mes': {
     uses: null,
-    days: null,
+    days: 30,
   },
   'T-10': {
     uses: 10,
