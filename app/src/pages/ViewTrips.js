@@ -14,6 +14,10 @@ class ViewTrips extends React.Component {
     };
   }
 
+  handleUpdateTrip() {
+    // TODO
+  }
+
   componentWillMount() {
     let initialTrips = [];
     fetch('/api/trips/').then(
@@ -84,6 +88,13 @@ class ViewTrips extends React.Component {
                 },
               ]}
               data={this.state.trips}
+              actions={[
+                {
+                  icon: 'edit',
+                  tooltip: 'Update Trip',
+                  onClick: (event, rowData) => this.handleUpdateTrip(/* TODO primary key params */),
+                },
+              ]}
               title="My Trips"
             />
           </div>

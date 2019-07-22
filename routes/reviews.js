@@ -27,6 +27,7 @@ router.get('/pending', (req, res) => {
 
 /* GET review */
 router.get('/:id', (req, res) => {
+  // TODO use passenger ID in query
   connection.query('SELECT * FROM Review WHERE rid = ?', [req.params.id], (err, result) => {
     if (err) {
       console.log(err);
@@ -85,10 +86,11 @@ router.put('/:id', (req, res) => {
     connection_speed: speed,
     comment,
     approver_ID: null,
-    edit_timestamp: null, // TODO
+    edit_timestamp: null, // TODO implement in constraints.sql
     approval_status: 'pending',
   };
 
+  // TODO use passenger ID in query
   connection.query('UPDATE Review SET ? WHERE rid = ?', [review, req.params.id], (err) => {
     if (err) {
       console.log(err);
