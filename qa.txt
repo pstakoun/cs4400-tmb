@@ -3,29 +3,32 @@ QA for application!
 Overall project requirements. All requirements require sequel queries (basic option), and frontend display/entering specifications. More details in the phase3.pdf
 
 
-To do: 17, 18, 19, 7, 8,
+To do QA for: 17, 18, 19,
 
-Finished:  16,
+Finished:
 
-In progress: 5, 6, 11, 12, 13, 20
+In progress: 6, 8, 11, 13, 16, 20
 
 
 TODO’s
-6. (Fix edit, grey it out until edited)
-11 embarking with Empty card crashes the form. (Grey out or fix)
-12 don’t allow sorting by end date time or card used.
-12/13 don't allow re-updating of the same trip with no end station.
-16. Make it removes all stations or lines added by the admin.
-20. Add station status changing.
+6. Edit Review:  grey out edit button until value is edited.
+8. Line Summary: Passengers can edit Line order.  should not be the case. make separate page for passenger and admin.
+11. Trip: embarking with Empty card value crashes the form. (Grey out or fix)
+13. Update Trip: don't allow updating or re-updating of the same trip with no end station.
+16. Edit Admin Profile: (SQL PROBLEM) Make it cascade to removes all stations or lines added by the admin.
+20. Add Station: status changing. (think it's finished)
 
 
 
-QA tested Front: 1, 2, 3, 4, 5, 9, 10, 14, 15
+QA tested Front: 1, 2, 3, 4, 5, 7, 9, 10, 12, 14, 15
 
 QA tested back:
 
 
-Finished: rejected review fixed.
+Finished:
+rejected review fixed. (15)
+comment non-sortable (5)
+card used / end datetime: non sortable (12)
 
 
 
