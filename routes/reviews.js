@@ -16,7 +16,7 @@ router.get('/', (req, res) => {
 
 /* GET pending reviews */
 router.get('/pending', (req, res) => {
-  connection.query('SELECT * FROM Review WHERE approval_status = ?', ['pending'], (err, result) => {
+  connection.query('SELECT * FROM Review WHERE approval_status = ?', ['Pending'], (err, result) => {
     if (err) {
       console.log(err);
       return res.status(500).json({ message: 'An error occurred' });
@@ -94,7 +94,7 @@ router.put('/:id', (req, res) => {
     connection_speed: speed,
     comment,
     approver_ID: null,
-    approval_status: 'pending',
+    approval_status: 'Pending',
   };
 
   connection.query('UPDATE Review SET ? WHERE rid = ? AND passenger_ID = ?', [review, req.params.id, req.session.user.ID], (err) => {

@@ -71,7 +71,7 @@ class PendingReviews extends React.Component {
                   field: 'station_name',
                   render: rowData => (
                     <Link to={{
-                      pathname: '/stationInfo',
+                      pathname: '/stationInfoAdmin',
                       state: {
                         stationName: rowData.station_name,
                       },
