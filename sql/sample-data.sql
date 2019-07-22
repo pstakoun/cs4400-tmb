@@ -3,11 +3,11 @@ USE TMB;
 
 INSERT INTO Line VALUES('L1');
 
-INSERT INTO User VALUES('chall68',	'Charles',	'J',	'Hall',	'pwdpwdpwd', NULL);
+INSERT INTO User VALUES('chall68',	'Charles',	'J',	'Hall',	'pwdpwdpwd', "charles@charlie.com");
 INSERT INTO User VALUES('wwhite12',	'Walter',	'H',	'White', 'pass1234', NULL);
 INSERT INTO User VALUES ('peter', 'Peter', 'A', 'Stakoun', 'password', 'peter@stakoun.com');
 INSERT INTO User VALUES ('peter-admin', 'Peter', 'A', 'Stakoun', 'password', NULL);
-INSERT INTO User VALUES('a',	'Andreas',	'J',	'Paljug',	'asdfasdf', NULL);
+INSERT INTO User VALUES('a',	'Andreas',	'J',	'Paljug',	'asdfasdf', "andreas@paljug.com");
 
 INSERT INTO Admin VALUES('wwhite12');
 INSERT INTO Admin VALUES('peter-admin');
