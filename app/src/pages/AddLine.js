@@ -63,7 +63,7 @@ class AddLine extends React.Component {
 
   handleAddStation() {
     if (this.state.selected == null) {
-      alert('Please select a line');
+      alert('Please select a station');
     } else {
       const name = this.state.selected.value;
       const orderNum = this.state.orderField;
@@ -75,9 +75,9 @@ class AddLine extends React.Component {
       if (orderNum == null || orderNum.length < 1) {
         alert('Please enter in an order number');
       } else if (this.state.addedStations.some(station => (station.name === name))) {
-        alert('A line can only be in a station once');
+        alert('A station can only be in a line once');
       } else if (this.state.addedStations.some(station => (station.order_num === orderNum))) {
-        alert('A line can only be in a station once');
+        alert('A station can only be in a line once');
       } else {
         if (updatedLines != null) {
           updatedLines.push(newElement);

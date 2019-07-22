@@ -90,7 +90,7 @@ class AddStation extends React.Component {
       if (orderNum == null || orderNum.length < 1) {
         alert('Please enter in an order number');
       } else if (this.state.addedLines.some(line => (line.name === name))) {
-        alert('A line can only be in a station once');
+        alert('A station can only be in a line once');
       } else {
         this.checkOrderNumber(newElement, (result) => {
           if (result) {
