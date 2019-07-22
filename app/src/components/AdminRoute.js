@@ -1,17 +1,19 @@
 import React from 'react';
 import { Redirect, Route } from 'react-router-dom';
 
-const PrivateRoute = ({
-  component: Component, user, ...rest
+const AdminRoute = ({
+  component: Component, user, pathChange, ...rest
 }) => (
   <Route
     {...rest}
-    render={props => ((user && user.ID) ? (
+    render={props => ((user && user.ID) ? ((user.admin) ? (
       <Component user={user} {...props} />
     ) : (
+      <Redirect to="/" />
+    )) : (
       <Redirect to="/login" />
     ))}
   />
 );
 
-export default PrivateRoute;
+export default AdminRoute;

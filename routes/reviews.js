@@ -8,40 +8,18 @@ router.get('/', (req, res) => {
   connection.query('SELECT * FROM Review WHERE passenger_ID = ?', [req.session.user.ID], (err, result) => {
     if (err) {
       console.log(err);
-      return res.status(500).json({ message: 'An error ocurred' });
+      return res.status(500).json({ message: 'An error occurred' });
     }
     res.status(200).json({ reviews: result });
-  });
-});
-
-/* GET reviews for a station */
-router.get('/:station', (req, res) => {
-  connection.query("SELECT * FROM Review WHERE approval_status = 'approved' AND station_name = ?", [req.params.station], (err, result) => {
-    if (err) {
-      console.log(err);
-      return res.status(500).json({ message: 'An error ocurred' });
-    }
-    res.status(200).json({ reviews: result });
-  });
-});
-
-/* GET average ragings for a station */
-router.get('/:station/ratings', (req, res) => {
-  connection.query("SELECT AVG(shopping) AS avgShopping, AVG(connection_speed) AS avgSpeed FROM Review WHERE approval_status = 'approved' AND station_name = ?", [req.params.station], (err, result) => {
-    if (err) {
-      console.log(err);
-      return res.status(500).json({ message: 'An error ocurred' });
-    }
-    res.status(200).json({ ratings: result });
   });
 });
 
 /* GET pending reviews */
 router.get('/pending', (req, res) => {
-  connection.query('SELECT * FROM Review WHERE approval_status = ?', ['Pending'], (err, result) => {
+  connection.query('SELECT * FROM Review WHERE approval_status = ?', ['pending'], (err, result) => {
     if (err) {
       console.log(err);
-      return res.status(500).json({ message: 'An error ocurred' });
+      return res.status(500).json({ message: 'An error occurred' });
     }
     res.status(200).json({ reviews: result });
   });
@@ -52,9 +30,12 @@ router.get('/:id', (req, res) => {
   connection.query('SELECT * FROM Review WHERE rid = ?', [req.params.id], (err, result) => {
     if (err) {
       console.log(err);
-      return res.status(500).json({ message: 'An error ocurred' });
+      return res.status(500).json({ message: 'An error occurred' });
     }
-    res.status(200).json({ review: result });
+    if (result.length === 0) {
+      return res.sendStatus(404);
+    }
+    res.status(200).json({ review: result[0] });
   });
 });
 
@@ -75,15 +56,16 @@ router.post('/', (req, res) => {
     comment,
     approver_ID: null,
     edit_timestamp: null,
-    approval_status: 'Pending',
+    approval_status: 'pending',
   };
 
+  // TODO shopping and connection_speed must be set
   connection.query('INSERT INTO Review SET ?', [review], (err) => {
     if (err) {
       console.log(err);
-      return res.status(500).json({ message: 'An error ocurred' });
+      return res.status(500).json({ message: 'An error occurred' });
     }
-    res.status(200).json({ success: true, message: 'Success' });
+    res.status(200).json({ success: true, message: 'Review created' });
   });
 });
 
@@ -104,26 +86,48 @@ router.put('/:id', (req, res) => {
     comment,
     approver_ID: null,
     edit_timestamp: null, // TODO
-    approval_status: 'Pending',
+    approval_status: 'pending',
   };
 
   connection.query('UPDATE Review SET ? WHERE rid = ?', [review, req.params.id], (err) => {
     if (err) {
       console.log(err);
-      return res.status(500).json({ message: 'An error ocurred' });
+      return res.status(500).json({ message: 'An error occurred' });
     }
-    res.status(200).json({ success: true, message: 'Success' });
+    res.status(200).json({ success: true, message: 'Review updated' });
+  });
+});
+
+/* Approve review */
+router.put('/:id/:user/approve', (req, res) => {
+  connection.query("UPDATE Review SET approval_status = 'approved' WHERE rid = ? AND passenger_ID = ?", [req.params.id, req.params.user], (err) => {
+    if (err) {
+      console.log(err);
+      return res.status(500).json({ message: 'An error occurred' });
+    }
+    res.status(200).json({ success: true, message: 'Review approved' });
   });
 });
 
 /* Delete review */
 router.delete('/:id', (req, res) => {
-  connection.query('DELETE FROM Review WHERE rid = ?', [req.params.id], (err) => {
+  connection.query('DELETE FROM Review WHERE rid = ? AND passenger_ID = ?', [req.params.id, req.session.user.ID], (err) => {
     if (err) {
       console.log(err);
-      return res.status(500).json({ message: 'An error ocurred' });
+      return res.status(500).json({ message: 'An error occurred' });
     }
-    res.status(200).json({ success: true, message: 'Success' });
+    res.status(200).json({ success: true, message: 'Review deleted' });
+  });
+});
+
+/* Delete review for another user */
+router.delete('/:id/:user/delete', (req, res) => {
+  connection.query('DELETE FROM Review WHERE rid = ? AND passenger_ID = ?', [req.params.id, req.params.user], (err) => {
+    if (err) {
+      console.log(err);
+      return res.status(500).json({ message: 'An error occurred' });
+    }
+    res.status(200).json({ success: true, message: 'Review deleted' });
   });
 });
 

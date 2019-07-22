@@ -11,6 +11,11 @@ class TextField extends React.Component {
           value={this.props.value}
           placeholder={this.props.placeholder}
           onChange={this.props.handleChange}
+          onKeyDown={(e) => {
+            if (e.keyCode === 13) {
+              this.props.onEnter();
+            }
+          }}
         />
       </div>
     );

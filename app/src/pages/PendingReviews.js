@@ -2,19 +2,20 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import MaterialTable from 'material-table';
 import GeneralButton from '../components/GeneralButton';
-import './ViewReviews.css';
+import './AdminGeneral.css';
 import '../components/Material-Icons.css';
 
-class ViewReviews extends React.Component {
+class PendingReviews extends React.Component {
   constructor(props) {
     super(props);
+    this.handleDeleteReview = this.handleDeleteReview.bind(this);
     this.state = {
       reviews: [],
     };
   }
 
   componentWillMount() {
-    fetch('/api/reviews').then(
+    fetch('/api/reviews/pending').then(
       results => results.json(),
     ).then((data) => {
       this.setState({
@@ -23,27 +24,49 @@ class ViewReviews extends React.Component {
     });
   }
 
+  handleApproveReview(user_id, rid) {
+    fetch(`/api/reviews/${rid}/${user_id}/approve`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    }).then(res => res.json()).then((data) => {
+      if (data.success) {
+        this.setState({
+          reviews: this.state.reviews.filter(review => !(review.rid === rid && review.passenger_ID === user_id)),
+        });
+      }
+      alert(data.message);
+    });
+  }
+
+  handleDeleteReview(user_id, rid) {
+    fetch(`/api/reviews/${rid}/${user_id}/delete`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    }).then(res => res.json()).then((data) => {
+      if (data.success) {
+        this.setState({
+          reviews: this.state.reviews.filter(review => !(review.rid === rid && review.passenger_ID === user_id)),
+        });
+      }
+      alert(data.message);
+    });
+  }
+
+
   render() {
     return (
       <div className="Wrapper">
-        <div className="ViewReviews">
+        <div className="ContentWrapper">
           <div style={{ maxWidth: '100%' }}>
             <MaterialTable
               columns={[
                 {
-                  title: 'ID',
-                  field: 'rid',
-                  render: rowData => (
-                    <Link to={{
-                      pathname: '/editReview',
-                      state: {
-                        rid: rowData.rid,
-                      },
-                    }}
-                    >
-                      {rowData.rid}
-                    </Link>
-                  ),
+                  title: 'User',
+                  field: 'passenger_ID',
                 },
                 {
                   title: 'Station',
@@ -72,13 +95,21 @@ class ViewReviews extends React.Component {
                   title: 'Comment',
                   field: 'comment',
                 },
-                {
-                  title: 'Approval Status',
-                  field: 'approval_status',
-                },
               ]}
               data={this.state.reviews}
-              title="My Reviews"
+              actions={[
+                {
+                  icon: 'check',
+                  tooltip: 'Approve Review',
+                  onClick: (event, rowData) => this.handleApproveReview(rowData.passenger_ID, rowData.rid),
+                },
+                {
+                  icon: 'delete',
+                  tooltip: 'Delete Review',
+                  onClick: (event, rowData) => this.handleDeleteReview(rowData.passenger_ID, rowData.rid),
+                },
+              ]}
+              title="Pending Reviews"
             />
           </div>
           <div className="ButtonWrapper">
@@ -92,4 +123,4 @@ class ViewReviews extends React.Component {
   }
 }
 
-export default ViewReviews;
+export default PendingReviews;

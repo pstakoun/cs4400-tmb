@@ -8,13 +8,13 @@ class EditProfile extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      firstName: '',
-      middleInitial: '',
-      lastName: '',
-      email: '',
-      userID: '',
-      password: '',
-      passwordConfirm: '',
+      firstName: props.user.first_name,
+      middleInitial: props.user.minit,
+      lastName: props.user.last_name,
+      email: props.user.passenger_email,
+      userID: props.user.ID,
+      password: props.user.password,
+      passwordConfirm: props.user.password,
       edited: false,
     };
     this.handleDeleteUser = this.handleDeleteUser.bind(this);
@@ -27,23 +27,6 @@ class EditProfile extends React.Component {
     this.userIDChange = this.userIDChange.bind(this);
     this.passwordChange = this.passwordChange.bind(this);
     this.passwordConfirmChange = this.passwordConfirmChange.bind(this);
-  }
-
-  componentWillMount() {
-    fetch('/api/me').then(
-      results => results.json(),
-    ).then((data) => {
-      console.log(data);
-      this.setState({
-        firstName: data.first_name,
-      middleInitial: data.minit,
-      lastName: data.last_name,
-  email: data.passenger_email,
-      userID: data.ID,
-      password: data.password,
-      passwordConfirm: data.password,
-      });
-    });
   }
 
   handleEditUser() {
@@ -62,8 +45,8 @@ class EditProfile extends React.Component {
         confirmPassword: this.state.passwordConfirm,
       }),
     }).then(res => res.json()).then((data) => {
-      if(data.success) {
-        alert('Edited User data.');
+      if (data.success) {
+        alert('User updated.');
         this.setState({
           edited: true,
         });
@@ -84,12 +67,13 @@ class EditProfile extends React.Component {
       }),
     }).then(res => res.json()).then((data) => {
       if (data.success) {
-        alert('You deleted this user. Please log back in.');
+        alert('User deleted. Please log back in.');
       } else {
         alert(data.message);
       }
     });
   }
+
   fNameChange(event) {
     this.setState({ firstName: event.target.value });
   }
@@ -118,26 +102,17 @@ class EditProfile extends React.Component {
     this.setState({ passwordConfirm: event.target.value });
   }
 
-  checkPass() {
-    console.log(`${this.state.password} | ${this.state.passwordConfirm}`);
-    if (this.state.password === this.state.passwordConfirm) {
-      console.log('Passwords match');
-    } else {
-      console.log('Passwords do not match');
-    }
-  }
-
   render() {
     return (
       <div className="Wrapper">
         <div className="Register">
           <TextField text="First Name *" type="text" value={this.state.firstName} handleChange={this.fNameChange} />
           <TextField text="Middle Initial" type="text" value={this.state.middleInitial} handleChange={this.MIChange} />
-          <TextField text="Last Name *" type="text" value = {this.state.lastName} handleChange={this.lNameChange} />
-          <TextField text="Email *" type="text"value={this.state.passenger_email} handleChange={this.emailChange} />
-          <TextField text="User ID (unique) *" value ={this.state.userID} type="text" handleChange={this.userIDChange} />
-          <TextField text="Password *" type="password" value ={this.state.password} handleChange={this.passwordChange} />
-          <TextField text="Password again *" type="password" value ={this.state.passwordConfirm} handleChange={this.passwordConfirmChange} onChange={this.checkPass()} />
+          <TextField text="Last Name *" type="text" value={this.state.lastName} handleChange={this.lNameChange} />
+          <TextField text="Email *" type="text" value={this.state.email} handleChange={this.emailChange} />
+          <TextField text="User ID (unique) *" type="text" value={this.state.userID} handleChange={this.userIDChange} />
+          <TextField text="Password *" type="password" value={this.state.password} handleChange={this.passwordChange} />
+          <TextField text="Password again *" type="password" value={this.state.passwordConfirm} handleChange={this.passwordConfirmChange} />
           <div className="ButtonWrapper">
             <h6>&apos;* is required&apos;</h6>
           </div>
@@ -146,11 +121,10 @@ class EditProfile extends React.Component {
               <GeneralButton text="Main Menu" />
             </Link>
             <Link to="/login">
-              <GeneralButton text="Delete User" handlePress={this.handleDeleteUser} />
+              <GeneralButton text="Delete" handlePress={this.handleDeleteUser} />
             </Link>
-          
-            <GeneralButton text="Edit User" handlePress={this.handleEditUser} />
-              { this.state.edited ? <Redirect to="/" /> : null }
+            <GeneralButton text="Update" handlePress={this.handleEditUser} />
+            { /* this.state.edited ? <Redirect to="/" /> : null */ }
           </div>
         </div>
       </div>
@@ -159,4 +133,3 @@ class EditProfile extends React.Component {
 }
 
 export default EditProfile;
-

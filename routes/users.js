@@ -20,11 +20,26 @@ router.post('/register', (req, res) => {
     confirmPassword,
   } = req.body;
 
-  if (password !== confirmPassword) {
-    return res.status(400).json({ message: 'Passwords do not match' });
+  let errorMessage = null;
+
+  if (!firstName) {
+    errorMessage = 'First Name is required';
+  } else if (!lastName) {
+    errorMessage = 'Last Name is required';
+  } else if (!email) {
+    errorMessage = 'Email is required';
+  } else if (!userID) {
+    errorMessage = 'User ID is required';
+  } else if (!password) {
+    errorMessage = 'Password is required';
+  } else if (password !== confirmPassword) {
+    errorMessage = 'Passwords do not match';
+  } else if (password.length < 8) {
+    errorMessage = 'Password too short';
   }
-  if (password.length < 8) {
-    return res.status(400).json({ message: 'Password too short' });
+
+  if (errorMessage) {
+    return res.status(400).json({ message: errorMessage });
   }
 
   const user = {
@@ -38,11 +53,50 @@ router.post('/register', (req, res) => {
 
   connection.query('INSERT INTO User SET ?', user, (err) => {
     if (err) {
+      if (err.code === 'ER_DUP_ENTRY') {
+        return res.status(400).json({ message: 'User ID must be unique' });
+      }
       console.log(err);
       return res.status(500).json({ message: 'An error ocurred' });
     }
     res.status(200).json({ success: true, message: 'Success' });
   });
+});
+
+/* Log in user */
+router.post('/login', (req, res) => {
+  const {
+    userID,
+    password,
+  } = req.body;
+
+  connection.query('SELECT User.*, Admin.ID AS admin FROM User LEFT JOIN Admin ON User.ID = Admin.ID WHERE User.ID = ?', [userID], (err, result) => {
+    if (err) {
+      console.log(err);
+      return res.status(500).json({ message: 'An error ocurred' });
+    }
+
+    if (result.length === 0) {
+      return res.status(401).json({ message: 'User ID or password is incorrect' });
+    }
+
+    const user = result[0];
+    user.admin = !!user.admin;
+
+    if (user.password !== password) {
+      return res.status(401).json({ message: 'User ID or password is incorrect' });
+    }
+
+    req.session.user = user;
+
+    res.status(200).json({ success: true, message: 'Success' });
+  });
+});
+
+/* Log out user */
+router.post('/logout', (req, res) => {
+  req.session.user = null;
+  res.status(200).json({ success: true, message: 'Success' });
 });
 
 /* Update Profile */
@@ -57,11 +111,26 @@ router.put('/', (req, res) => {
     confirmPassword,
   } = req.body;
 
-  if (password !== confirmPassword) {
-    return res.status(400).json({ message: 'Passwords do not match' });
+  let errorMessage = null;
+
+  if (!firstName) {
+    errorMessage = 'First Name is required';
+  } else if (!lastName) {
+    errorMessage = 'Last Name is required';
+  } else if (!email) {
+    errorMessage = 'Email is required';
+  } else if (!userID) {
+    errorMessage = 'User ID is required';
+  } else if (!password) {
+    errorMessage = 'Password is required';
+  } else if (password !== confirmPassword) {
+    errorMessage = 'Passwords do not match';
+  } else if (password.length < 8) {
+    errorMessage = 'Password too short';
   }
-  if (password.length < 8) {
-    return res.status(400).json({ message: 'Password too short' });
+
+  if (errorMessage) {
+    return res.status(400).json({ message: errorMessage });
   }
 
   const user = {
@@ -75,6 +144,9 @@ router.put('/', (req, res) => {
 
   connection.query('UPDATE User SET ? WHERE ID = ?', [user, req.session.user.ID], (err) => {
     if (err) {
+      if (err.code === 'ER_DUP_ENTRY') {
+        return res.status(400).json({ message: 'User ID must be unique' });
+      }
       console.log(err);
       return res.status(500).json({ message: 'An error ocurred' });
     }
@@ -86,7 +158,6 @@ router.put('/', (req, res) => {
   });
 });
 
-
 /* Delete User */
 router.delete('/', (req, res) => {
   connection.query('DELETE FROM User WHERE ID = ?', [req.session.user.ID], (err) => {
@@ -97,54 +168,6 @@ router.delete('/', (req, res) => {
     req.session.user = null;
     res.status(200).json({ success: true, message: 'Success' });
   });
-});
-
-
-/* Log in user */
-router.post('/login', (req, res) => {
-  const {
-    userID,
-    password,
-  } = req.body;
-
-  // TODO convert query to left outer join
-  connection.query('SELECT * FROM User WHERE ID = ?', [userID], (err, result) => {
-    if (err) {
-      console.log(err);
-      return res.status(500).json({ message: 'An error ocurred' });
-    }
-
-    if (result.length === 0) {
-      return res.status(401).json({ message: 'User ID or password is incorrect' });
-    }
-
-    const user = result[0];
-
-    if (user.password !== password) {
-      return res.status(401).json({ message: 'User ID or password is incorrect' });
-    }
-
-    connection.query('SELECT * FROM Admin WHERE ID = ?', [userID], (err1, result1) => {
-      if (err1) {
-        console.log(err1.message);
-        return res.status(500).json({ message: 'An error ocurred' });
-      }
-
-      if (result1.length > 0) {
-        user.admin = true;
-      }
-
-      req.session.user = user;
-
-      res.status(200).json({ success: true, message: 'Success' });
-    });
-  });
-});
-
-/* Log out user */
-router.post('/logout', (req, res) => {
-  req.session.user = null;
-  res.status(200).json({ success: true, message: 'Success' });
 });
 
 module.exports = router;

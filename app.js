@@ -26,7 +26,8 @@ app.use(session({
 }));
 
 app.use('/api/me', (req, res) => {
-  res.status(req.session.user ? 200 : 404).json(req.session.user);
+  const { user } = req.session;
+  res.status(user ? 200 : 404).json(user || {});
 });
 app.use('/api/users', usersRouter);
 app.use('/api/cards', cardsRouter);

@@ -27,12 +27,12 @@ class EditReview extends React.Component {
     fetch(`/api/reviews/${this.state.rid}`).then(
       results => results.json(),
     ).then((data) => {
-      console.log(data);
+      const { review } = data;
       this.setState({
-        station: data.review[0].station_name,
-        shoppingRating: data.review[0].shopping,
-        speedRating: data.review[0].connection_speed,
-        comment: data.review[0].comment,
+        station: review.station_name,
+        shoppingRating: review.shopping,
+        speedRating: review.connection_speed,
+        comment: review.comment,
       });
     });
   }
@@ -50,38 +50,23 @@ class EditReview extends React.Component {
         comment: this.state.comment,
       }),
     }).then(res => res.json()).then((data) => {
-      if (data.success) {
-        alert('You updated this review');
-      } else {
-        alert(data.message);
-      }
+      alert(data.message);
     });
   }
 
   handleDeleteReview() {
     fetch(`/api/reviews/${this.state.rid}`, {
       method: 'DELETE',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-      }),
     }).then(res => res.json()).then((data) => {
-      if (data.success) {
-        alert('You deleted this review');
-      } else {
-        alert(data.message);
-      }
+      alert(data.message);
     });
   }
 
   handleRateShopping(rating) {
-    console.log(`Shopping Rating is: ${this.state.shoppingRating}`);
     this.setState({ shoppingRating: rating });
   }
 
   handleRateSpeed(rating) {
-    console.log(`Connection Speed Rating is: ${rating}`);
     this.setState({ speedRating: rating });
   }
 

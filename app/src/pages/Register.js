@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import GeneralButton from '../components/GeneralButton';
 import TextField from '../components/TextField';
 import './Register.css';
@@ -16,6 +16,7 @@ class Register extends React.Component {
       password: '',
       passwordConfirm: '',
       passwordAgreement: false,
+      registered: false,
     };
     this.handleRegister = this.handleRegister.bind(this);
     this.fNameChange = this.fNameChange.bind(this);
@@ -45,6 +46,11 @@ class Register extends React.Component {
       }),
     }).then(res => res.json()).then((data) => {
       alert(data.message);
+      if (data.success) {
+        this.setState({
+          registered: true,
+        });
+      }
     });
   }
 
@@ -80,15 +86,6 @@ class Register extends React.Component {
     this.setState({ passwordAgreement: event.target.checked });
   }
 
-  checkPass() {
-    console.log(`${this.state.password} | ${this.state.passwordConfirm}`);
-    if (this.state.password === this.state.passwordConfirm) {
-      console.log('Passwords match');
-    } else {
-      console.log('Passwords do not match');
-    }
-  }
-
   render() {
     return (
       <div className="Wrapper">
@@ -99,11 +96,11 @@ class Register extends React.Component {
           <TextField text="Email *" type="text" handleChange={this.emailChange} />
           <TextField text="User ID (unique) *" type="text" handleChange={this.userIDChange} />
           <TextField text="Password *" type="password" handleChange={this.passwordChange} />
-          <TextField text="Password again *" type="password" handleChange={this.passwordConfirmChange} onChange={this.checkPass()} />
+          <TextField text="Password again *" type="password" handleChange={this.passwordConfirmChange} />
           <div className="checkbox">
-            <br/>
+            <br />
             <label>I want to store my password in plaintext and have it shown to me every time I edit my profile *</label>
-            <br/>
+            <br />
             <div className="checkboxContainer">
               <input
                 type="checkbox"
@@ -119,9 +116,8 @@ class Register extends React.Component {
             <Link to="/login">
               <GeneralButton text="I already have an account" />
             </Link>
-            <Link to="/login">
-              <GeneralButton text="Register" handlePress={this.handleRegister} />
-            </Link>
+            <GeneralButton text="Register" handlePress={this.handleRegister} />
+            { this.state.registered ? <Redirect to="/login" /> : null }
           </div>
         </div>
       </div>
