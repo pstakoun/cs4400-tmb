@@ -35,12 +35,23 @@ ALTER TABLE Card MODIFY COLUMN purchase_date_time Datetime DEFAULT CURRENT_TIMES
 ALTER TABLE Trip MODIFY COLUMN start_date_time Datetime DEFAULT CURRENT_TIMESTAMP;
 ALTER TABLE Trip MODIFY COLUMN end_date_time Datetime NULL ON UPDATE CURRENT_TIMESTAMP;
 
+ALTER TABLE Review MODIFY COLUMN 
+
+
+#delete admin approval id in review table. cascade to null. change status to pending.
+#TEST THIS
+ALTER TABLE Review
+   ADD CONSTRAINT approver_id_deleted
+   FOREIGN KEY (approver_id) REFERENCES ADMIN(ID) ON DELETE SET NULL;
+
+
+
+
 
 
 # TODO!
 #drop foriegn key for admin
 #add cascade 
-#delete admin approval id in review table. cascade to null. change status to pending.
 #todo fix error messages for all constraints.
 #continue adding and double checking constraints as we go.
 
