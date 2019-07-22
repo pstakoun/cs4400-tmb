@@ -4,11 +4,11 @@ import MaterialTable from 'material-table';
 import Dropdown from 'react-dropdown';
 import GeneralButton from '../components/GeneralButton';
 import TextField from '../components/TextField';
-import './AdminGeneral.css';
-import '../components/Material-Icons.css';
 import 'react-dropdown/style.css';
+import './AdminGeneral.css';
 import './Register.css';
 import './AddStation.css';
+import '../components/Material-Icons.css';
 
 class AddStation extends React.Component {
   constructor(props) {

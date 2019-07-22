@@ -10,6 +10,8 @@ import LeaveReview from './pages/LeaveReview';
 import ViewReviews from './pages/ViewReviews';
 import EditReview from './pages/EditReview';
 import EditProfile from './pages/EditProfile';
+import EditAdmin from './pages/EditAdmin';
+
 import StationInfo from './pages/StationInfo';
 import BuyCard from './pages/BuyCard';
 import Trip from './pages/Trip';
@@ -62,6 +64,8 @@ class App extends React.Component {
           <PrivateRoute path="/viewReviews" component={ViewReviews} user={this.state.user} />
           <PrivateRoute path="/editReview" component={EditReview} user={this.state.user} />
           <PrivateRoute path="/editProfile" component={EditProfile} user={this.state.user} />
+          <PrivateRoute path="/editAdmin" component={EditAdmin} user={this.state.user} />
+
           <PrivateRoute path="/stationInfo" component={StationInfo} user={this.state.user} />
           <PrivateRoute path="/buyCard" component={BuyCard} user={this.state.user} />
           <PrivateRoute path="/trip" component={Trip} user={this.state.user} />

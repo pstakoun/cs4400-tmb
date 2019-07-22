@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import MaterialTable from 'material-table';
 import GeneralButton from '../components/GeneralButton';
 import 'react-dropdown/style.css';
@@ -9,13 +9,17 @@ import '../components/Material-Icons.css';
 class ViewTrips extends React.Component {
   constructor(props) {
     super(props);
+    this.handleUpdateTrip = this.handleUpdateTrip.bind(this);
     this.state = {
       trips: [],
+      updateTripData: null,
     };
   }
 
-  handleUpdateTrip() {
-    // TODO
+  handleUpdateTrip(data) {
+    this.setState({
+      updateTripData: data,
+    });
   }
 
   componentWillMount() {
@@ -24,12 +28,15 @@ class ViewTrips extends React.Component {
       results => results.json(),
     ).then((data) => {
       initialTrips = data.trips.map(trip => ({
-        user_ID: trip.user_ID,
         card_type: trip.card_type,
-        start_date_time: trip.start_date_time.slice(0, 19).replace('T', ' '),
+        start_date_time: trip.start_date_time,
+        start_date_time_display: trip.start_date_time.slice(0, 19).replace('T', ' '),
         end_date_time: trip.end_date_time,
+        end_date_time_display: trip.end_date_time ? trip.end_date_time.slice(0, 19).replace('T', ' ') : null,
         from_station_name: trip.from_station_name,
         to_station_name: trip.to_station_name,
+        card_purchase_date_time: trip.card_purchase_date_time,
+        card_purchase_date_time_display: trip.card_purchase_date_time ? trip.card_purchase_date_time.slice(0, 19).replace('T', ' ') : null,
       }));
       this.setState({
         trips: initialTrips,
@@ -46,11 +53,11 @@ class ViewTrips extends React.Component {
               columns={[
                 {
                   title: 'Start Date Time',
-                  field: 'start_date_time',
+                  field: 'start_date_time_display',
                 },
                 {
                   title: 'End Date Time',
-                  field: 'end_date_time',
+                  field: 'end_date_time_display',
                 },
                 {
                   title: 'Card Used',
@@ -92,7 +99,7 @@ class ViewTrips extends React.Component {
                 {
                   icon: 'edit',
                   tooltip: 'Update Trip',
-                  onClick: (event, rowData) => this.handleUpdateTrip(/* TODO primary key params */),
+                  onClick: (event, rowData) => this.handleUpdateTrip(rowData),
                 },
               ]}
               title="My Trips"
@@ -102,6 +109,15 @@ class ViewTrips extends React.Component {
             <Link to="/">
               <GeneralButton text="Main Menu" />
             </Link>
+            { this.state.updateTripData
+              ? (
+                <Redirect to={{
+                  pathname: '/updateTrip',
+                  state: { trip: this.state.updateTripData },
+                }}
+                />
+              )
+              : null}
           </div>
         </div>
       </div>

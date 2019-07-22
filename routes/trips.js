@@ -68,4 +68,23 @@ router.post('/', (req, res) => {
   });
 });
 
+/* Update trip */
+router.put('/', (req, res) => {
+  const {
+    toStation,
+    cardType,
+  } = req.body;
+
+  const startDateTime = new Date(req.body.startDateTime);
+  const purchaseDateTime = new Date(req.body.purchaseDateTime);
+
+  connection.query('UPDATE Trip SET to_station_name = ? WHERE user_ID = ? AND card_type = ? AND card_purchase_date_time = ? AND start_date_time = ?', [toStation, req.session.user.ID, cardType, purchaseDateTime, startDateTime], (err) => {
+    if (err) {
+      console.log(err);
+      return res.status(500).json({ message: 'An error ocurred' });
+    }
+    res.status(200).json({ success: true, message: 'Trip updated' });
+  });
+});
+
 module.exports = router;

@@ -1,20 +1,17 @@
 import React from 'react';
 import './Register.css';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import GeneralButton from '../components/GeneralButton';
 import TextField from '../components/TextField';
 
 
-
-
-class EditProfile extends React.Component {
+class EditAdmin extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       firstName: props.user.first_name,
       middleInitial: props.user.minit,
       lastName: props.user.last_name,
-      email: props.user.passenger_email,
       userID: props.user.ID,
       password: props.user.password,
       passwordConfirm: props.user.password,
@@ -26,14 +23,13 @@ class EditProfile extends React.Component {
     this.fNameChange = this.fNameChange.bind(this);
     this.MIChange = this.MIChange.bind(this);
     this.lNameChange = this.lNameChange.bind(this);
-    this.emailChange = this.emailChange.bind(this);
     this.userIDChange = this.userIDChange.bind(this);
     this.passwordChange = this.passwordChange.bind(this);
     this.passwordConfirmChange = this.passwordConfirmChange.bind(this);
   }
 
   handleEditUser() {
-    fetch('/api/users', {
+    fetch('/api/users/admin', {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
@@ -89,10 +85,6 @@ class EditProfile extends React.Component {
     this.setState({ lastName: event.target.value });
   }
 
-  emailChange(event) {
-    this.setState({ email: event.target.value });
-  }
-
   userIDChange(event) {
     this.setState({ userID: event.target.value });
   }
@@ -112,7 +104,6 @@ class EditProfile extends React.Component {
           <TextField text="First Name *" type="text" value={this.state.firstName} handleChange={this.fNameChange} />
           <TextField text="Middle Initial" type="text" value={this.state.middleInitial} handleChange={this.MIChange} />
           <TextField text="Last Name *" type="text" value={this.state.lastName} handleChange={this.lNameChange} />
-          <TextField text="Email *" type="text" value={this.state.email} handleChange={this.emailChange} />
           <TextField text="User ID (unique) *" type="text" value={this.state.userID} handleChange={this.userIDChange} />
           <TextField text="Password *" type="text" value={this.state.password} handleChange={this.passwordChange} />
           <TextField text="Password again *" type="text" value={this.state.passwordConfirm} handleChange={this.passwordConfirmChange} />
@@ -135,4 +126,4 @@ class EditProfile extends React.Component {
   }
 }
 
-export default EditProfile;
+export default EditAdmin;
