@@ -27,8 +27,7 @@ router.get('/pending', (req, res) => {
 
 /* GET review */
 router.get('/:id', (req, res) => {
-  // TODO use passenger ID in query
-  connection.query('SELECT * FROM Review WHERE rid = ?', [req.params.id], (err, result) => {
+  connection.query('SELECT * FROM Review WHERE rid = ? AND passenger_ID = ?', [req.params.id, req.session.user.ID], (err, result) => {
     if (err) {
       console.log(err);
       return res.status(500).json({ message: 'An error occurred' });
@@ -49,18 +48,25 @@ router.post('/', (req, res) => {
     comment,
   } = req.body;
 
+  // TODO implement in sql
+  if (!shopping || !speed) {
+    return res.status(400).json({ message: 'Ratings cannot be empty' });
+  }
+  if (shopping > 5 || speed > 5) {
+    return res.status(400).json({ message: 'Ratings invalid' });
+  }
+
   const review = {
     passenger_ID: req.session.user.ID,
     station_name: station,
     shopping,
     connection_speed: speed,
     comment,
-    approver_ID: null,
-    edit_timestamp: null,
-    approval_status: 'pending',
+    approver_ID: null, // TODO implement in sql
+    edit_timestamp: null, // TODO implement in sql
+    approval_status: 'pending', // TODO implement in sql
   };
 
-  // TODO shopping and connection_speed must be set
   connection.query('INSERT INTO Review SET ?', [review], (err) => {
     if (err) {
       console.log(err);
@@ -79,19 +85,25 @@ router.put('/:id', (req, res) => {
     comment,
   } = req.body;
 
+  // TODO implement in sql
+  if (!shopping || !speed) {
+    return res.status(400).json({ message: 'Ratings cannot be empty' });
+  }
+  if (shopping > 5 || speed > 5) {
+    return res.status(400).json({ message: 'Ratings invalid' });
+  }
+
   const review = {
-    passenger_ID: req.session.user.ID,
     station_name: station,
     shopping,
     connection_speed: speed,
     comment,
-    approver_ID: null,
-    edit_timestamp: null, // TODO implement in constraints.sql
-    approval_status: 'pending',
+    approver_ID: null, // TODO implement in sql
+    edit_timestamp: null, // TODO implement in sql
+    approval_status: 'pending', // TODO implement in sql
   };
 
-  // TODO use passenger ID in query
-  connection.query('UPDATE Review SET ? WHERE rid = ?', [review, req.params.id], (err) => {
+  connection.query('UPDATE Review SET ? WHERE rid = ? AND passenger_ID = ?', [review, req.params.id, req.session.user.ID], (err) => {
     if (err) {
       console.log(err);
       return res.status(500).json({ message: 'An error occurred' });
