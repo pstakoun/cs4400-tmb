@@ -9,7 +9,7 @@ CREATE TABLE User
     first_name varchar(255) NOT NULL,
     minit char(1),
     last_name varchar(255) NOT NULL,
-    password varchar(255) NOT NULL,
+    password varchar(255),
     passenger_email varchar(255) NOT NULL,
     PRIMARY KEY (ID)
 );
