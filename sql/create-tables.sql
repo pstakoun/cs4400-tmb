@@ -4,8 +4,7 @@ GRANT ALL PRIVILEGES ON TMB.* TO 'tmb-user'@'localhost';
 USE TMB;
 
 CREATE TABLE User
-(
-    ID varchar(255),
+(    ID varchar(255),
     first_name varchar(255),
     minit char(1),
     last_name varchar(255),
@@ -17,7 +16,7 @@ CREATE TABLE User
 CREATE TABLE Admin
 (
     ID varchar(255) PRIMARY KEY,
-    FOREIGN KEY(ID) REFERENCES User(ID)
+	FOREIGN KEY(ID) REFERENCES User(ID)
 );
 
 CREATE TABLE Station
@@ -45,7 +44,7 @@ CREATE TABLE Card
     uses_left int,
     expiration_date Date,
     PRIMARY KEY (user_ID, type, purchase_date_time),
-    FOREIGN KEY(user_ID) REFERENCES User(ID)
+    FOREIGN KEY(user_ID) REFERENCES User(ID) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 CREATE TABLE Trip
@@ -59,8 +58,8 @@ CREATE TABLE Trip
     to_station_name varchar(255),
     PRIMARY KEY(user_ID, card_type, card_purchase_date_time, start_date_time),
     FOREIGN KEY (from_station_name) REFERENCES Station(name),
-    FOREIGN KEY (to_station_name) REFERENCES Station(name),
-    FOREIGN KEY (user_ID, card_type, card_purchase_date_time) REFERENCES Card(user_ID, type, purchase_date_time)
+	FOREIGN KEY (to_station_name) REFERENCES Station(name),
+    FOREIGN KEY (user_ID, card_type, card_purchase_date_time) REFERENCES Card(user_ID, type, purchase_date_time) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 CREATE TABLE Review
@@ -75,9 +74,9 @@ CREATE TABLE Review
     edit_timestamp Datetime,
     station_name varchar(255) NOT NULL,
     PRIMARY KEY (passenger_ID, rid),
-    FOREIGN KEY(passenger_ID) REFERENCES User(ID),
-    FOREIGN KEY(approver_ID) REFERENCES Admin(ID),
-    FOREIGN KEY(station_name) REFERENCES Station(name)
+	FOREIGN KEY(passenger_ID) REFERENCES User(ID) ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY(approver_ID) REFERENCES Admin(ID) ON DELETE SET NULL ON UPDATE CASCADE,
+	FOREIGN KEY(station_name) REFERENCES Station(name) 
 );
 
 CREATE TABLE Admin_Add_Line
@@ -85,17 +84,17 @@ CREATE TABLE Admin_Add_Line
     line_name varchar(255) PRIMARY KEY,
     admin_ID varchar(255),
     date_time Datetime,
-    FOREIGN KEY(admin_ID) REFERENCES Admin(ID),
-    FOREIGN KEY(line_name) REFERENCES Line(name)
-);
+	FOREIGN KEY(admin_ID) REFERENCES Admin(ID) ON DELETE CASCADE ON UPDATE CASCADE,
+	FOREIGN KEY(line_name) REFERENCES Line(name) ON DELETE CASCADE ON UPDATE CASCADE
+    );
 
 CREATE TABLE Admin_Add_Station
-(
+( 
     station_name varchar(255) PRIMARY KEY,
     admin_ID varchar(255),
     date_time Datetime,
-    FOREIGN KEY(admin_ID) REFERENCES Admin(ID),
-    FOREIGN KEY(station_name) REFERENCES Station(name)
+    FOREIGN KEY(admin_ID) REFERENCES Admin(ID) ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY(station_name) REFERENCES Station(name) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 CREATE TABLE Station_On_Line
@@ -104,6 +103,6 @@ CREATE TABLE Station_On_Line
     line_name varchar(255),
     order_number int,
     PRIMARY KEY(station_name, line_name),
-    FOREIGN KEY(station_name) REFERENCES Station(name),
+	FOREIGN KEY(station_name) REFERENCES Station(name),
     FOREIGN KEY(line_name) REFERENCES Line(name)
 )
