@@ -5,8 +5,6 @@ import GeneralButton from '../components/GeneralButton';
 import TextField from '../components/TextField';
 
 
-
-
 class EditAdmin extends React.Component {
   constructor(props) {
     super(props);
