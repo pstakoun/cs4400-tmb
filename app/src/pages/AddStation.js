@@ -53,7 +53,7 @@ class AddStation extends React.Component {
 
   handleAddStation() {
     console.log(this.state.addedLines);
-    fetch('/api/stations/', {
+    fetch('/api/stations', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

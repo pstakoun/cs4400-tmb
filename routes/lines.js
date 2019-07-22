@@ -71,7 +71,7 @@ router.post('/', (req, res) => {
   res.status(200)
     .json({
       success: true,
-      message: 'Station created',
+      message: 'Line created',
     });
 });
 
