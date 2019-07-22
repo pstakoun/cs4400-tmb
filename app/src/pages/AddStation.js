@@ -22,6 +22,7 @@ class AddStation extends React.Component {
     this.onSelect = this.onSelect.bind(this);
     this.orderFieldChange = this.orderFieldChange.bind(this);
     this.handleAddLine = this.handleAddLine.bind(this);
+    this.handleAddStation = this.handleAddStation.bind(this);
 
     this.state = {
       stationName: '',
@@ -30,7 +31,7 @@ class AddStation extends React.Component {
       stateProvince: '',
       zipCode: '',
       lines: [],
-      selected: '',
+      selected: null,
       addedLines: [],
       orderField: '',
     };
@@ -51,21 +52,73 @@ class AddStation extends React.Component {
   }
 
   handleAddStation() {
-    // TODO add a station
+    console.log(this.state.addedLines);
+    fetch('/api/stations/', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        name: this.state.stationName,
+        address: this.state.streetAddress,
+        city: this.state.city,
+        stateProvince: this.state.stateProvince,
+        zipcode: this.state.zipcode,
+        newLines: this.state.addedLines,
+        //TODO figure out what status should be default
+        status: 'Open',
+      }),
+    }).then(res => res.json()).then((data) => {
+      if (!data.success) {
+        alert(data.message);
+      }
+    });
   }
 
+
   handleAddLine() {
-    const name = this.state.selected.value;
-    const orderNum = this.state.orderField;
-    let updatedLines = this.state.addedLines;
-    const newElement = { name, order_num: orderNum };
-    if (updatedLines != null) {
-      updatedLines.push(newElement);
+    if (this.state.selected == null) {
+      alert('Please select a line');
     } else {
-      updatedLines = [newElement];
+      const name = this.state.selected.value;
+      const orderNum = this.state.orderField;
+      let updatedLines = this.state.addedLines;
+      const newElement = {
+        name,
+        order_num: orderNum
+      };
+      if (orderNum == null || orderNum.length < 1) {
+        alert('Please enter in an order number');
+      } else if (this.state.addedLines.some(line => (line.name === name))) {
+        alert('A line can only be in a station once');
+      } else {
+        this.checkOrderNumber(newElement, result => {
+          if (result) {
+            alert('That order number already exists beyond this station');
+          } else {
+            if (updatedLines != null) {
+              updatedLines.push(newElement);
+            } else {
+              updatedLines = [newElement];
+            }
+            this.setState({
+              addedLines: updatedLines,
+            });
+          }
+        });
+      }
     }
-    this.setState({
-      addedLines: updatedLines,
+  }
+
+  checkOrderNumber(element, cb) {
+    fetch(`/api/lines/${element.name}/${element.order_num}`).then(
+      results => results.json(),
+    ).then((data) => {
+      if (data.matches[0].matched === 1) {
+        console.log("wtf");
+        return cb(true);
+      }
+      cb(false);
     });
   }
 
@@ -102,11 +155,11 @@ class AddStation extends React.Component {
     return (
       <div className="Wrapper">
         <div className="ContentWrapper, Register">
-          <TextField text="Station Name (Unique) *" type="text" handleChange={this.fNameChange} />
-          <TextField text="Street Address *" type="text" handleChange={this.MIChange} />
-          <TextField text="City *" type="text" handleChange={this.lNameChange} />
-          <TextField text="State/Province *" type="text" handleChange={this.emailChange} />
-          <TextField text="Zip Code *" type="text" handleChange={this.userIDChange} />
+          <TextField text="Station Name (Unique) *" type="text" handleChange={this.stationNameChange} />
+          <TextField text="Street Address *" type="text" handleChange={this.streetAddressChange} />
+          <TextField text="City *" type="text" handleChange={this.cityChange} />
+          <TextField text="State/Province *" type="text" handleChange={this.stateProvinceChange} />
+          <TextField text="Zip Code *" type="text" handleChange={this.zipCodeChange} />
           <Dropdown
             options={(this.state.lines)}
             value={defaultOption}
