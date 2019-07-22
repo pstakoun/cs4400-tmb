@@ -4,6 +4,9 @@ import { Link, Redirect } from 'react-router-dom';
 import GeneralButton from '../components/GeneralButton';
 import TextField from '../components/TextField';
 
+
+
+
 class EditProfile extends React.Component {
   constructor(props) {
     super(props);
@@ -111,8 +114,8 @@ class EditProfile extends React.Component {
           <TextField text="Last Name *" type="text" value={this.state.lastName} handleChange={this.lNameChange} />
           <TextField text="Email *" type="text" value={this.state.email} handleChange={this.emailChange} />
           <TextField text="User ID (unique) *" type="text" value={this.state.userID} handleChange={this.userIDChange} />
-          <TextField text="Password *" type="password" value={this.state.password} handleChange={this.passwordChange} />
-          <TextField text="Password again *" type="password" value={this.state.passwordConfirm} handleChange={this.passwordConfirmChange} />
+          <TextField text="Password *" type="text" value={this.state.password} handleChange={this.passwordChange} />
+          <TextField text="Password again *" type="text" value={this.state.passwordConfirm} handleChange={this.passwordConfirmChange} />
           <div className="ButtonWrapper">
             <h6>&apos;* is required&apos;</h6>
           </div>

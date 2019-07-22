@@ -12,7 +12,6 @@ class EditAdmin extends React.Component {
       firstName: props.user.first_name,
       middleInitial: props.user.minit,
       lastName: props.user.last_name,
-      email: props.user.passenger_email,
       userID: props.user.ID,
       password: props.user.password,
       passwordConfirm: props.user.password,
@@ -24,14 +23,13 @@ class EditAdmin extends React.Component {
     this.fNameChange = this.fNameChange.bind(this);
     this.MIChange = this.MIChange.bind(this);
     this.lNameChange = this.lNameChange.bind(this);
-    this.emailChange = this.emailChange.bind(this);
     this.userIDChange = this.userIDChange.bind(this);
     this.passwordChange = this.passwordChange.bind(this);
     this.passwordConfirmChange = this.passwordConfirmChange.bind(this);
   }
 
   handleEditUser() {
-    fetch('/api/users', {
+    fetch('/api/users/admin', {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
@@ -87,10 +85,6 @@ class EditAdmin extends React.Component {
     this.setState({ lastName: event.target.value });
   }
 
-  emailChange(event) {
-    this.setState({ email: event.target.value });
-  }
-
   userIDChange(event) {
     this.setState({ userID: event.target.value });
   }
@@ -111,8 +105,8 @@ class EditAdmin extends React.Component {
           <TextField text="Middle Initial" type="text" value={this.state.middleInitial} handleChange={this.MIChange} />
           <TextField text="Last Name *" type="text" value={this.state.lastName} handleChange={this.lNameChange} />
           <TextField text="User ID (unique) *" type="text" value={this.state.userID} handleChange={this.userIDChange} />
-          <TextField text="Password *" type="password" value={this.state.password} handleChange={this.passwordChange} />
-          <TextField text="Password again *" type="password" value={this.state.passwordConfirm} handleChange={this.passwordConfirmChange} />
+          <TextField text="Password *" type="text" value={this.state.password} handleChange={this.passwordChange} />
+          <TextField text="Password again *" type="text" value={this.state.passwordConfirm} handleChange={this.passwordConfirmChange} />
           <div className="ButtonWrapper">
             <h6>&apos;* is required&apos;</h6>
           </div>
