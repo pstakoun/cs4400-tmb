@@ -76,7 +76,7 @@ router.post('/', (req, res) => {
     newLines,
   } = req.body;
 
-  let createDate = new Date();
+  const createDate = new Date();
 
   const station = {
     name,
@@ -87,13 +87,11 @@ router.post('/', (req, res) => {
     city,
   };
 
-  const mappedLines = newLines.map(lines => {
-    return {
-      station_name: name,
-      line_name: lines.name,
-      order_number: lines.order_num,
-    };
-  });
+  const mappedLines = newLines.map(lines => ({
+    station_name: name,
+    line_name: lines.name,
+    order_number: lines.order_num,
+  }));
 
   const adminAdd = {
     station_name: name,
@@ -115,20 +113,19 @@ router.post('/', (req, res) => {
     }
   });
 
-  mappedLines.forEach( (item) => {
-      connection.query('INSERT INTO Station_On_Line SET ?', [item], (err) => {
-        if (err) {
-          console.log(err);
-          return res.status(500)
-            .json({ message: 'An error occurred' });
-        }
-      });
-    }
-  );
+  mappedLines.forEach((item) => {
+    connection.query('INSERT INTO Station_On_Line SET ?', [item], (err) => {
+      if (err) {
+        console.log(err);
+        return res.status(500)
+          .json({ message: 'An error occurred' });
+      }
+    });
+  });
   res.status(200)
     .json({
       success: true,
-      message: 'Station created'
+      message: 'Station created',
     });
 });
 

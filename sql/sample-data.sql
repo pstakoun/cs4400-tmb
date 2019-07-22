@@ -28,3 +28,4 @@ INSERT INTO Review VALUES ('chall68',	'1',	'3',	'4',	'Cool station. Kinda hot th
 INSERT INTO Admin_Add_Line VALUES ('L1', 'wwhite12',	'2019-05-10 08:32:00');
 INSERT INTO Admin_Add_Station VALUES ('Catalunya', 'wwhite12',	'2019-05-10 08:34:00');
 INSERT INTO Station_On_Line VALUES ('Catalunya', 'L1',	16);
+INSERT INTO Station_On_Line VALUES ('Crapalunya', 'L1',	17);

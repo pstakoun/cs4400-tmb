@@ -159,7 +159,6 @@ router.put('/', (req, res) => {
 });
 
 
-
 /* Update Profile Admin */
 router.put('/Admin', (req, res) => {
   const {

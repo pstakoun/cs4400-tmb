@@ -27,6 +27,10 @@ class LineSummary extends React.Component {
     });
   }
 
+  handleChangeOrder(orderNumber, increment) {
+    console.log(this.state.stations);
+  }
+
   render() {
     return (
       <div className="Wrapper">
@@ -63,10 +67,22 @@ class LineSummary extends React.Component {
                 },
               ]}
               data={this.state.stations}
+              actions={[
+                {
+                  icon: 'keyboard_arrow_up',
+                  tooltip: 'Change Order',
+                  onClick: (event, rowData) => this.handleChangeOrder(rowData.order_number, -1),
+                },
+                {
+                  icon: 'keyboard_arrow_down',
+                  tooltip: 'Change Order',
+                  onClick: (event, rowData) => this.handleChangeOrder(rowData.order_number, 1),
+                },
+              ]}
               options={{
                 sorting: true,
               }}
-              title="Station Reviews"
+              title="Line Summary"
             />
           </div>
           <div className="ButtonWrapper">
