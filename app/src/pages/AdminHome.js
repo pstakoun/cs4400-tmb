@@ -47,7 +47,7 @@ class AdminHome extends React.Component {
             <Link to="/trip">
               <GeneralButton text="Go on Trip" />
             </Link>
-            <Link to="/editProfile">
+            <Link to="/EditAdmin">
               <GeneralButton text="Edit Profile" />
             </Link>
             <Link to="/addStation">
@@ -67,5 +67,4 @@ class AdminHome extends React.Component {
     );
   }
 }
-
 export default AdminHome;
