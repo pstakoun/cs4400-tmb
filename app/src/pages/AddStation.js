@@ -20,6 +20,8 @@ class AddStation extends React.Component {
     this.stateProvinceChange = this.stateProvinceChange.bind(this);
     this.zipCodeChange = this.zipCodeChange.bind(this);
     this.onSelect = this.onSelect.bind(this);
+    this.orderFieldChange = this.orderFieldChange.bind(this);
+    this.handleAddLine = this.handleAddLine.bind(this);
 
     this.state = {
       stationName: '',
@@ -30,6 +32,7 @@ class AddStation extends React.Component {
       lines: [],
       selected: '',
       addedLines: [],
+      orderField: '',
     };
   }
 
@@ -37,26 +40,33 @@ class AddStation extends React.Component {
     let initialLines = [];
     fetch('/api/lines/')
       .then(res => res.json()).then((data) => {
-      if (!data.lines) {
-        return;
-      }
-      initialLines = data.lines.map(lines => lines.name);
-      this.setState({
-        lines: initialLines,
+        if (!data.lines) {
+          return;
+        }
+        initialLines = data.lines.map(lines => lines.name);
+        this.setState({
+          lines: initialLines,
+        });
       });
-    });
   }
 
   handleAddStation() {
-    //TODO add a station
+    // TODO add a station
   }
 
   handleAddLine() {
-    //TODO does work to add line to stations
-  }
-
-  updateLines() {
-    //TODO updates the table with the added lines
+    const name = this.state.selected.value;
+    const orderNum = this.state.orderField;
+    let updatedLines = this.state.addedLines;
+    const newElement = { name, order_num: orderNum };
+    if (updatedLines != null) {
+      updatedLines.push(newElement);
+    } else {
+      updatedLines = [newElement];
+    }
+    this.setState({
+      addedLines: updatedLines,
+    });
   }
 
   stationNameChange(event) {
@@ -77,6 +87,10 @@ class AddStation extends React.Component {
 
   zipCodeChange(event) {
     this.setState({ zipCode: event.target.value });
+  }
+
+  orderFieldChange(event) {
+    this.setState({ orderField: event.target.value });
   }
 
   onSelect(option) {
@@ -100,10 +114,10 @@ class AddStation extends React.Component {
             placeholder="Select a Line"
           />
           <div className="newLineWrapper">
-            <TextField placeholder={"Order"} text={null}/>
-            <GeneralButton text={"Add Line"} handleChange={this.handleAddLine}/>
+            <TextField placeholder="Order" text={null} handleChange={this.orderFieldChange} />
+            <GeneralButton text="Add Line" handlePress={this.handleAddLine} />
           </div>
-          <div style={{ maxWidth: '100%'}}>
+          <div style={{ maxWidth: '100%' }}>
             <MaterialTable
               columns={[
                 {
@@ -112,7 +126,7 @@ class AddStation extends React.Component {
                 },
                 {
                   title: 'Order',
-                  field: 'order_number',
+                  field: 'order_num',
                 },
               ]}
               data={this.state.addedLines}

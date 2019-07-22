@@ -5,7 +5,7 @@ class TextField extends React.Component {
   render() {
     return (
       <div className="TextField">
-        <label hidden={this.props.text == null ? true : false}>{this.props.text}</label>
+        <label hidden={this.props.text == null}>{this.props.text}</label>
         <input
           type={this.props.type}
           value={this.props.value}
