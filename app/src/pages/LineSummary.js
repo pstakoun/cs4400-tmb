@@ -58,11 +58,11 @@ class LineSummary extends React.Component {
         line: this.state.name,
         station: stations[initialIndex].station_name,
       }),
-    }).then(res => res.json()).then(data => {
+    }).then(res => res.json()).then((data) => {
       if (data.message) {
         alert(data.message);
       }
-    })
+    });
     if (swapIndex !== -1) {
       stations[swapIndex].order_number = orderNumber;
       fetch('/api/lines/order', {
@@ -75,11 +75,11 @@ class LineSummary extends React.Component {
           line: this.state.name,
           station: stations[swapIndex].station_name,
         }),
-      }).then(res => res.json()).then(data => {
+      }).then(res => res.json()).then((data) => {
         if (data.message) {
           alert(data.message);
         }
-      })
+      });
     }
     this.setState({
       stations,
