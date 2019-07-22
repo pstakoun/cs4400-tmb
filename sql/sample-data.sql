@@ -1,3 +1,6 @@
+USE TMB;
+
+
 INSERT INTO Line VALUES('L1');
 
 INSERT INTO User VALUES('chall68',	'Charles',	'J',	'Hall',	'pwdpwdpwd', NULL);
@@ -8,6 +11,7 @@ INSERT INTO User VALUES('a',	'Andreas',	'J',	'Paljug',	'asdfasdf', NULL);
 
 INSERT INTO Admin VALUES('wwhite12');
 INSERT INTO Admin VALUES('peter-admin');
+#fix these warnings... on card
 INSERT INTO Card VALUES ('chall68',	'T-mes',	'2019-06-08 10:27:00',	NULL,
 '2019-07-08 10:27:00');
 INSERT INTO Card VALUES ('peter',	'T-mes',	'2019-06-08 10:27:00',	NULL,

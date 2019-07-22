@@ -102,7 +102,7 @@ router.put('/:id', (req, res) => {
 
 /* Approve review */
 router.put('/:id/:user/approve', (req, res) => {
-  connection.query("UPDATE Review SET approval_status = 'approved' WHERE rid = ? AND passenger_ID = ?", [req.params.id, req.params.user], (err) => {
+  connection.query("UPDATE Review SET approval_status = 'approved', approver_ID = ? WHERE rid = ? AND passenger_ID = ?", [req.session.user.ID, req.params.id, req.params.user], (err) => {
     if (err) {
       console.log(err);
       return res.status(500).json({ message: 'An error occurred' });
