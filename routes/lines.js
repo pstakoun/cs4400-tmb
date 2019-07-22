@@ -46,13 +46,11 @@ router.post('/', (req, res) => {
 
   const line = { name };
 
-  const mappedStations = newStations.map(station => {
-    return {
-      station_name: station.name,
-      line_name: name,
-      order_number: station.order_num,
-    };
-  });
+  const mappedStations = newStations.map(station => ({
+    station_name: station.name,
+    line_name: name,
+    order_number: station.order_num,
+  }));
 
   connection.query('INSERT INTO Line SET ?', [line], (err) => {
     if (err) {
@@ -61,20 +59,19 @@ router.post('/', (req, res) => {
     }
   });
 
-  mappedStations.forEach( (item) => {
-      connection.query('INSERT INTO Station_On_Line SET ?', [item], (err) => {
-        if (err) {
-          console.log(err);
-          return res.status(500)
-            .json({ message: 'An error occurred' });
-        }
-      });
-    }
-  );
+  mappedStations.forEach((item) => {
+    connection.query('INSERT INTO Station_On_Line SET ?', [item], (err) => {
+      if (err) {
+        console.log(err);
+        return res.status(500)
+          .json({ message: 'An error occurred' });
+      }
+    });
+  });
   res.status(200)
     .json({
       success: true,
-      message: 'Station created'
+      message: 'Station created',
     });
 });
 
