@@ -83,6 +83,21 @@ class ViewTrips extends React.Component {
                 {
                   title: 'To',
                   field: 'to_station_name',
+
+                  //TODO the commented section is what should run if in admin
+                  /*
+                  render: rowData => (
+                    <Link to={{
+                      pathname: '/stationInfoAdmin',
+                      state: {
+                        stationName: rowData.station_name,
+                      },
+                    }}
+                    >
+                      {rowData.station_name}
+                    </Link>
+                  ),
+                   */
                   render: rowData => (
                     <Link to={{
                       pathname: '/stationInfo',
