@@ -57,7 +57,7 @@ class EditAdmin extends React.Component {
 
 
   handleDeleteUser() {
-    fetch('/api/users', {
+    fetch('/api/users/', {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',

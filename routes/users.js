@@ -158,7 +158,6 @@ router.put('/', (req, res) => {
   });
 });
 
-
 /* Update Profile Admin */
 router.put('/Admin', (req, res) => {
   const {
@@ -214,17 +213,49 @@ router.put('/Admin', (req, res) => {
   });
 });
 
-
-/* Delete User */
+/* Delete User and Admin*/
 router.delete('/', (req, res) => {
-  connection.query('DELETE FROM User WHERE ID = ?', [req.session.user.ID], (err) => {
-    if (err) {
-      console.log(err);
-      return res.status(500).json({ message: 'An error ocurred' });
-    }
-    req.session.user = null;
-    res.status(200).json({ success: true, message: 'Success' });
-  });
+  if (req.session.user.admin) { 
+    connection.query(" DELETE FROM station " +
+      "WHERE name IN (SELECT names " +
+      "FROM (SELECT DISTINCT station.name as names " +
+      "FROM station LEFT OUTER JOIN admin_add_station " +
+      "ON station.name = admin_add_station.station_name " +
+      "WHERE admin_add_station.admin_id = ? ) AS required)", [req.session.user.ID], (err) => {
+        if (err) {
+          console.log(err);
+          return res.status(500).json({ message: 'An error ocurred' });
+        }
+        connection.query("DELETE FROM line " +
+          "WHERE name IN (SELECT names " +
+          "FROM (SELECT DISTINCT line.name as names " +
+          "FROM line LEFT OUTER JOIN admin_add_line " +
+          "ON line.name = admin_add_line.line_name " +
+          "WHERE admin_add_line.admin_id = ? ) AS required);",[req.session.user.ID], (err2) => {
+            if (err2) {
+              console.log(err2);
+              return res.status(500).json({ message: 'An error ocurred' });
+            }
+            connection.query('DELETE FROM User WHERE ID = ?', [req.session.user.ID], (err3) => {
+              if (err3) {
+                console.log(err3);
+                return res.status(500).json({ message: 'An error ocurred' });
+              }
+              req.session.user = null;
+              res.status(200).json({ success: true, message: 'Success' });
+            }); 
+        });
+    });
+  } else {
+    connection.query('DELETE FROM User WHERE ID = ?', [req.session.user.ID], (err) => {
+      if (err) {
+        console.log(err);
+        return res.status(500).json({ message: 'An error ocurred' });
+      }
+      req.session.user = null;
+      res.status(200).json({ success: true, message: 'Success' });
+    });
+  }
 });
 
 module.exports = router;

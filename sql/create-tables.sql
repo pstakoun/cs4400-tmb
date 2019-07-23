@@ -22,7 +22,7 @@ CREATE TABLE Admin
 
 CREATE TABLE Station
 (
-    name varchar(255),
+    name varchar(255) NOT NULL,
     status varchar(255),
     state_province varchar(255),
     address varchar(255),
@@ -58,8 +58,8 @@ CREATE TABLE Trip
     from_station_name varchar(255) NOT NULL,
     to_station_name varchar(255),
     PRIMARY KEY(user_ID, card_type, card_purchase_date_time, start_date_time),
-    FOREIGN KEY (from_station_name) REFERENCES Station(name),
-	FOREIGN KEY (to_station_name) REFERENCES Station(name),
+    FOREIGN KEY (from_station_name) REFERENCES Station(name) ON DELETE CASCADE,
+	FOREIGN KEY (to_station_name) REFERENCES Station(name)  ON DELETE CASCADE,
     FOREIGN KEY (user_ID, card_type, card_purchase_date_time) REFERENCES Card(user_ID, type, purchase_date_time) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
@@ -71,13 +71,13 @@ CREATE TABLE Review
     connection_speed int NOT NULL,
     comment text,
     approver_ID varchar(255) DEFAULT NULL,
-    approval_status varchar(255) DEFAULT 'Pending',
+    approval_status varchar(255) DEFAULT 'pending',
     edit_timestamp Datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
     station_name varchar(255) NOT NULL,
     PRIMARY KEY (passenger_ID, rid),
 	FOREIGN KEY(passenger_ID) REFERENCES User(ID) ON DELETE CASCADE ON UPDATE CASCADE,
     FOREIGN KEY(approver_ID) REFERENCES Admin(ID) ON DELETE SET NULL ON UPDATE CASCADE,
-	FOREIGN KEY(station_name) REFERENCES Station(name)
+	FOREIGN KEY(station_name) REFERENCES Station(name)  ON DELETE CASCADE
 );
 
 CREATE TABLE Admin_Add_Line
@@ -104,6 +104,9 @@ CREATE TABLE Station_On_Line
     line_name varchar(255),
     order_number int,
     PRIMARY KEY(station_name, line_name),
-	FOREIGN KEY(station_name) REFERENCES Station(name),
-    FOREIGN KEY(line_name) REFERENCES Line(name)
+	FOREIGN KEY(station_name) REFERENCES Station(name)  ON DELETE CASCADE,
+    FOREIGN KEY(line_name) REFERENCES Line(name) ON DELETE CASCADE ON UPDATE CASCADE
 );
+
+
+
