@@ -131,3 +131,4 @@ Form with dynamic table: Add station 17, Add Line 18,
 
 PETER UPDATE TODO:
 Test updating admin and resulting email value
+StationInfoAdmin

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import MaterialTable from 'material-table';
 import GeneralButton from '../components/GeneralButton';
 import 'react-dropdown/style.css';
@@ -24,65 +24,6 @@ class LineSummary extends React.Component {
         stations: data.stations,
         stops: data.stations.length,
       });
-    });
-  }
-
-  handleChangeOrder(orderNumber, increment) {
-    const target = orderNumber + increment;
-    if (target < 1) {
-      alert('Order number must be positive');
-      return;
-    }
-    let initialIndex = -1;
-    let swapIndex = -1;
-    const { stations } = this.state;
-    for (let i = 0; i < stations.length; i++) {
-      if (stations[i].order_number === orderNumber) {
-        initialIndex = i;
-      }
-      if (stations[i].order_number === target) {
-        swapIndex = i;
-      }
-    }
-    if (initialIndex === -1) {
-      return;
-    }
-    stations[initialIndex].order_number = target;
-    fetch('/api/lines/order', {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        orderNumber: target,
-        line: this.state.name,
-        station: stations[initialIndex].station_name,
-      }),
-    }).then(res => res.json()).then((data) => {
-      if (data.message) {
-        alert(data.message);
-      }
-    });
-    if (swapIndex !== -1) {
-      stations[swapIndex].order_number = orderNumber;
-      fetch('/api/lines/order', {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          orderNumber,
-          line: this.state.name,
-          station: stations[swapIndex].station_name,
-        }),
-      }).then(res => res.json()).then((data) => {
-        if (data.message) {
-          alert(data.message);
-        }
-      });
-    }
-    this.setState({
-      stations,
     });
   }
 
@@ -123,18 +64,6 @@ class LineSummary extends React.Component {
                 },
               ]}
               data={this.state.stations}
-              actions={[
-                {
-                  icon: 'keyboard_arrow_up',
-                  tooltip: 'Change Order',
-                  onClick: (event, rowData) => this.handleChangeOrder(rowData.order_number, -1),
-                },
-                {
-                  icon: 'keyboard_arrow_down',
-                  tooltip: 'Change Order',
-                  onClick: (event, rowData) => this.handleChangeOrder(rowData.order_number, 1),
-                },
-              ]}
               options={{
                 sorting: true,
               }}
@@ -145,6 +74,10 @@ class LineSummary extends React.Component {
             <Link to="/">
               <GeneralButton text="Main Menu" />
             </Link>
+            { this.props.user.admin ? <Redirect to={{
+              pathname: '/lineSummaryAdmin',
+              state: this.props.location.state,
+            }} /> : null }
           </div>
         </div>
       </div>
