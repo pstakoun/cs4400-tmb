@@ -103,6 +103,9 @@ router.post('/', (req, res) => {
     line_name: lines.name,
     order_number: lines.order_num,
   }));
+  if (mappedLines.length < 1) {
+    return res.status(400).json({ message: 'Add a line in order to make the station' });
+  }
 
   const adminAdd = {
     station_name: name,
