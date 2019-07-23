@@ -63,15 +63,15 @@ class AddStation extends React.Component {
         address: this.state.streetAddress,
         city: this.state.city,
         stateProvince: this.state.stateProvince,
-        zipcode: this.state.zipcode,
+        zipcode: this.state.zipCode,
         newLines: this.state.addedLines,
-        // TODO figure out what status should be default
         status: 'Open',
       }),
     }).then(res => res.json()).then((data) => {
-      if (!data.success) {
-        alert(data.message);
-      } else if (!alert(`${this.state.stationName} has been added`)) { window.location.reload(); }
+      alert(data.message);
+      if (data.success) {
+        window.location.reload();
+      }
     });
   }
 

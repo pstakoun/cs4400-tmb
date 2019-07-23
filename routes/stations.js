@@ -71,7 +71,7 @@ router.put('/:name/:status/update', (req, res) => {
       console.log(err);
       return res.status(500).json({ message: 'An error occurred' });
     }
-    res.status(200).json({ success: true, message: 'Update Successful' });
+    res.status(200).json({ success: true, message: 'Update successful' });
   });
 });
 
@@ -113,31 +113,34 @@ router.post('/', (req, res) => {
   connection.query('INSERT INTO Station SET ?', [station], (err) => {
     if (err) {
       console.log(err);
+      if (err.code === 'ER_DUP_ENTRY') {
+        return res.status(400).json({ message: 'Station name and location must be unique' });
+      }
       return res.status(500).json({ message: 'An error occurred' });
     }
-  });
-
-  connection.query('INSERT INTO Admin_Add_Station SET ?', [adminAdd], (err) => {
-    if (err) {
-      console.log(err);
-      return res.status(500).json({ message: 'An error occurred' });
-    }
-  });
-
-  mappedLines.forEach((item) => {
-    connection.query('INSERT INTO Station_On_Line SET ?', [item], (err) => {
+    connection.query('INSERT INTO Admin_Add_Station SET ?', [adminAdd], (err) => {
       if (err) {
         console.log(err);
-        return res.status(500)
-          .json({ message: 'An error occurred' });
+        return res.status(500).json({ message: 'An error occurred' });
       }
+      let left = mappedLines.length;
+      mappedLines.forEach((item) => {
+        connection.query('INSERT INTO Station_On_Line SET ?', [item], (err) => {
+          if (err) {
+            console.log(err);
+            return res.status(500).json({ message: 'An error occurred' });
+          }
+          left -= 1;
+          if (left === 0) {
+            res.status(200).json({
+              success: true,
+              message: 'Station created',
+            });
+          }
+        });
+      });
     });
   });
-  res.status(200)
-    .json({
-      success: true,
-      message: 'Station created',
-    });
 });
 
 
