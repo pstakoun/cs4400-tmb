@@ -20,6 +20,7 @@ class EditReview extends React.Component {
       speedRating: 0,
       comment: '',
       status: 'pending',
+      changed: false,
     };
   }
 
@@ -63,15 +64,15 @@ class EditReview extends React.Component {
   }
 
   handleRateShopping(rating) {
-    this.setState({ shoppingRating: rating });
+    this.setState({ shoppingRating: rating, changed: true });
   }
 
   handleRateSpeed(rating) {
-    this.setState({ speedRating: rating });
+    this.setState({ speedRating: rating, changed: true });
   }
 
   handleCommentChange(event) {
-    this.setState({ comment: event.target.value });
+    this.setState({ comment: event.target.value, changed: true });
   }
 
   render() {
@@ -102,8 +103,7 @@ class EditReview extends React.Component {
             <Link to="/">
               <GeneralButton text="Delete" handlePress={this.handleDeleteReview} />
             </Link>
-            //TODO grey out update until field is edited.
-            <GeneralButton text="Update" handlePress={this.handleUpdateReview} />
+            <GeneralButton text="Update" handlePress={this.handleUpdateReview} disabled={!this.state.changed} />
             <Link to="/viewReviews">
               <GeneralButton text="View All Reviews" />
             </Link>
