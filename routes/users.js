@@ -216,22 +216,22 @@ router.put('/Admin', (req, res) => {
 /* Delete User and Admin */
 router.delete('/', (req, res) => {
   if (req.session.user.admin) {
-    connection.query('DELETE FROM station '
+    connection.query('DELETE FROM Station '
       + 'WHERE name IN (SELECT names '
-      + 'FROM (SELECT DISTINCT station.name as names '
-      + 'FROM station LEFT OUTER JOIN admin_add_station '
-      + 'ON station.name = admin_add_station.station_name '
-      + 'WHERE admin_add_station.admin_id = ? ) AS required)', [req.session.user.ID], (err) => {
+      + 'FROM (SELECT DISTINCT Station.name as names '
+      + 'FROM Station LEFT OUTER JOIN Admin_Add_Station '
+      + 'ON Station.name = Admin_Add_Station.station_name '
+      + 'WHERE Admin_Add_Station.admin_id = ? ) AS required)', [req.session.user.ID], (err) => {
       if (err) {
         console.log(err);
         return res.status(500).json({ message: 'An error ocurred' });
       }
-      connection.query('DELETE FROM line '
+      connection.query('DELETE FROM Line '
           + 'WHERE name IN (SELECT names '
-          + 'FROM (SELECT DISTINCT line.name as names '
-          + 'FROM line LEFT OUTER JOIN admin_add_line '
-          + 'ON line.name = admin_add_line.line_name '
-          + 'WHERE admin_add_line.admin_id = ? ) AS required);', [req.session.user.ID], (err2) => {
+          + 'FROM (SELECT DISTINCT Line.name as names '
+          + 'FROM Line LEFT OUTER JOIN Admin_Add_Line '
+          + 'ON Line.name = Admin_Add_Line.line_name '
+          + 'WHERE Admin_Add_Line.admin_id = ? ) AS required);', [req.session.user.ID], (err2) => {
         if (err2) {
           console.log(err2);
           return res.status(500).json({ message: 'An error ocurred' });
