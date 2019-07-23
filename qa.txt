@@ -13,8 +13,8 @@ In progress: 6, 8, 11, 13, 16, 20
 TODO’s
 DONE 6. Edit Review:  grey out edit button until value is edited.
 DONE 8. Line Summary: Passengers can edit Line order.  should not be the case. make separate page for passenger and admin.
-11. Trip: embarking with Empty card value crashes the form. (Grey out or fix)
-13. Update Trip: don't allow updating or re-updating of the same trip with no end station.
+DONE 11. Trip: embarking with Empty card value crashes the form. (Grey out or fix)
+DONE 13. Update Trip: don't allow updating or re-updating of the same trip with no end station.
 16. Edit Admin Profile: (SQL PROBLEM) Make it cascade to removes all stations or lines added by the admin.
 20. Add Station: status changing. (think it's finished)
 
@@ -133,3 +133,4 @@ PETER UPDATE TODO:
 Test updating admin and resulting email value
 StationInfoAdmin
 LineSummaryAdmin
+Card expiries
