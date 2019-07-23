@@ -47,6 +47,14 @@ class Trip extends React.Component {
   }
 
   handleTripGenerate() {
+    if (!this.state.selectedStation) {
+      alert('Please select a station');
+      return;
+    }
+    if (!this.state.selectedCard) {
+      alert('Please select a card');
+      return;
+    }
     fetch('/api/trips', {
       method: 'POST',
       headers: {

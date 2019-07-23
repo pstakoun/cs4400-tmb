@@ -11,9 +11,7 @@ import ViewReviews from './pages/ViewReviews';
 import EditReview from './pages/EditReview';
 import EditProfile from './pages/EditProfile';
 import EditAdmin from './pages/EditAdmin';
-
 import StationInfo from './pages/StationInfo';
-import StationInfoAdmin from './pages/StationInfoAdmin';
 import BuyCard from './pages/BuyCard';
 import Trip from './pages/Trip';
 import ViewTrips from './pages/ViewTrips';
@@ -22,6 +20,8 @@ import LineSummary from './pages/LineSummary';
 import AddStation from './pages/AddStation';
 import AddLine from './pages/AddLine';
 import PendingReviews from './pages/PendingReviews';
+import StationInfoAdmin from './pages/StationInfoAdmin';
+import LineSummaryAdmin from './pages/LineSummaryAdmin';
 import NotFound from './pages/NotFound';
 import './App.css';
 
@@ -66,9 +66,7 @@ class App extends React.Component {
           <PrivateRoute path="/editReview" component={EditReview} user={this.state.user} />
           <PrivateRoute path="/editProfile" component={EditProfile} user={this.state.user} />
           <PrivateRoute path="/editAdmin" component={EditAdmin} user={this.state.user} />
-
           <PrivateRoute path="/stationInfo" component={StationInfo} user={this.state.user} />
-          <PrivateRoute path="/stationInfoAdmin" component={StationInfoAdmin} user={this.state.user} />
           <PrivateRoute path="/buyCard" component={BuyCard} user={this.state.user} />
           <PrivateRoute path="/trip" component={Trip} user={this.state.user} />
           <PrivateRoute path="/viewTrips" component={ViewTrips} user={this.state.user} />
@@ -77,6 +75,8 @@ class App extends React.Component {
           <AdminRoute path="/addStation" component={AddStation} user={this.state.user} />
           <AdminRoute path="/addLine" component={AddLine} user={this.state.user} />
           <AdminRoute path="/pendingReviews" component={PendingReviews} user={this.state.user} />
+          <AdminRoute path="/stationInfoAdmin" component={StationInfoAdmin} user={this.state.user} />
+          <AdminRoute path="/lineSummaryAdmin" component={LineSummaryAdmin} user={this.state.user} />
           <Route component={NotFound} />
         </Switch>
       </div>

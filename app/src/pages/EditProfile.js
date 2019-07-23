@@ -17,6 +17,7 @@ class EditProfile extends React.Component {
       password: props.user.password,
       passwordConfirm: props.user.password,
       edited: false,
+      changed: false,
     };
     this.handleDeleteUser = this.handleDeleteUser.bind(this);
     this.handleEditUser = this.handleEditUser.bind(this);
@@ -76,31 +77,31 @@ class EditProfile extends React.Component {
   }
 
   fNameChange(event) {
-    this.setState({ firstName: event.target.value });
+    this.setState({ firstName: event.target.value, changed: true });
   }
 
   MIChange(event) {
-    this.setState({ middleInitial: event.target.value });
+    this.setState({ middleInitial: event.target.value, changed: true });
   }
 
   lNameChange(event) {
-    this.setState({ lastName: event.target.value });
+    this.setState({ lastName: event.target.value, changed: true });
   }
 
   emailChange(event) {
-    this.setState({ email: event.target.value });
+    this.setState({ email: event.target.value, changed: true });
   }
 
   userIDChange(event) {
-    this.setState({ userID: event.target.value });
+    this.setState({ userID: event.target.value, changed: true });
   }
 
   passwordChange(event) {
-    this.setState({ password: event.target.value });
+    this.setState({ password: event.target.value, changed: true });
   }
 
   passwordConfirmChange(event) {
-    this.setState({ passwordConfirm: event.target.value });
+    this.setState({ passwordConfirm: event.target.value, changed: true });
   }
 
   render() {
@@ -124,7 +125,7 @@ class EditProfile extends React.Component {
             <Link to="/login">
               <GeneralButton text="Delete" handlePress={this.handleDeleteUser} />
             </Link>
-            <GeneralButton text="Update" handlePress={this.handleEditUser} />
+            <GeneralButton text="Update" handlePress={this.handleEditUser} disabled={!this.state.changed} />
             { /* this.state.edited ? <Redirect to="/" /> : null */ }
           </div>
         </div>

@@ -30,6 +30,10 @@ class UpdateTrip extends React.Component {
   }
 
   handleUpdateTrip() {
+    if (!this.state.selectedStation) {
+      alert('Please select a station');
+      return;
+    }
     const { trip } = this.props.location.state;
     fetch('/api/trips', {
       method: 'PUT',

@@ -12,7 +12,7 @@ class TextField extends React.Component {
           placeholder={this.props.placeholder}
           onChange={this.props.handleChange}
           onKeyDown={(e) => {
-            if (e.keyCode === 13) {
+            if (e.keyCode === 13 && this.props.onEnter) {
               this.props.onEnter();
             }
           }}
