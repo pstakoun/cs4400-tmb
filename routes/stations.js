@@ -116,7 +116,7 @@ router.post('/', (req, res) => {
       return res.status(500).json({ message: 'An error occurred' });
     }
   });
-  
+
   connection.query('INSERT INTO Admin_Add_Station SET ?', [adminAdd], (err) => {
     if (err) {
       console.log(err);

@@ -15,7 +15,7 @@ class GeneralButton extends React.Component {
         className="GeneralButton"
         type="submit"
         onClick={this.props.handlePress}
-        disabled={!this.validateForm()}
+        disabled={!this.validateForm() || this.props.disabled}
       >
         {this.props.text}
       </button>

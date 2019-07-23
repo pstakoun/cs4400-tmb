@@ -127,3 +127,7 @@ Form: login 1, registration 2, Leave review 4, Edit Review 6, edit profile 9, Go
 Table: View Reviews 5, Station info 7, Line Summary 8, View Trips 12, review reviews 15, Line Summary admin 19, Station Info 20
 
 Form with dynamic table: Add station 17, Add Line 18,
+
+
+PETER UPDATE TODO:
+Test updating admin and resulting email value
