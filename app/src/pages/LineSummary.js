@@ -74,10 +74,13 @@ class LineSummary extends React.Component {
             <Link to="/">
               <GeneralButton text="Main Menu" />
             </Link>
-            { this.props.user.admin ? <Redirect to={{
-              pathname: '/lineSummaryAdmin',
-              state: this.props.location.state,
-            }} /> : null }
+            { this.props.user.admin ? (
+              <Redirect to={{
+                pathname: '/lineSummaryAdmin',
+                state: this.props.location.state,
+              }}
+              />
+            ) : null }
           </div>
         </div>
       </div>
