@@ -54,25 +54,35 @@ router.post('/', (req, res) => {
 
   connection.query('INSERT INTO Line SET ?', [line], (err) => {
     if (err) {
+      if (err.code === 'ER_DUP_ENTRY') {
+        return res.status(400).json({ message: 'Line name must be unique' });
+      }
       console.log(err);
       return res.status(500).json({ message: 'An error occurred' });
     }
-  });
-
-  mappedStations.forEach((item) => {
-    connection.query('INSERT INTO Station_On_Line SET ?', [item], (err) => {
-      if (err) {
-        console.log(err);
-        return res.status(500)
-          .json({ message: 'An error occurred' });
-      }
+    let left = mappedStations.length;
+    if (left === 0) {
+      res.status(200).json({
+        success: true,
+        message: 'Line created',
+      });
+    }
+    mappedStations.forEach((item) => {
+      connection.query('INSERT INTO Station_On_Line SET ?', [item], (err1) => {
+        if (err1) {
+          console.log(err1);
+          return res.status(500).json({ message: 'An error occurred' });
+        }
+        left -= 1;
+        if (left === 0) {
+          res.status(200).json({
+            success: true,
+            message: 'Line created',
+          });
+        }
+      });
     });
   });
-  res.status(200)
-    .json({
-      success: true,
-      message: 'Line created',
-    });
 });
 
 /* GET station with a given order number */

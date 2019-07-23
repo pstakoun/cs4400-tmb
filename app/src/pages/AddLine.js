@@ -54,9 +54,10 @@ class AddLine extends React.Component {
         newStations: this.state.addedStations,
       }),
     }).then(res => res.json()).then((data) => {
-      if (!data.success) {
-        alert(data.message);
-      } else if (!alert(`${this.state.lineName} has been added`)) { window.location.reload(); }
+      alert(data.message);
+      if (data.success) {
+        window.location.reload();
+      }
     });
   }
 
@@ -77,7 +78,7 @@ class AddLine extends React.Component {
       } else if (this.state.addedStations.some(station => (station.name === name))) {
         alert('A station can only be in a line once');
       } else if (this.state.addedStations.some(station => (station.order_num === orderNum))) {
-        alert('A station can only be in a line once');
+        alert('A station already exists at this order number');
       } else {
         if (updatedLines != null) {
           updatedLines.push(newElement);

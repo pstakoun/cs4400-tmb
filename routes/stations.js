@@ -124,6 +124,12 @@ router.post('/', (req, res) => {
         return res.status(500).json({ message: 'An error occurred' });
       }
       let left = mappedLines.length;
+      if (left === 0) {
+        res.status(200).json({
+          success: true,
+          message: 'Station created',
+        });
+      }
       mappedLines.forEach((item) => {
         connection.query('INSERT INTO Station_On_Line SET ?', [item], (err) => {
           if (err) {
