@@ -11,7 +11,7 @@ In progress: 6, 8, 11, 13, 16, 20
 
 
 TODO’s
-6. Edit Review:  grey out edit button until value is edited.
+DONE 6. Edit Review:  grey out edit button until value is edited.
 8. Line Summary: Passengers can edit Line order.  should not be the case. make separate page for passenger and admin.
 11. Trip: embarking with Empty card value crashes the form. (Grey out or fix)
 13. Update Trip: don't allow updating or re-updating of the same trip with no end station.
